@@ -16,8 +16,8 @@
 ![UGLC Attributes fields](https://github.com/UnibaGEO/UGLC/blob/master/README_FILES/UGLC%20attributes.png?raw=true)
 
 
-| wkt_geom    | New dataset     |              |
-|-------------|-----------------|--------------|
+| wkt_geom | NEW DATASET | ID | OLD DATASET | OLD ID | VERSION | COUNTRY | ACCURACY | START DATE | END DATE | TYPE | TRIGGER | AFFIDABILITY | RPSV | DPCM | FATALITIES | INJURIES | NOTES | LINK |
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 | Geospatial reference | Name of the final Dataframe   |              |
 
 
