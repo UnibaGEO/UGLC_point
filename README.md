@@ -2,7 +2,7 @@
 UNIFIED GLOBAL LANDSLIDES CATALOG
 --------------------------------------------------------
 Authors: 
-## - Saverio Mancino, PhD Student, University of Bari ()
+ - Saverio Mancino, PhD Student, University of Bari (@RavyHollow)
 - Anna Sblano, Researcher, University of Bari ()
 - Giuseppe Amatulli, PhD Researcher, Yale University ()
 
