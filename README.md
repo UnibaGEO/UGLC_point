@@ -1,10 +1,10 @@
-# UGLC Project
-UNIFIED GLOBAL LANDSLIDES CATALOG
+#                                                 UGLC Project
+                                       UNIFIED GLOBAL LANDSLIDES CATALOG
 --------------------------------------------------------
 Authors: Saverio Mancino, Anna Sblano
 
 --------------------------------------------------------
-                   IN PROGRESS
+                                             IN PROGRESS
 --------------------------------------------------------
 
 ## SUMMARY OF FIELDS INCLUDED IN UGLC
