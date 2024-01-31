@@ -15,8 +15,8 @@
 
 || WKT_GEOM | NEW DATASET | ID | OLD DATASET | OLD ID | VERSION | COUNTRY | ACCURACY | START DATE | END DATE | TYPE | TRIGGER | AFFIDABILITY | RPSV | DPCM | FATALITIES | INJURIES | NOTES | LINK |
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-| TYPE | Well known text | String | Int
-| DESCRIPTION | Geospatial reference | Name of the final Dataframe |              |
+| TYPE | Well known text | String | Int | String |
+| DESCRIPTION | Geospatial reference | Identifying abbreviation of the final Dataframe Name | Increasing numeric ID within the UGLC Dataframe | Identifying abbreviation of the native Dataframe Name |
 
 
 
