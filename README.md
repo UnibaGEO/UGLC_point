@@ -1,7 +1,10 @@
-#                                                 UGLC Project
-                                       UNIFIED GLOBAL LANDSLIDES CATALOG
+# UGLC Project
+UNIFIED GLOBAL LANDSLIDES CATALOG
 --------------------------------------------------------
-Authors: Saverio Mancino, Anna Sblano
+Authors: - Saverio Mancino, PhD Student,University of Bari
+         - Anna Sblano, Researcher, University of Bari
+         - Giuseppe Amatulli, PhD Researcher, Yale University 
+
 
 --------------------------------------------------------
                                              IN PROGRESS
