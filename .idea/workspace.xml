@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test" />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/lookup_config_anis.json" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/lookup_config_anis.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,11 +21,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Saverio" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -59,7 +57,7 @@
     "Python.02_COOLR_CONVERSION.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Saverio",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Users/microzonazione_05/Desktop/UGLC/lookup_config.json",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
@@ -117,43 +115,8 @@
       <option name="project" value="LOCAL" />
       <updated>1706536622158</updated>
     </task>
-    <task id="LOCAL-00005" summary="First Test">
-      <option name="closed" value="true" />
-      <created>1706699405644</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1706699405644</updated>
-    </task>
-    <task id="LOCAL-00006" summary="First Test">
-      <option name="closed" value="true" />
-      <created>1706701651081</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1706701651081</updated>
-    </task>
-    <task id="LOCAL-00007" summary="First Test">
-      <option name="closed" value="true" />
-      <created>1706702000508</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1706702000508</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="5" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
