@@ -1,10 +1,10 @@
-<p align="center">
+
   
-# UGLC Project
+# <p align="center">UGLC Project </p>
 "Unified Global Landslides Catalog"
 ----------------------------------------------------------------------------------------------------------------
 
-</p>
+
 
 ## Authors
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student, University of Bari.
