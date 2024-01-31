@@ -1,9 +1,13 @@
 # UGLC Project
 UNIFIED GLOBAL LANDSLIDES CATALOG
 --------------------------------------------------------
+Authors: Saverio Mancino, Anna Sblano
+                   
+                   IN PROGRESS
+--------------------------------------------------------
 
-SUMMARY OF FIELDS INCLUDED IN UGLC
-__________________________________________
+## SUMMARY OF FIELDS INCLUDED IN UGLC
+--------------------------------------------------------
 WKT_GEOM: POINT (LONG LAT)
 
 NEW DATASET: UGLC (name of our new dataset)
@@ -45,6 +49,8 @@ INJURIES:
 NOTES:
 
 LINK:
+
+--------------------------------------------------------
 
 # UGLC Project
 
