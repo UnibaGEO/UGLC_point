@@ -15,6 +15,14 @@
 
 ![UGLC Attributes fields](https://github.com/UnibaGEO/UGLC/blob/master/README_FILES/UGLC%20attributes.png?raw=true)
 
+
+| wkt_geom    | New dataset     |              |
+|-------------|-----------------|--------------|
+| Geospatial  | Name of the     |              |
+| reference   | final Dataframe |              |
+
+
+
 - WKT_GEOM: POINT (LONG LAT)
 
 NEW DATASET: UGLC (name of our new dataset)
