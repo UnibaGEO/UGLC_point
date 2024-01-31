@@ -3,7 +3,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 # native dataframe:     COOLR report points - NASA
 # version:              4
-# authors:              Saverio Mancino, Anna Sblano1
+# authors:              Saverio Mancino, Anna Sblano11
 # affiliation:          Università degli studi di Bari
 # date:                 29/01/2024
 #-----------------------------------------------------------------------------------------------------------------------
