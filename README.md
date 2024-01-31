@@ -18,8 +18,7 @@
 
 | wkt_geom    | New dataset     |              |
 |-------------|-----------------|--------------|
-| Geospatial  | Name of the     |              |
-| reference   | final Dataframe |              |
+| Geospatial reference | Name of the final Dataframe   |              |
 
 
 
