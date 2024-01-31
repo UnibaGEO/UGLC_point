@@ -13,7 +13,7 @@
 
 ## SUMMARY OF FIELDS INCLUDED IN UGLC
 
-![UGLC Attributes fields]( https://drive.google.com/file/d/1a_eeal7wxu22UuxSKAyr9gC5wBcu-_Jf/view?usp=drive_link)
+![UGLC Attributes fields](https://github.com/UnibaGEO/UGLC/blob/master/README_FILES/UGLC%20attributes.png?raw=true)
 
 - WKT_GEOM: POINT (LONG LAT)
 
