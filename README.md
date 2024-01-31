@@ -1,15 +1,15 @@
 # UGLC Project
-UNIFIED GLOBAL LANDSLIDES CATALOG
---------------------------------------------------------
+"Unified Global Landslides Catalog"
+----------------------------------------------------------------------------------------------------------------
 
 ## Authors
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student, University of Bari.
 - [@Anna Sblano](https://github.com/Anita2333) - Researcher, University of Bari.
 - [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher, Yale University.
 
---------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
                                              IN PROGRESS
---------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
 ## SUMMARY OF FIELDS INCLUDED IN UGLC
 --------------------------------------------------------
