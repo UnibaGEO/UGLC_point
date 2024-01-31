@@ -1,7 +1,6 @@
-
-
+# UGLC Project
 UNIFIED GLOBAL LANDSLIDES CATALOG
-******************************************
+--------------------------------------------------------
 
 SUMMARY OF FIELDS INCLUDED IN UGLC
 __________________________________________
@@ -47,4 +46,32 @@ NOTES:
 
 LINK:
 
+# UGLC Project
 
+Unified Global Landslides Catalog.
+--------------------------------------------------------
+                   IN PROGRESS
+--------------------------------------------------------
+
+## Descrizione
+
+The UGLC project aims to create a global landslide catalog as a unified dataframe from multiple global, national and regional dataframes.
+inside contains information from catalogs:
+- 
+-
+-
+
+
+## Requisiti
+
+Specifica eventuali requisiti hardware o software necessari per eseguire gli script. Ad esempio:
+
+- Python 3.6 o versioni successive
+- Altri moduli o librerie specifici
+
+## Installazione
+
+Spiega come installare eventuali dipendenze o configurare l'ambiente di lavoro per eseguire gli script.
+
+```bash
+pip install -r requirements.txt
