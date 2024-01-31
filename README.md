@@ -1,7 +1,8 @@
 # UGLC Project
 UNIFIED GLOBAL LANDSLIDES CATALOG
-
+--------------------------------------------------------
 Authors: Saverio Mancino, Anna Sblano
+
 --------------------------------------------------------
                    IN PROGRESS
 --------------------------------------------------------
