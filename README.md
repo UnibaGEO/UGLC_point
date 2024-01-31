@@ -1,11 +1,11 @@
 # UGLC Project
 UNIFIED GLOBAL LANDSLIDES CATALOG
 --------------------------------------------------------
-Authors: 
- - Saverio Mancino, PhD Student, University of Bari (@RavyHollow)
-- Anna Sblano, Researcher, University of Bari ()
-- Giuseppe Amatulli, PhD Researcher, Yale University ()
 
+## Authors
+- [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student, University of Bari.
+- [@Anna Sblano](https://github.com/Anita2333) - Researcher, University of Bari.
+- [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher, Yale University.
 
 --------------------------------------------------------
                                              IN PROGRESS
