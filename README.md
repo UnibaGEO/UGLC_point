@@ -1,7 +1,7 @@
 
   
-# <p align="center">UGLC Project </p>
-"Unified Global Landslides Catalog"
+# <p align="center"> UGLC Project </p>
+<p align="center">"Unified Global Landslides Catalog"</p>
 ----------------------------------------------------------------------------------------------------------------
 
 
