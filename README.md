@@ -13,7 +13,9 @@
 
 ## SUMMARY OF FIELDS INCLUDED IN UGLC
 
-WKT_GEOM: POINT (LONG LAT)
+![UGLC Attributes fields]( https://drive.google.com/file/d/1a_eeal7wxu22UuxSKAyr9gC5wBcu-_Jf/view?usp=drive_link)
+
+- WKT_GEOM: POINT (LONG LAT)
 
 NEW DATASET: UGLC (name of our new dataset)
 
