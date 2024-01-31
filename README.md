@@ -1,13 +1,13 @@
 
   
 # <p align="center"> UGLC Project </p>
-<p align="center">"Unified Global Landslides Catalog"</p>
+<p align="center"> "Unified Global Landslides Catalog" </p>
 
 ----------------------------------------------------------------------------------------------------------------
 
 
 
-## Authors
+## <p align="center"> Authors  </p>
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student, University of Bari.
 - [@Anna Sblano](https://github.com/Anita2333) - Researcher, University of Bari.
 - [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher, Yale University.
@@ -16,7 +16,7 @@
                                              IN PROGRESS
 ----------------------------------------------------------------------------------------------------------------
 
-## SUMMARY OF FIELDS INCLUDED IN UGLC
+## <p align="center"> Summary of Attribute Fields included in UGLC </p>
 
 || WKT_GEOM | NEW DATASET | ID | OLD DATASET | OLD ID | VERSION | COUNTRY | ACCURACY | START DATE | END DATE | TYPE | TRIGGER | AFFIDABILITY | RPSV | DPCM | FATALITIES | INJURIES | NOTES | LINK |
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
