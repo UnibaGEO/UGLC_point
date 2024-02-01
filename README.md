@@ -120,12 +120,36 @@ LINK:
 
 
 
-### <p align="center"> FOLDER STRUCTURE </p>
------------
+### <p align="center"> FOLDER STRUCTURE</p>
+--------------------------------------------------------
+--------------------------------------------------------
 
 ![Dataframe Folder Structure](README_FILES/Dataframe structure v1.png)
 
+The entire UGLC structure is allocated in 3 main folders :
+- 00.INPUT
 
+      This folder contains the "DOWNLOADER.py" and "STANDARDIZER.py" scripts that allow the automatic download of 
+      native datasets from the source sites (Entities, Government agencies, Universities, Various repositories etc.), the standardization of the file name 
+      (NN_DATASETNAME_NATIVE.csv format) and allocation in the subfolder named "00.INPUT\NATIVE_DATAFRAMES\NN_DATASETNAME_NATIVE" 
+      sub folder.
+
+- 01.CONVERSION_CSV
+
+      This folder contains the different folders named after the native datasets ("NN_DATASETNAME") within the
+      "NN_CONVERTER.py," "NN_FUNCTIONS.py," and "NN_LOOKUPTABLES.json" scripts which allow the filtering of the native datasets
+      and its conversion into a new dataset having the same format as the final UGLC dataframe, and will be allocated in 
+      "02.OUTPUT\CONVERTED_DATAFRAMES" directory.
+
+- 02.OUTPUT
+
+      This folder contains the script "UNIFIER.py" that allows the union of all converted and adapted datasets 
+      present in the  "02.OUTPUT\CONVERTED_DATAFRAMES" directory, into the final UGLC dataframe allocated into the "FINAL_DATAFRAME" folder.
+
+All the scripts are commanded by the "ORCHESTRATOR.py" master script in the main folder "UGLC".
+
+Into the main folder there is also the README.txt and the subfolder "README_FILES" wich contain all this informations and the 
+pictures of the UGLC dataframe.
 
 --------------------------------------------------------
 
