@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/02_COOLR_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/02_COOLR_CONVERSION.py" afterDir="false" />
-    </list>
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Aniss" />
+        <entry key="$PROJECT_DIR$" value="Saverio" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,11 +57,10 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.02_COOLR_CONVERSION.executor": "Run",
-    "Python.function.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/sbla2/OneDrive/Desktop/prova/date_corrections.py",
+    "git-widget-placeholder": "Saverio",
+    "last_opened_file_path": "C:/Users/microzonazione_05/Desktop/UGLC/lookup_config.json",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
@@ -72,16 +68,11 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\microzonazione_05\Desktop\UGLC Dataframe - scripts\UGLC" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\00.INPUT\NATIVE_DATASET" />
-      <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV\02.COOLR" />
-      <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV" />
-    </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
       </set>
     </attachedChunks>
   </component>
@@ -128,21 +119,29 @@
     </task>
     <task id="LOCAL-00005" summary="First Test">
       <option name="closed" value="true" />
-      <created>1706706781498</created>
+      <created>1706699405644</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1706706781498</updated>
+      <updated>1706699405644</updated>
     </task>
     <task id="LOCAL-00006" summary="First Test">
       <option name="closed" value="true" />
-      <created>1706706823987</created>
+      <created>1706701651081</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1706706823987</updated>
+      <updated>1706701651081</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="First Test">
+      <option name="closed" value="true" />
+      <created>1706702000508</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706702000508</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -150,19 +149,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="Aniss" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>

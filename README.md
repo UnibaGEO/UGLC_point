@@ -19,16 +19,61 @@
 
 ## <p align="center"> SUMMARY OF ATTRIBUTE FIELDS INCLUDED IN UGLC </p>
 
-|| WKT_GEOM | NEW DATASET | ID | OLD DATASET | OLD ID | VERSION | COUNTRY | ACCURACY | START DATE | END DATE | TYPE | TRIGGER | AFFIDABILITY | RPSV | DPCM | FATALITIES | INJURIES | NOTES | LINK |
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-| TYPE | Well known text | String | Int | String | String | String | String | String | Date | Date | String | String | Int | Bool | Bool | Int | Int | String | String |
+|        | WKT_GEOM          | NEW DATASET   | ID     | OLD DATASET   | OLD ID | VERSION   | COUNTRY   | ACCURACY   | START DATE   | END DATE   | TYPE     | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
+|--------|-------------------|---------------|--------|---------------|--------|-----------|-----------|------------|--------------|------------|----------|---------|--------------|----------|----------|------------|----------|--------|--------|
+| TYPE   | Well known text   | String        | Int    | String        | String | String    | String    | String     | Date         | Date       | String   | String  | Int          | Bool     | Bool     | Int        | Int      | String | String |
+| STATUS | active            | Active        | Active | Active        | Active | Active    | Active    | Active     | Active       | Active     | Active   | Active  | Active       | Inactive | inactive | Active     | Active   | Active | Active |
 
 
+### <p align="center"> ATTRIBUTES DESCRIPTION </p>
 
-- WKT_GEOM: POINT (LONG LAT)
+-----------
+- <b> WKT_GEOM: </b> The contents of this field contain information about the georeferencing of each point described in the dataframe using the WGS84 reference system.
+-----------
+- <b> NEW DATASET: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
+-----------
+- <b> ID: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
+-----------
+  - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
 
-NEW DATASET: UGLC (name of our new dataset)
+    - [02_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
+        Cooperative Open Online Landslide Repository (NASA), both Event Points and Report Points are used together, eliminating overlapping points at same coordinates [TOTAL POINTS: XXX].  
+    - [03_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521): 
+        Global fatal landslide occurrence from 2004 to 2016 DA COMPLETARE
 
+    - "04_ITALICA" eccc
+   ...
+-----------
+- <b> OLD ID: </b> 
+-----------
+- <b> VERSION: </b> 
+-----------
+- <b> COUNTRY: </b> 
+-----------
+- <b> ACCURACY: </b> 
+-----------
+- <b> START DATE: </b> 
+-----------
+- <b> END DATE: </b> 
+-----------
+- <b> TYPE: </b> 
+-----------
+- <b> TRIGGER: </b> 
+-----------
+- <b> AFFIDABILITY: </b> 
+-----------
+- <b> RPSV: </b> 
+-----------
+- <b> DCMV: </b> 
+-----------
+- <b> FATALITIES: </b> 
+-----------
+- <b> INJURIES: </b> 
+-----------
+- <b> NOTES: </b> 
+-----------
+- <b> LINKS: </b> 
+-----------
 ID: Unique ID for each landslide
 
 OLD DATASET: Name of the Native dataset
