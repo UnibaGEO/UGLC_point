@@ -15,12 +15,14 @@ import pandas as pd
 import json
 
 # Native Dataframe COOLR_02 loading
-df_OLD = pd.read_csv('COOLR_02_NATIVE\COOLR_REPORT_POINTS_02.csv')
+df_OLD = pd.read_csv('\00.INPUT\NATIVE_DATASET\COOLR_REPORT_POINTS_02.csv', sep=,''=)
 
 # JSON Lookup Tables Loading
 with open('lookup_config.json', 'r') as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["02_COOLR LOOKUP TABLES"]
+
+df_OLD['injuries'].fillna('ND', inplace=True)
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
