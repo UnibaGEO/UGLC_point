@@ -129,7 +129,7 @@ LINK:
 The entire UGLC structure is allocated in 3 main folders:
 - 00.INPUT
 
-      This folder contains the "DOWNLOADER.py" and "STANDARDIZER.py" scripts that allow the automatic download of 
+This folder contains the "DOWNLOADER.py" and "STANDARDIZER.py" scripts that allow the automatic download of 
       native datasets from the source sites (Entities, Government agencies, Universities, Various repositories etc.), the standardization of the file name 
       (NN_DATASETNAME_NATIVE.csv format) and allocation in the subfolder named "00.INPUT\NATIVE_DATAFRAMES\NN_DATASETNAME_NATIVE" 
       sub folder.
