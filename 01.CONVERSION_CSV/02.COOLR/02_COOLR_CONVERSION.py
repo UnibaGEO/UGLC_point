@@ -14,15 +14,20 @@
 import pandas as pd
 import json
 
-# Native Dataframe COOLR_02 loading
-df_OLD = pd.read_csv('\00.INPUT\NATIVE_DATASET\COOLR_REPORT_POINTS_02.csv', sep=,''=)
+
+import pandas as pd
+import json
+
+# Native Dataframe 02_COOLR_NATIVE loading
+df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_COOLR_NATIVE.csv",low_memory=False)
 
 # JSON Lookup Tables Loading
-with open('lookup_config.json', 'r') as file:
+with open('02_COOLR_LOOKUPTABLES.json', 'r') as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["02_COOLR LOOKUP TABLES"]
 
 df_OLD['injuries'].fillna('ND', inplace=True)
+df_OLD['fatalities'].fillna('ND', inplace=True)
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -72,13 +77,13 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "COOLR-R"
+df_NEW['OLD DATASET'] = df_OLD['source']
 df_NEW['OLD ID'] = df_OLD['ev_id']
 df_NEW['VERSION'] = "2019"
 df_NEW['COUNTRY'] = df_OLD['ctry_name']
 df_NEW['ACCURACY'] = df_OLD['loc_acc']
-df_NEW['START DATE'] = df_OLD['ev_date']
-df_NEW['END DATE'] = df_OLD['ev_date']
+df_NEW['START DATE'] = df_OLD['ev_date'].replace('ND', '1956/01/01')
+df_NEW['END DATE'] = df_OLD['ev_date'].replace('ND', '2023/01/01')
 df_NEW['TYPE'] = df_OLD['ls_cat']
 df_NEW['TRIGGER'] = df_OLD['ls_trig']
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -89,27 +94,27 @@ df_NEW['INJURIES'] = df_OLD['injuries']
 df_NEW['NOTES'] = "Cooperative Open Online Landslide Repository - NASA, locality: " + df_OLD['loc_desc'] + ", description: " + df_OLD['ev_desc']
 df_NEW['LINK'] = "Source: " + df_OLD['src_link']
 
-
+print(df_OLD['fatalities'].unique())
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
-#-----------------------------------------------------------------------------------------------------------------------
-from FUNCTIONS_SCRIPTS.date_corrections import apply_date_corrections
-from FUNCTIONS_SCRIPTS.country_corrections import apply_country_corrections
-from FUNCTIONS_SCRIPTS.affidability_calc import apply_affidability_calculator
+#-----------------------------------------------------------------------------------------------------------------------f
 
-apply_date_corrections(df_NEW)
+from function import apply_country_corrections
+from function import apply_affidability_calculator
+
+
 apply_country_corrections(df_NEW)
 apply_affidability_calculator(df_NEW)
-
+print(df_NEW['FATALITIES'])
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('COOLR_02_CONVERTED\COOLR_02_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_COOLR_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as COOLR_02_CONVERTED.csv in the COOLR_02_CONVERTED directory")
+print("COOLR-report points successfully converted as COOLR_02_CONVERTED.csv in the DATASET_CONVERTED directory")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
