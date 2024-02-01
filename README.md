@@ -53,8 +53,14 @@
 - <b> ACCURACY: </b> 
 -----------
 - <b> START DATE: </b> 
+
+formato:ISO 8601:YYYY/MM/DD
+
 -----------
 - <b> END DATE: </b> 
+
+formato:ISO 8601:YYYY/MM/DD
+
 -----------
 - <b> TYPE: </b> 
 -----------
@@ -86,7 +92,7 @@ COUNTRY: Country of the point
 
 ACCURACY[m]: Accuracy in metres   
 
-START DATE: Date of the landslides , formato:ISO 8601:YYYY/MM/DD
+START DATE: Date of the landslides , 
 
 END DATE: Date of the landslides, format: ISO 8601: YYYY/MM/DD. If we have the exact date of the landslides we will have the start date = end date,
 however if we only have the year or period of acquisition of the landslide we will have the start date different from the end date and therefore we
@@ -111,6 +117,15 @@ INJURIES:
 NOTES:
 
 LINK:
+
+
+
+### <p align="center"> FOLDER STRUCTURE </p>
+-----------
+
+![Dataframe Folder Structure](README_FILES/Dataframe structure v1.png)
+
+
 
 --------------------------------------------------------
 
