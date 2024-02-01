@@ -126,7 +126,7 @@ LINK:
 
 ![Dataframe Folder Structure](README_FILES/Dataframe structure v1.png)
 
-The entire UGLC structure is allocated in 3 main folders:
+The entire UGLC structure is allocated in 3 main folders :
 - 00.INPUT
 
       This folder contains the "DOWNLOADER.py" and "STANDARDIZER.py" scripts that allow the automatic download of 
