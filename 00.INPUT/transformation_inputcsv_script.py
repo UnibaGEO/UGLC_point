@@ -9,7 +9,7 @@ from geopy import Point
 from shapely.geometry import Point
 
 
-# Specifica il percorso del file Shapefile di input
+# Specifica il percorso del file Shapefile di inputt
 input_shapefile = "../00.INPUT/NATIVE_DATASET/03_GFLD_NATIVE/Landslidepoints_GFLD.shp"
 
 # Leggi il file Shapefile
