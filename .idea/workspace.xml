@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/COOLR_REPORT_POINTS_02.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/02_COOLR_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/02_COOLR_CONVERSION.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/function.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/function.py" afterDir="false" />
-    </list>
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +59,7 @@
     "Python.02_COOLR_CONVERSION.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Saverio",
     "last_opened_file_path": "C:/Users/sbla2/Documents/LVM_shared/00.Script_csv_landslides_dataset/INPUT_COOLR",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
@@ -157,7 +152,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706714120741</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="First Test">
+      <option name="closed" value="true" />
+      <created>1706787974017</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706787974017</updated>
+    </task>
+    <task id="LOCAL-00010" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1706788074612</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706788074612</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,6 +186,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Conversion Script" />
     <MESSAGE value="First Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Test" />
+    <MESSAGE value="READMETEXT modificationssss" />
+    <option name="LAST_COMMIT_MESSAGE" value="READMETEXT modificationssss" />
   </component>
 </project>

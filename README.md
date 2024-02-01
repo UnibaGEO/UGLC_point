@@ -1,13 +1,17 @@
 
-  
 # <p align="center"> UGLC Project </p>
-<p align="center"> "Unified Global Landslides Catalog" </p>
+### <p align="center"> "Unified Global Landslides Catalog" </p>
 
 ----------------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------
+                                                               IN PROGRESS
+--------------------------------------------------------
 
 
 ## <p align="center"> AUTHORS  </p>
+
+----------------------------------------------------------------------------------------------------------------
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari).
 - [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari).
 - [@Francesco Paolo Lovergine](https://github.com/fpl) - Researcher (CNR - IREA).
@@ -27,7 +31,7 @@
 
 ### <p align="center"> ATTRIBUTES DESCRIPTION </p>
 
------------
+----------------------------------------------------------------------------------------------------------------
 - <b> WKT_GEOM: </b> The contents of this field contain information about the georeferencing of each point described in the dataframe using the WGS84 reference system.
 -----------
 - <b> NEW DATASET: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
