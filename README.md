@@ -1,13 +1,17 @@
 
-  
 # <p align="center"> UGLC Project </p>
-<p align="center"> "Unified Global Landslides Catalog" </p>
+### <p align="center"> "Unified Global Landslides Catalog" </p>
 
 ----------------------------------------------------------------------------------------------------------------
 
+--------------------------------------------------------
+                                                               IN PROGRESS
+--------------------------------------------------------
 
 
 ## <p align="center"> AUTHORS  </p>
+
+----------------------------------------------------------------------------------------------------------------
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari).
 - [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari).
 - [@Francesco Paolo Lovergine](https://github.com/fpl) - Researcher (CNR - IREA).
@@ -27,7 +31,7 @@
 
 ### <p align="center"> ATTRIBUTES DESCRIPTION </p>
 
------------
+----------------------------------------------------------------------------------------------------------------
 - <b> WKT_GEOM: </b> The contents of this field contain information about the georeferencing of each point described in the dataframe using the WGS84 reference system.
 -----------
 - <b> NEW DATASET: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
@@ -120,12 +124,36 @@ LINK:
 
 
 
-### <p align="center"> FOLDER STRUCTURE </p>
------------
+### <p align="center"> FOLDER STRUCTURE</p>
+--------------------------------------------------------
+--------------------------------------------------------
 
 ![Dataframe Folder Structure](README_FILES/Dataframe structure v1.png)
 
+The entire UGLC structure is allocated in 3 main folders :
+- 00.INPUT
 
+      This folder contains the "DOWNLOADER.py" and "STANDARDIZER.py" scripts that allow the automatic download of 
+      native datasets from the source sites (Entities, Government agencies, Universities, Various repositories etc.), the standardization of the file name 
+      (NN_DATASETNAME_NATIVE.csv format) and allocation in the subfolder named "00.INPUT\NATIVE_DATAFRAMES\NN_DATASETNAME_NATIVE" 
+      sub folder.
+
+- 01.CONVERSION_CSV
+
+      This folder contains the different folders named after the native datasets ("NN_DATASETNAME") within the
+      "NN_CONVERTER.py," "NN_FUNCTIONS.py," and "NN_LOOKUPTABLES.json" scripts which allow the filtering of the native datasets
+      and its conversion into a new dataset having the same format as the final UGLC dataframe, and will be allocated in 
+      "02.OUTPUT\CONVERTED_DATAFRAMES" directory.
+
+- 02.OUTPUT
+
+      This folder contains the script "UNIFIER.py" that allows the union of all converted and adapted datasets 
+      present in the  "02.OUTPUT\CONVERTED_DATAFRAMES" directory, into the final UGLC dataframe allocated into the "FINAL_DATAFRAME" folder.
+
+All the scripts are commanded by the "ORCHESTRATOR.py" master script in the main folder "UGLC".
+
+Into the main folder there is also the README.txt and the subfolder "README_FILES" wich contain all this informations and the 
+pictures of the UGLC dataframe.
 
 --------------------------------------------------------
 
