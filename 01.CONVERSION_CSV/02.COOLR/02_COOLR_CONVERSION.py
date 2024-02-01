@@ -11,15 +11,12 @@
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
 
-import pandas as pd
-import json
-
 
 import pandas as pd
 import json
 
 # Native Dataframe 02_COOLR_NATIVE loading
-df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_COOLR_NATIVE.csv",low_memory=False)
+df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_COOLR_NATIVE/02_COOLR_NATIVE.csv",low_memory=False)
 
 # JSON Lookup Tables Loading
 with open('02_COOLR_LOOKUPTABLES.json', 'r') as file:
@@ -76,7 +73,7 @@ df_NEW = pd.DataFrame(new_data)
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = range(1, len(df_OLD) + 1)
+df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = df_OLD['source']
 df_NEW['OLD ID'] = df_OLD['ev_id']
 df_NEW['VERSION'] = "2019"
