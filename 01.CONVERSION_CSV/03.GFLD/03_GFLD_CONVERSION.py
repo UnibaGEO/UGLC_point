@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     COOLR report points - NASA
+# native dataframe:     UGLC report points - NASA
 # version:              4
 # authors:              Saverio Mancino, Anna Sblano111
 # affiliation:          Università degli studi di Bari
