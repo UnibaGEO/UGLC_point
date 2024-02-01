@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss" />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss">
+      <change afterPath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/ITALICA-v2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv" beforeDir="false" afterPath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/03_ITALICA_NATIVE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/00.INPUT/transformation_inputcsv_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/00.INPUT/transformation_inputcsv_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_CONVERSION.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +64,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.02_COOLR_CONVERSION.executor": "Run",
+    "Python.transformation_inputcsv_script.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Saverio",
@@ -168,7 +176,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706788074612</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1706788650333</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706788650333</updated>
+    </task>
+    <task id="LOCAL-00012" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1706798972595</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706798972595</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
