@@ -40,12 +40,12 @@
 -----------
   - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
 
-    - [02_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
+    - [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
         Cooperative Open Online Landslide Repository (NASA), both Event Points and Report Points are used together, eliminating overlapping points at same coordinates [TOTAL POINTS: XXX].  
-    - [03_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521): 
+    - [02_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521): 
         Global fatal landslide occurrence from 2004 to 2016 DA COMPLETARE
 
-    - "04_ITALICA" eccc
+    - "03_ITALICA" eccc
    ...
 -----------
 - <b> OLD ID: </b> 
