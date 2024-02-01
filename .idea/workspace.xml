@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/COOLR_REPORT_POINTS_02.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/02_COOLR_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/02_COOLR_CONVERSION.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/function.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.COOLR/function.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,20 +58,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.02_COOLR_CONVERSION.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Saverio&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/microzonazione_05/Desktop/UGLC - Scripts/FUNCTIONS_SCRIPTS/date_corrections.py&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.02_COOLR_CONVERSION.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/sbla2/Documents/LVM_shared/00.Script_csv_landslides_dataset/INPUT_COOLR",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\microzonazione_05\Desktop\UGLC Dataframe - scripts\UGLC" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV\02.COOLR" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -152,15 +157,7 @@
       <option name="project" value="LOCAL" />
       <updated>1706714120741</updated>
     </task>
-    <task id="LOCAL-00009" summary="First Test">
-      <option name="closed" value="true" />
-      <created>1706779860529</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1706779860529</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
