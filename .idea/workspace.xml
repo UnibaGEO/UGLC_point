@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="REVISIONE CARTELLE">
-      <change afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/TEMP.py" afterDir="false" />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="GFLD_WORK IN PROGRESS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_CONVERSION.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_LOOKUPTABLES.json" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_LOOKUPTABLES.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706797662583</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="GFLD_WORK IN PROGRESS">
+      <option name="closed" value="true" />
+      <created>1706802650654</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706802650654</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,6 +217,7 @@
     <MESSAGE value="First Test" />
     <MESSAGE value="READMETEXT modificationssss" />
     <MESSAGE value="REVISIONE CARTELLE" />
-    <option name="LAST_COMMIT_MESSAGE" value="REVISIONE CARTELLE" />
+    <MESSAGE value="GFLD_WORK IN PROGRESS" />
+    <option name="LAST_COMMIT_MESSAGE" value="GFLD_WORK IN PROGRESS" />
   </component>
 </project>
