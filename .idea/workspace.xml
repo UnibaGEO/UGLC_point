@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="First Test">
-      <change afterPath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_GFLD_STANDARDIZER.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_02_2024_09_41__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_02_2024_09_41__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_11_53__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_11_53__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_15_22__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_15_22__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/00.INPUT/transformation_inputcsv_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/00.INPUT/transformation_inputcsv_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_CONVERSION.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_LOOKUPTABLES.json" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_LOOKUPTABLES.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/TEMP.py" beforeDir="false" />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="GFLD_work in progress">
       <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/function.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv" beforeDir="false" afterPath="$PROJECT_DIR$/02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +200,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706802650654</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="First Test">
+      <option name="closed" value="true" />
+      <created>1707133781577</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707133781577</updated>
+    </task>
+    <task id="LOCAL-00015" summary="GFLD_work in progress">
+      <option name="closed" value="true" />
+      <created>1707133867376</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707133867376</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,11 +233,12 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Conversion Script" />
-    <MESSAGE value="First Test" />
     <MESSAGE value="READMETEXT modificationssss" />
     <MESSAGE value="REVISIONE CARTELLE" />
     <MESSAGE value="GFLD_WORK IN PROGRESS" />
-    <option name="LAST_COMMIT_MESSAGE" value="GFLD_WORK IN PROGRESS" />
+    <MESSAGE value="First Test" />
+    <MESSAGE value="GFLD_work in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="GFLD_work in progress" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
