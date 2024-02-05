@@ -82,7 +82,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = " Global fatal landslide - Copernicus + locality: " + df_OLD['Location_M'] + " description: " + df_OLD['Report_1']
+df_NEW['NOTES'] = " Global fatal landslide, locality: " + df_OLD['Location_M'] + ", description: " + df_OLD['Report_1']
 df_NEW['LINK'] = "Source: " + df_OLD['Source_1']
 
 #-----------------------------------------------------------------------------------------------------------------------
