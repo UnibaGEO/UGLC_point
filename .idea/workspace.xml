@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="GFLD_WORK IN PROGRESS">
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="GFLD_work in progress">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_CONVERSION.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_LOOKUPTABLES.json" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/02.GFLD/02_GFLD_LOOKUPTABLES.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,12 +62,11 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.02_COOLR_CONVERSION.executor": "Run",
     "Python.02_GFLD_CONVERSION.executor": "Run",
-    "Python.TEMP.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Anis",
     "last_opened_file_path": "C:/Users/sbla2/Documents/LVM_shared/00.Script_csv_landslides_dataset/INPUT_COOLR",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "settings.editor.selected.configurable": "advanced.settings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -74,7 +75,6 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV\02.COOLR" />
-      <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -173,31 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706788074612</updated>
     </task>
-    <task id="LOCAL-00011" summary="REVISIONE CARTELLE">
+    <task id="LOCAL-00011" summary="GFLD_work in progress">
       <option name="closed" value="true" />
-      <created>1706797477299</created>
+      <created>1707143502766</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1706797477299</updated>
+      <updated>1707143502766</updated>
     </task>
-    <task id="LOCAL-00012" summary="REVISIONE CARTELLE">
-      <option name="closed" value="true" />
-      <created>1706797662583</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1706797662583</updated>
-    </task>
-    <task id="LOCAL-00013" summary="GFLD_WORK IN PROGRESS">
-      <option name="closed" value="true" />
-      <created>1706802650654</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1706802650654</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,8 +200,7 @@
     <MESSAGE value="Conversion Script" />
     <MESSAGE value="First Test" />
     <MESSAGE value="READMETEXT modificationssss" />
-    <MESSAGE value="REVISIONE CARTELLE" />
-    <MESSAGE value="GFLD_WORK IN PROGRESS" />
-    <option name="LAST_COMMIT_MESSAGE" value="GFLD_WORK IN PROGRESS" />
+    <MESSAGE value="GFLD_work in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="GFLD_work in progress" />
   </component>
 </project>

@@ -72,7 +72,7 @@ df_NEW['OLD DATASET'] = "GFLD"
 df_NEW['OLD ID'] = df_OLD['LandslideN']
 df_NEW['VERSION'] = "2017"
 df_NEW['COUNTRY'] = df_OLD['Country']
-df_NEW['ACCURACY'] = np.sqrt(df_OLD['Precision'] / np.pi) * 100
+df_NEW['ACCURACY'] = round(np.sqrt((df_OLD['Precision'].astype(int)/ np.pi)),0)
 df_NEW['START DATE'] = df_OLD['Year'].astype(str) + "/" + df_OLD['Month'].astype(str) + "/" + df_OLD['Day'].astype(str)
 df_NEW['END DATE'] = df_OLD['Year'].astype(str) + "/" + df_OLD['Month'].astype(str) + "/" + df_OLD['Day'].astype(str)
 df_NEW['TYPE'] = "ND"
@@ -82,7 +82,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = " Global fatal landslide - Copernicus + locality: " + df_OLD['Location_M'] + " description: " + df_OLD['Report_1']
+df_NEW['NOTES'] = " Global fatal landslide, locality: " + df_OLD['Location_M'] + ", description: " + df_OLD['Report_1']
 df_NEW['LINK'] = "Source: " + df_OLD['Source_1']
 
 #-----------------------------------------------------------------------------------------------------------------------
