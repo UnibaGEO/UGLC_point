@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss">
-      <change afterPath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/STANDARDIZER_02_ITALICA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/STANDARDIZER_03_ITALICA.py" beforeDir="false" afterPath="$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/03_ITALICA_STANDARDIZER.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_LOOKUPTABLES.json" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_LOOKUPTABLES.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706802695929</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1707128421510</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707128421510</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,8 +231,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/STANDARDIZER_02_ITALICA.py</url>
-          <line>11</line>
+          <url>file://$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/03_ITALICA_STANDARDIZER.py</url>
+          <line>13</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
