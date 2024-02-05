@@ -1,6 +1,7 @@
 import pandas as pd
 from shapely.wkt import loads
 from opencage.geocoder import OpenCageGeocode
+import numpy as np
 
 import pandas as pd
 #1
@@ -77,3 +78,6 @@ def apply_affidability_calculator(df):
     print("________________________________________________________________________________________")
     print("Valori di 'AFFIDABILITY' assegnati con successo.")
     print("________________________________________________________________________________________")
+
+# -----------------------------------------------------------------------------------------------------------------------
+#3
