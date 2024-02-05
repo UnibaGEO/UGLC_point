@@ -10,7 +10,7 @@ from shapely.geometry import Point
 
 
 # Specifica il percorso del file Shapefile di inputt
-input_shapefile = "../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/Landslidepoints_GFLD.shp"
+input_shapefile = "../00.INPUT/NATIVE_DATASET/03_GFLD_NATIVE/Landslidepoints_GFLD.shp"
 
 # Leggi il file Shapefile
 gdf = gpd.read_file(input_shapefile)
@@ -28,11 +28,11 @@ gdf['WKT_GEOM'] = gdf['geometry'].apply(lambda geom: f"POINT ({geom.xy[0][0]} {g
 # gdf = gdf.drop('geometry', axis=1)
 
 # Specifica il percorso del file CSV di output
-output_csv = "../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE1.csv"
+output_csv = "../00.INPUT/NATIVE_DATASET/03_GFLD_NATIVE/03_UGLC_NATIVE.csv"
 
 
 # Salva il GeoDataFrame come file CSV
-gdf.to_csv(output_csv, index=False,decimal=',')
+gdf.to_csv(output_csv, index=False)
 
 print("Conversione completata con successo.")
 
