@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss" />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_11_53__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_11_53__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_15_22__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_02_2024_15_22__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_CONVERSION.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_LOOKUPTABLES.json" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_LOOKUPTABLES.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/function.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/function.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +64,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.02_COOLR_CONVERSION.executor": "Run",
+    "Python.03_ITALICA_CONVERSION.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Saverio",
