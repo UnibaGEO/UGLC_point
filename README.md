@@ -54,7 +54,7 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.md).
 - <b> ID: </b> the content of this field contains a unique ID for each landslide event int othe UGLC dataset.
 
 
-  - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
+- <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
 
     - [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
         Cooperative Open Online Landslide Repository (NASA) (both Event Points and Report Points are used together, 
