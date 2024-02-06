@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="READMETEXT modificationssss">
-      <change afterPath="$PROJECT_DIR$/02.OUTPUT/DATASET_CONVERTED/03_ITALICA_CONVERTED.csv" afterDir="false" />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="03_ITALICA converter completato.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_CONVERSION.py" beforeDir="false" afterPath="$PROJECT_DIR$/01.CONVERSION_CSV/03.ITALICA/03_ITALICA_CONVERSION.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707149207961</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="03_ITALICA converter completato.">
+      <option name="closed" value="true" />
+      <created>1707215297723</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707215297723</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,6 +206,7 @@
     <MESSAGE value="Conversion Script" />
     <MESSAGE value="First Test" />
     <MESSAGE value="READMETEXT modificationssss" />
-    <option name="LAST_COMMIT_MESSAGE" value="READMETEXT modificationssss" />
+    <MESSAGE value="03_ITALICA converter completato." />
+    <option name="LAST_COMMIT_MESSAGE" value="03_ITALICA converter completato." />
   </component>
 </project>
