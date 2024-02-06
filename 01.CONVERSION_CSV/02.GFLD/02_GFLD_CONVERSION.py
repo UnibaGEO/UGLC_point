@@ -11,7 +11,7 @@ import json
 import numpy as np
 
 
-# Native Dataframe 02_COOLR_NATIVE loading
+# Native Dataframe 02_GFLD_NATIVE loading
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv",low_memory=False)
 
 # JSON Lookup Tables Loading
