@@ -186,7 +186,8 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.md).
 
 --------------------------------------------------------
 <img alt="Dataframe Folder Structure" src="README_FILES/Dataframe structure v1.png"/>
-Folder Structure Scheme
+<p align="center"><i> Folder Structure Scheme </i></p>
+
 --------------------------------------------------------
 
 
@@ -217,16 +218,6 @@ Into the main folder there is also the README.txt and the sub-folder "README_FIL
 pictures of the UGLC dataframe.
 
 --------------------------------------------------------
-
-# UGLC Project
-
-Unified Global Landslides Catalog.
---------------------------------------------------------
-                   IN PROGRESS
---------------------------------------------------------
-
-
-
 ## Requisiti
 
 Specifica eventuali requisiti hardware o software necessari per eseguire gli script. Ad esempio:
@@ -234,8 +225,7 @@ Specifica eventuali requisiti hardware o software necessari per eseguire gli scr
 - Python 3.6 o versioni successive
 - Altri moduli o librerie specifici
 
-
-
+--------------------------------------------------------
 ## Installazione
 
 Spiega come installare eventuali dipendenze o configurare l'ambiente di lavoro per eseguire gli script.
