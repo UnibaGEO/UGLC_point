@@ -4,9 +4,9 @@
 
 ----------------------------------------------------------------------------------------------------------------
 
---------------------------------------------------------
-                                                               IN PROGRESS
---------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+                                                        IN PROGRESS
+----------------------------------------------------------------------------------------------------------------
 
 
 ## <p align="center"> AUTHORS  </p>
@@ -16,10 +16,9 @@
 - [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari).
 - [@Francesco Paolo Lovergine](https://github.com/fpl) - Researcher (CNR - IREA).
 - [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher (Yale University).
+- 
 
-----------------------------------------------------------------------------------------------------------------
-                                             IN PROGRESS
-----------------------------------------------------------------------------------------------------------------
+
 
 ## <p align="center"> SUMMARY OF ATTRIBUTE FIELDS INCLUDED IN UGLC </p>
 
@@ -41,12 +40,27 @@
   - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
 
     - [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
-        Cooperative Open Online Landslide Repository (NASA), both Event Points and Report Points are used together, eliminating overlapping points at same coordinates [TOTAL POINTS: XXX].  
+        Cooperative Open Online Landslide Repository (NASA) (both Event Points and Report Points are used together, 
+        eliminating overlapping points at same coordinates.
+    
+        <b>[TOTAL POINTS: 49718]</b>.  
     - [02_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521): 
-        Global fatal landslide occurrence from 2004 to 2016 DA COMPLETARE
+        Global fatal landslide occurrence from 2004 to 2016 
+    
+        <b>[TOTAL POINTS: 5490]</b>. 
 
-    - "03_ITALICA" eccc
+    - [03_ITALICA](https://zenodo.org/records/8009366): 
+        ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)
+
+        <b>[TOTAL POINTS: 6312]</b>. 
+    
+    - [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308): 
+        Landslide Inventories across the United States version2 (USGS)
+
+        <b>[TOTAL POINTS: 6312]</b>. 
+
    ...
+
 -----------
 - <b> OLD ID: </b> 
 -----------
@@ -179,6 +193,9 @@ Specifica eventuali requisiti hardware o software necessari per eseguire gli scr
 
 - Python 3.6 o versioni successive
 - Altri moduli o librerie specifici
+
+## License
+The code is published under the [MIT License](README_FILES/LICENSE.md).
 
 ## Installazione
 
