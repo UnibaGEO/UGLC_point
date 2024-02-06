@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="03_ITALICA converter completato." />
+    <list default="true" id="0c747b36-858f-48a7-8663-fd7e6f91ee0c" name="Changes" comment="GFLD_work in progress">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Saverio" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,30 +55,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.02_COOLR_CONVERSION.executor&quot;: &quot;Run&quot;,
-    &quot;Python.03_ITALICA_CONVERSION.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Saverio&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sbla2/Documents/LVM_shared/00.Script_csv_landslides_dataset/INPUT_COOLR&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.02_COOLR_CONVERSION.executor": "Run",
+<<<<<<<<< Temporary merge branch 1
+    "Python.02_GFLD_CONVERSION.executor": "Run",
+    "Python.02_GFLD_STANDARDIZER.executor": "Run",
+    "Python.TEMP.executor": "Run",
+    "Python.function.executor": "Run",
+=========
+    "Python.STANDARDIZER_02_ITALICA.executor": "Run",
+>>>>>>>>> Temporary merge branch 2
+    "Python.transformation_inputcsv_script.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Anis",
+    "last_opened_file_path": "C:/Users/sbla2/Documents/LVM_shared/00.Script_csv_landslides_dataset/INPUT_COOLR",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\microzonazione_05\Desktop\UGLC Dataframe - scripts\UGLC" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV\02.COOLR" />
+      <recent name="C:\Users\sbla2\Documents\LVM_shared\UGLC\UGLC\01.CONVERSION_CSV" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
@@ -169,31 +180,99 @@
       <option name="project" value="LOCAL" />
       <updated>1706788074612</updated>
     </task>
-    <task id="LOCAL-00011" summary="READMETEXT modificationssss">
+<<<<<<<<< Temporary merge branch 1
+    <task id="LOCAL-00011" summary="REVISIONE CARTELLE">
       <option name="closed" value="true" />
-      <created>1707149207961</created>
+      <created>1706797477299</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1707149207961</updated>
+      <updated>1706797477299</updated>
     </task>
-    <task id="LOCAL-00012" summary="03_ITALICA converter completato.">
+    <task id="LOCAL-00012" summary="REVISIONE CARTELLE">
       <option name="closed" value="true" />
-      <created>1707215297723</created>
+      <created>1706797662583</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1707215297723</updated>
+      <updated>1706797662583</updated>
     </task>
-    <task id="LOCAL-00013" summary="03_ITALICA converter completato.">
+    <task id="LOCAL-00013" summary="GFLD_WORK IN PROGRESS">
       <option name="closed" value="true" />
-      <created>1707216240957</created>
+      <created>1706802650654</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1707216240957</updated>
+      <updated>1706802650654</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="First Test">
+      <option name="closed" value="true" />
+      <created>1707133781577</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707133781577</updated>
+    </task>
+    <task id="LOCAL-00015" summary="GFLD_work in progress">
+      <option name="closed" value="true" />
+      <created>1707133867376</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707133867376</updated>
+    </task>
+    <task id="LOCAL-00016" summary="GFLD_work in progress">
+      <option name="closed" value="true" />
+      <created>1707134056309</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1707134056309</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+=========
+    <task id="LOCAL-00011" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1706788650333</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706788650333</updated>
+    </task>
+    <task id="LOCAL-00012" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1706798972595</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706798972595</updated>
+    </task>
+    <task id="LOCAL-00013" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1706802695929</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706802695929</updated>
+    </task>
+    <task id="LOCAL-00014" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1707128421510</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707128421510</updated>
+    </task>
+    <task id="LOCAL-00015" summary="READMETEXT modificationssss">
+      <option name="closed" value="true" />
+      <created>1707137594763</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707137594763</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+>>>>>>>>> Temporary merge branch 2
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -210,9 +289,33 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Conversion Script" />
-    <MESSAGE value="First Test" />
     <MESSAGE value="READMETEXT modificationssss" />
-    <MESSAGE value="03_ITALICA converter completato." />
-    <option name="LAST_COMMIT_MESSAGE" value="03_ITALICA converter completato." />
+    <MESSAGE value="REVISIONE CARTELLE" />
+    <MESSAGE value="GFLD_WORK IN PROGRESS" />
+    <MESSAGE value="First Test" />
+    <MESSAGE value="GFLD_work in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="GFLD_work in progress" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_GFLD_STANDARDIZER.py</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/03_ITALICA_STANDARDIZER.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

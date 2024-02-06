@@ -33,7 +33,7 @@
       "illegal mining": "human",
       "earthquake": "seismic",
       "legal mining": "human",
-      "leaking_pipe": "human",
+      "leaking pipe": "human",
       "volcanic eruption": "volcanic",
       "fire": "postfire",
       "recreation": "human",
@@ -42,7 +42,7 @@
       "freezing": "climate",
       "human activity (unspecified)": "human",
       "garbage collapse": "human",
-      "natural dam or riberbank collapse": "ND",
+      "natural dam or riverbank collapse": "ND",
       "animal activity": "natural",
       "conflict and explosion": "human",
       "marine erosion": "natural"
