@@ -11,4 +11,4 @@ print((df_OLD).columns.values)
 
 print(df_OLD['Inventory'].unique())
 
-print(df_OLD['InventoryU'].unique())
+print(df_OLD['Date'].unique())

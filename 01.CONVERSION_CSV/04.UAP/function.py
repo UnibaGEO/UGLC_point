@@ -2,13 +2,13 @@ import pandas as pd
 from shapely.wkt import loads
 from opencage.geocoder import OpenCageGeocode
 import numpy as np
+from geopy.geocoders import Nominatim
 
-import pandas as pd
 #1
 
 def apply_country_corrections(df):
-    def get_country_name(wkt_geom):
-        geometry = loads(wkt_geom)
+    def get_country_name(WKT_GEOM):
+        geometry = loads(WKT_GEOM)
         longitude, latitude = geometry.xy
         geolocator = Nominatim(user_agent="country_lookup")
         location = geolocator.reverse((latitude[0], longitude[0]), language='en')
@@ -20,13 +20,13 @@ def apply_country_corrections(df):
 
     # Iterate on the lines and update the country name
     for idx in nd_rows:
-        wkt_geom = df.at[idx, 'WKT_GEOM']
+        WKT_GEOM = df.at[idx, 'WKT_GEOM']
 
         try:
-            country_name = get_country_name(wkt_geom)
+            country_name = get_country_name(WKT_GEOM)
             df.at[idx, 'COUNTRY'] = country_name
         except Exception as e:
-            print("________________________________________________________________________________________")
+            print("_")
             #print(f"Error during the coordinates extraction from the row {idx}: {e}")
             #print("________________________________________________________________________________________")
 

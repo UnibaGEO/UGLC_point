@@ -1,7 +1,7 @@
 import pandas as pd
 from shapely.wkt import loads
 from opencage.geocoder import OpenCageGeocode
-
+from geopy.geocoders import Nominatim
 import pandas as pd
 #1
 

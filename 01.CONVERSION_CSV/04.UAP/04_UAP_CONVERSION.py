@@ -14,10 +14,11 @@ import numpy as np
 # Native Dataframe 02_GFLD_NATIVE loading
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
 
+
 # JSON Lookup Tables Loading
-with open('02_GFLD_LOOKUPTABLES.json', 'r') as file:
+with open('04_UAP_LOOKUPTABLES.json', 'r') as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["02_GFLD LOOKUP TABLES"]
+    lookup_tables = lookup_config["04_UAP LOOKUP TABLES"]
 
 
 # Application of lookup Tables to the columns of the old DataFrame
@@ -66,42 +67,46 @@ df_NEW = pd.DataFrame(new_data)
 
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
-df_NEW['NEW DATASET'] = "UGLC"
+df_NEW['NEW DATASET'] = "UAP"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "GFLD"
-df_NEW['OLD ID'] = df_OLD['LandslideN']
-df_NEW['VERSION'] = "2017"
-df_NEW['COUNTRY'] = df_OLD['Country']
-df_NEW['ACCURACY'] = round(np.sqrt((df_OLD['Precision'].astype(int)/ np.pi)),0)
-df_NEW['START DATE'] = df_OLD['Year'].astype(str) + "/" + df_OLD['Month'].astype(str) + "/" + df_OLD['Day'].astype(str)
-df_NEW['END DATE'] = df_OLD['Year'].astype(str) + "/" + df_OLD['Month'].astype(str) + "/" + df_OLD['Day'].astype(str)
-df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = df_OLD['Trigger']
+df_NEW['OLD ID'] = df_OLD['OBJECTID']
+df_NEW['VERSION'] = "V2 - 2022/06/03"
+df_NEW['COUNTRY'] = "ND"
+df_NEW['ACCURACY'] = "ND"
+df_NEW['START DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
+df_NEW['END DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
+df_NEW['TYPE'] = df_OLD['Inventory']
+df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = " Global fatal landslide, locality: " + df_OLD['Location_M'] + ", description: " + df_OLD['Report_1']
-df_NEW['LINK'] = "Source: " + df_OLD['Source_1']
+df_NEW['NOTES'] = "  Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS, locality: " + df_NEW['COUNTRY'] + ", description: " + df_OLD['Notes']
+df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
 
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------f
 
-from function import apply_affidability_calculator
+#from function import apply_country_corrections
+#from function import apply_affidability_calculator
 
-apply_affidability_calculator(df_NEW)
+
+#apply_country_corrections(df_NEW)
+#apply_affidability_calculator(df_NEW)
+print(df_NEW['COUNTRY'].unique())
 
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
-print(df_NEW['TRIGGER'].unique())
+
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as GFLD_02_CONVERTED.csv in the DATASET_CONVERTED directory")
+print("COOLR-report points successfully converted as UAP_04_CONVERTED.csv in the DATASET_CONVERTED directory")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
