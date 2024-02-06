@@ -19,8 +19,17 @@
 - Domenico Capolongo - PhD Professor (University of Bari).
 
 ----------------------------------------------------------------------------------------------------------------
+
+## Project description
+
+The UGLC project aims to create a global landslide catalog as a unified dataframe from multiple global, national and regional dataframes.
+inside contains information from catalogs:
+
+
+----------------------------------------------------------------------------------------------------------------
+
 ## License
-The code is published under the [MIT License](README_FILES/LICENSE.md).
+The whole code is published under the [MIT License](README_FILES/LICENSE.md).
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -33,7 +42,7 @@ The code is published under the [MIT License](README_FILES/LICENSE.md).
 
 ----------------------------------------------------------------------------------------------------------------
 
-### Attributes description
+## Attributes description
 
 
 - <b> WKT_GEOM: </b> The contents of this field contain information about the georeferencing of each point described in the dataframe using the WGS84 reference system.
@@ -42,7 +51,7 @@ The code is published under the [MIT License](README_FILES/LICENSE.md).
 - <b> NEW DATASET: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
 
 
-- <b> ID: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
+- <b> ID: </b> the content of this field contains a unique ID for each landslide event int othe UGLC dataset.
 
 
   - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
@@ -148,63 +157,38 @@ The code is published under the [MIT License](README_FILES/LICENSE.md).
     | >1000 m              | TRUE and FALSE                 | Point with uncertain reliability  | 9              | 
     | ND                   | TRUE and FALSE                 | Unreliable point                  | 10             | 
 
-- <b> RPSV: </b> 
------------
-- <b> DCMV: </b> 
------------
-- <b> FATALITIES: </b> 
------------
-- <b> INJURIES: </b> 
------------
-- <b> NOTES: </b> 
------------
-- <b> LINKS: </b> 
------------
-ID: Unique ID for each landslide
-
-OLD DATASET: Name of the Native dataset
-
-OLD_ID: ID point of the Native dataset
-
-VERSION: Version of the Native dataset
-
-COUNTRY: Country of the point
-
-ACCURACY[m]: Accuracy in metres   
-
-START DATE: Date of the landslides , 
-
-END DATE: Date of the landslides, format: ISO 8601: YYYY/MM/DD. If we have the exact date of the landslides we will have the start date = end date,
-however if we only have the year or period of acquisition of the landslide we will have the start date different from the end date and therefore we
-will have the interval in the time in which the landslide probably occurred
-
-TYPE: Type of landsdlise if known and include: complex,soil creep,debris flow,earth flow,lahar,slide,mudslide,riverbank collapse,rock slide,rock fall,rotational slide,
-translational slide,snow avalanche,not defined
-
-TRIGGER:Type of trigger if known and include: rainfall,seismic,volcanic,human,climate,not defined
-
-AFFIDABILITY: 1:exact point , 2:Almost exact point , 3:Very high reliability point, 4:High reliability point, 5:Medium reliability point, 6:Low reliability point,
-7:Very low reliability point, 8:Poor reliability point, 9: Uncertain reliability point, 10:Not reliable point
-
-PSV:
-
-DCMV:
-
-FATALITIES:
-
-INJURIES:
-
-NOTES:
-
-LINK:
+- <b> RPSV: </b> the content of this field contains the data validation flag through a comparison with the data from Radar Permanent Scatterers product from Sentinel 1 - Copernicus
+    
+      NOT YET IMPLEMENTED
 
 
+- <b> DCMV: </b> the content of this field contains the data validation flag through a comparison with the data from DEM change maps TanDEM-X - DLR (approximately 2010 - 2022)
+    
+      NOT YET IMPLEMENTED
 
-### <p align="center"> FOLDER STRUCTURE</p>
---------------------------------------------------------
+
+- <b> FATALITIES: </b> the content of this field contains the number of fatalities related to the event (if explicit)
+  
+
+- <b> INJURIES: </b> the content of this field contains the number of injuries related to the event (if explicit)
+
+
+- <b> NOTES: </b> the content of this field contains the notes and information relate to the event (if explicit)
+
+
+- <b> LINKS: </b>  the content of this field contains the link to the source of the event report or study (if explicit)
+
 --------------------------------------------------------
 
-![Dataframe Folder Structure](README_FILES/Dataframe structure v1.png)
+## Folder Structure
+
+
+
+--------------------------------------------------------
+<img alt="Dataframe Folder Structure" src="README_FILES/Dataframe structure v1.png"/>
+Folder Structure Scheme
+--------------------------------------------------------
+
 
 The entire UGLC structure is allocated in 3 main folders :
 - 00.INPUT
@@ -241,13 +225,6 @@ Unified Global Landslides Catalog.
                    IN PROGRESS
 --------------------------------------------------------
 
-## Descrizione
-
-The UGLC project aims to create a global landslide catalog as a unified dataframe from multiple global, national and regional dataframes.
-inside contains information from catalogs:
-- 
--
--
 
 
 ## Requisiti
