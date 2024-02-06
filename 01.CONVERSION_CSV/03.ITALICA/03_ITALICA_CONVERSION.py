@@ -69,8 +69,8 @@ df_NEW['OLD ID'] = df_OLD['id']
 df_NEW['VERSION'] = "V2 - 2023"
 df_NEW['COUNTRY'] = "Italy"
 df_NEW['ACCURACY'] = df_OLD['geographic_accuracy']
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M:%S", errors='coerce').dt.strftime("%Y/%m/%d")
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M:%S", errors='coerce').dt.strftime("%Y/%m/%d")
+df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
+df_NEW['END DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
 df_NEW['TYPE'] = df_OLD['landslide_type']
 df_NEW['TRIGGER'] = "rainfall"
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -97,7 +97,7 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../03.OUTPUT/DATASET_CONVERTED/03_ITALICA_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/03_ITALICA_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
 print("COOLR-report points successfully converted as ITALICA_03_CONVERTED.csv in the DATASET_CONVERTED directory")
 print("________________________________________________________________________________________")
