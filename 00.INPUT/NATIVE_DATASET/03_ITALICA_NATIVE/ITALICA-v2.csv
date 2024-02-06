@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 WKT_GEOM,id,landslide_type,municipality,province,region,geographic_accuracy,utc_date
 POINT (16.173 40.592109),ITA_0001,RF,Calciano,Matera,Basilicata,P0,12/11/2004 23:01
 POINT (13.671922 42.51),ITA_0002,SL,Isola del Gran Sasso d'Italia,Teramo,Abruzzo,P1,19/05/2002 21:59
@@ -6312,7 +6312,7 @@ POINT (9.419401 44.261562),ITA_6348,SL,Sestri Levante,Genova,Liguria,P1,27/12/20
 POINT (9.370394 44.316211),ITA_6349,SL,Cogorno,Genova,Liguria,P1,27/12/2021 20:40
 POINT (9.443864 39.129636),ITA_6350,RF,Villasimius,Sud Sardegna,Sardegna,P1,16/11/2021 05:00
 POINT (15.630895 41.716011),ITA_6351,SL,San Marco in Lamis,Foggia,Puglia,P0,04/09/2014 03:00
-=======
+=========
 id;information_source;landslide_type;lon;lat;municipality;province;region;geographic_accuracy;day;month;year;local_time;local_date;utc_date;temporal_accuracy
 ITA_0001;IR;RF;16.173000;40.592109;Calciano;Matera;Basilicata;P0;13;11;2004;00:01;13/11/2004 00:01;12/11/2004 23:01;T1
 ITA_0002;NR;SL;13.671922;42.510000;Isola del Gran Sasso d'Italia;Teramo;Abruzzo;P1;19;05;2002;23:59;19/05/2002 23:59;19/05/2002 21:59;T3
@@ -12626,4 +12626,4 @@ ITA_6348;IR;SL;9.419401;44.261562;Sestri Levante;Genova;Liguria;P1;27;12;2021;21
 ITA_6349;IR;SL;9.370394;44.316211;Cogorno;Genova;Liguria;P1;27;12;2021;21:40;27/12/2021 21:40;27/12/2021 20:40;T1
 ITA_6350;NR;RF;9.443864;39.129636;Villasimius;Sud Sardegna;Sardegna;P1;16;11;2021;06:00;16/11/2021 06:00;16/11/2021 05:00;T2
 ITA_6351;NR;SL;15.630895;41.716011;San Marco in Lamis;Foggia;Puglia;P0;04;09;2014;05:00;04/09/2014 05:00;04/09/2014 03:00;T2
->>>>>>> e02173c73d1c09b2b04ecdaed80ced40c9f8c670
+>>>>>>>>> Temporary merge branch 2
