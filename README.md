@@ -86,7 +86,7 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.md).
 - <b> VERSION: </b> the contents of this field represent the latest updated version of the original dataset used (if specified)
 
 
-- <b> COUNTRY: </b> the content of this field represents the country where the event was located (where missing it was derived using its coordinates )
+- <b> COUNTRY: </b> the content of this field represents the country where the event was located (where missing it was derived using its coordinates
 
 
 - <b> ACCURACY: </b> the content of this field represents the precision in meters of the relative deviation of the georeferenced point from the actual landslide (if there is one)
