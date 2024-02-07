@@ -74,10 +74,11 @@ df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "GFLD"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
-df_NEW['COUNTRY'] = df_OLD.apply(get_country_name, axis=1)
+df_NEW['COUNTRY'] = 'ND'
 df_NEW['ACCURACY'] = "ND"
 df_NEW['START DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
 df_NEW['END DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
+non_matching_values = df_NEW[df_NEW['START DATE'].isna()]
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -101,7 +102,7 @@ df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
 #apply_affidability_calculator(df_NEW)
 #apply_country_corrections(df_NEW)
 print(df_NEW['COUNTRY'].head())
-
+print(non_matching_values['START_DATE'])
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
