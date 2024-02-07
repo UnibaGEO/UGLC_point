@@ -99,6 +99,6 @@ apply_affidability_calculator(df_NEW)
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/03_ITALICA_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as ITALICA_03_CONVERTED.csv in the DATASET_CONVERTED directory")
+print("                            03_ITALICA_NATIVE conversion: DONE                          ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------

@@ -44,5 +44,5 @@ def apply_affidability_calculator(df):
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
     print("________________________________________________________________________________________")
-    print("Valori di 'AFFIDABILITY' assegnati con successo.")
+    print("                            AFFIDABILITY calculation: DONE                              ")
     print("________________________________________________________________________________________")
