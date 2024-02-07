@@ -1,12 +1,10 @@
------------------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
 # native dataframe:     ITALICA - CNR IRPI
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
-
-
 import pandas as pd
 import json
 
@@ -17,9 +15,6 @@ df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/03_ITALICA_NATIVE/03_ITALICA
 with open('03_ITALICA_LOOKUPTABLES.json', 'r') as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["03_ITALICA LOOKUP TABLES"]
-
-df_OLD['injuries'].fillna('ND', inplace=True)
-df_OLD['fatalities'].fillna('ND', inplace=True)
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -66,47 +61,44 @@ new_data = {
 df_NEW = pd.DataFrame(new_data)
 
 # New Dataframe Updating with the Old Dataframe columns content values
-df_NEW['WKT_GEOM'] = df_OLD['WKT']
+df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = df_OLD['source']
-df_NEW['OLD ID'] = df_OLD['ev_id']
-df_NEW['VERSION'] = "2019"
-df_NEW['COUNTRY'] = df_OLD['ctry_name']
-df_NEW['ACCURACY'] = df_OLD['loc_acc']
-df_NEW['START DATE'] = df_OLD['ev_date'].replace('ND', '1956/01/01')
-df_NEW['END DATE'] = df_OLD['ev_date'].replace('ND', '2023/01/01')
-df_NEW['TYPE'] = df_OLD['ls_cat']
-df_NEW['TRIGGER'] = df_OLD['ls_trig']
+df_NEW['OLD DATASET'] = "ITALICA"
+df_NEW['OLD ID'] = df_OLD['id']
+df_NEW['VERSION'] = "V2 - 2023"
+df_NEW['COUNTRY'] = "Italy"
+df_NEW['ACCURACY'] = df_OLD['geographic_accuracy']
+df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
+df_NEW['END DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
+df_NEW['TYPE'] = df_OLD['landslide_type']
+df_NEW['TRIGGER'] = "rainfall"
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['fatalities']
-df_NEW['INJURIES'] = df_OLD['injuries']
-df_NEW['NOTES'] = "Cooperative Open Online Landslide Repository - NASA, locality: " + df_OLD['loc_desc'] + ", description: " + df_OLD['ev_desc']
-df_NEW['LINK'] = "Source: " + df_OLD['src_link']
+df_NEW['FATALITIES'] = "ND"
+df_NEW['INJURIES'] = "ND"
+df_NEW['NOTES'] = "ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI, locality:"+df_OLD['province']+", "+ df_OLD['region'] +", description: ND"
+df_NEW['LINK'] = "Source: ND"
 
-print(df_OLD['fatalities'].unique())
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------f
 
-from function import apply_country_corrections
 from function import apply_affidability_calculator
 
-
-apply_country_corrections(df_NEW)
 apply_affidability_calculator(df_NEW)
-print(df_NEW['FATALITIES'])
+
+
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/03_ITALICA_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as COOLR_01_CONVERTED.csv in the DATASET_CONVERTED directory")
+print("                            03_ITALICA_NATIVE conversion: DONE                          ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
