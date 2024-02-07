@@ -9,6 +9,8 @@
 import pandas as pd
 import json
 import numpy as np
+from opencage.geocoder import OpenCageGeocode
+from function import get_country_name
 
 
 # Native Dataframe 02_GFLD_NATIVE loading
@@ -72,7 +74,7 @@ df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "GFLD"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
-df_NEW['COUNTRY'] = "ND"
+df_NEW['COUNTRY'] = df_OLD.apply(get_country_name, axis=1)
 df_NEW['ACCURACY'] = "ND"
 df_NEW['START DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
 df_NEW['END DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
@@ -91,13 +93,14 @@ df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------f
 
-#from function import apply_country_corrections
+#df_NEW['COUNTRY'] = df_NEW['WKT_GEOM'].apply(lambda x: get_country_name(x))
+
+#from function import update_country_column
 #from function import apply_affidability_calculator
 
-
-#apply_country_corrections(df_NEW)
 #apply_affidability_calculator(df_NEW)
-print(df_NEW['COUNTRY'].unique())
+#apply_country_corrections(df_NEW)
+print(df_NEW['COUNTRY'].head())
 
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
@@ -106,7 +109,11 @@ print(df_NEW['COUNTRY'].unique())
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED.csv', index=False)
-print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as UAP_04_CONVERTED.csv in the DATASET_CONVERTED directory")
-print("________________________________________________________________________________________")
+#print("________________________________________________________________________________________")
+#print("COOLR-report points successfully converted as UAP_04_CONVERTED.csv in the DATASET_CONVERTED directory")
+#print("________________________________________________________________________________________")
+
+
+
+
 #-----------------------------------------------------------------------------------------------------------------------

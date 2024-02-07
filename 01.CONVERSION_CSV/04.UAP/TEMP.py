@@ -2,6 +2,8 @@
 import pandas as pd
 import json
 import numpy as np
+from opencage.geocoder import OpenCageGeocode
+
 
 
 # Native Dataframe 02_GFLD_NATIVE loading

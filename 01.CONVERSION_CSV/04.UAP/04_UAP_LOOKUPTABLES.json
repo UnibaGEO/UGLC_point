@@ -1,15 +1,15 @@
 {
   "04_UAP LOOKUP TABLES": {
-    "OBJECTID": "ND",
-    "Fatalities": "ND",
-    "Confidence": "ND",
-    "InventoryU": "ND",
-    "Info_sourc": "ND",
-    "Notes": "ND",
-    "long": "ND",
-    "lat": "ND",
-    "geometry": "ND",
-    "WKT_GEOM": "ND",
+    "OBJECTID_lookup": "ND",
+    "Fatalities_lookup": "ND",
+    "Confidence_lookup": "ND",
+    "InventoryU_lookup": "ND",
+    "Info_source_lookup": "ND",
+    "Notes_lookup": "ND",
+    "long_lookup": "ND",
+    "lat_lookup": "ND",
+    "geometry_lookup": "ND",
+    "WKT_GEOM_lookup": "ND",
     "Source_1_lookup": "ND",
     "Report_2_lookup": "ND",
     "Source_2_lookup": "ND",
@@ -20,8 +20,7 @@
     "Location_M_lookup": "ND",
     "Precision_lookup": "ND",
     "Location_R_lookup": "ND",
-    "geometry_lookup": "ND",
-    "WKT_GEOM_lookup": "ND",
+
 
     "Inventory_lookup": {
       "AK DOT": "ND",

@@ -1,11 +1,14 @@
+import re
 import pandas as pd
 from shapely.wkt import loads
 from opencage.geocoder import OpenCageGeocode
 import numpy as np
 from geopy.geocoders import Nominatim
+import geopandas as gpd
+from shapely import wkt
 
 #1
-
+"""
 def apply_country_corrections(df):
     def get_country_name(WKT_GEOM):
         geometry = loads(WKT_GEOM)
@@ -29,6 +32,18 @@ def apply_country_corrections(df):
             print("_")
             #print(f"Error during the coordinates extraction from the row {idx}: {e}")
             #print("________________________________________________________________________________________")
+"""
+
+api_key = '345b70a41acc4ae49b07f28e0bd637c1'
+geocoder = OpenCageGeocode(api_key)
+def get_country_name(row):
+    # Utilizza il geocoder di OpenCage Geocode per ottenere il nome del paese
+    result = geocoder.geocode(f"{row['lat']}, {row['long']}", no_annotations=1)
+    if result and 'components' in result[0]:
+        return result[0]['components']['country']
+    return 'ND'
+
+
 
 # -----------------------------------------------------------------------------------------------------------------------
 #2
