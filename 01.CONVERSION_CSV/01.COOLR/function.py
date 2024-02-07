@@ -1,6 +1,6 @@
 import pandas as pd
+from geopy import Nominatim
 from shapely.wkt import loads
-from opencage.geocoder import OpenCageGeocode
 
 import pandas as pd
 #1
@@ -28,6 +28,10 @@ def apply_country_corrections(df):
             print("________________________________________________________________________________________")
             #print(f"Error during the coordinates extraction from the row {idx}: {e}")
             #print("________________________________________________________________________________________")
+
+    print("________________________________________________________________________________________")
+    print("                            Country Names Correction DONE                               ")
+    print("________________________________________________________________________________________")
 
 # -----------------------------------------------------------------------------------------------------------------------
 #2
@@ -75,5 +79,5 @@ def apply_affidability_calculator(df):
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
     print("________________________________________________________________________________________")
-    print("Valori di 'AFFIDABILITY' assegnati con successo.")
+    print("                            Affidability calculation DONE                               ")
     print("________________________________________________________________________________________")

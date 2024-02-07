@@ -86,7 +86,6 @@ df_NEW['INJURIES'] = df_OLD['injuries']
 df_NEW['NOTES'] = "Cooperative Open Online Landslide Repository - NASA, locality: " + df_OLD['loc_desc'] + ", description: " + df_OLD['ev_desc']
 df_NEW['LINK'] = "Source: " + df_OLD['src_link']
 
-print(df_OLD['fatalities'].unique())
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
@@ -98,7 +97,7 @@ from function import apply_affidability_calculator
 
 apply_country_corrections(df_NEW)
 apply_affidability_calculator(df_NEW)
-print(df_NEW['FATALITIES'])
+
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
@@ -107,6 +106,6 @@ print(df_NEW['FATALITIES'])
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as COOLR_01_CONVERTED.csv in the DATASET_CONVERTED directory")
+print("        COOLR-report points successfully converted as COOLR_01_CONVERTED.csv            ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
