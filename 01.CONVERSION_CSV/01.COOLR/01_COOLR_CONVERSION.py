@@ -106,6 +106,6 @@ apply_affidability_calculator(df_NEW)
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("        COOLR-report points successfully converted as COOLR_01_CONVERTED.csv            ")
+print("                            01_COOLR_NATIVE conversion: DONE                            ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
