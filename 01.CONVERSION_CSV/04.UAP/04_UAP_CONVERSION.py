@@ -11,7 +11,7 @@ import json
 import numpy as np
 from opencage.geocoder import OpenCageGeocode
 from function import get_country_name
-
+from function import trasforma_data
 
 # Native Dataframe 02_GFLD_NATIVE loading
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
@@ -39,7 +39,7 @@ for column in df_OLD.columns:
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
 
 # null values replacement in the Native Dataframe
-df_OLD = df_OLD.fillna("ND")
+#df_OLD = df_OLD.fillna("ND")
 
 # New dataframe Configuration
 new_data = {
@@ -76,9 +76,9 @@ df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
 df_NEW['COUNTRY'] = 'ND'
 df_NEW['ACCURACY'] = "ND"
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['Date'], format="%d/%m/%Y", errors='coerce').dt.strftime("%Y/%m/%d")
-non_matching_values = df_NEW[df_NEW['START DATE'].isna()]
+df_NEW['Date']=df_OLD['Date']
+df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data)
+df_NEW['END DATE'] = "nd"
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -88,8 +88,8 @@ df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "ND"
 df_NEW['NOTES'] = "  Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS, locality: " + df_NEW['COUNTRY'] + ", description: " + df_OLD['Notes']
 df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
-
-#-----------------------------------------------------------------------------------------------------------------------
+df_NEW['START DATE'].fillna('1878/01/01', inplace=True)
+-------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------f
@@ -101,8 +101,7 @@ df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
 
 #apply_affidability_calculator(df_NEW)
 #apply_country_corrections(df_NEW)
-print(df_NEW['COUNTRY'].head())
-print(non_matching_values['START_DATE'])
+
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

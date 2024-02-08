@@ -32,6 +32,7 @@ gdf_orig['WKT_GEOM'] = gdf_orig.geometry.apply(lambda geom: geom.wkt)
 # I create a 'TRIGGER' column with the same values as df_OLD['Inventory'] to create a lookup table in 04_UAP_CONVERSION."
 
 gdf_orig['TRIGGER']=gdf_orig['Inventory']
+gdf_orig['DATEf']=gdf_orig['Date']
 
 # Salva il GeoDataFrame in un nuovo CSV
 gdf_orig.to_csv('04_UAP_NATIVE.csv', index=False)
