@@ -5,9 +5,31 @@ import numpy as np
 from opencage.geocoder import OpenCageGeocode
 from datetime import datetime
 from function import trasforma_data_start
+import geopandas as gpd
+from shapely.geometry import Point
+
 
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
 
+
+# Carica il file shapefile dei confini dei paesi
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+
+# Carica il dataset dei punti georeferenziati
+# Supponiamo che il dataset sia in formato CSV con colonne latitudine e longitudine
+points = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.longitudine, df.latitudine))
+
+# Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
+points_with_country = gpd.sjoin(points, world[['geometry', 'name']], how='left', op='within')
+
+# La colonna 'name' conterrà il nome del paese corrispondente
+
+
+
+
+
+
+"""
 #df_OLD['Date'] = df_OLD['Date'].apply(trasforma_data)
 
 print(df_OLD)
@@ -58,3 +80,4 @@ print(righe_con_data_specifica)
 # Utilizzo della funzione per trasformare il file CSV
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED_temp_data5.csv')
 
+"""
