@@ -4,7 +4,7 @@ import json
 import numpy as np
 from opencage.geocoder import OpenCageGeocode
 from datetime import datetime
-from function import trasforma_data
+from function import trasforma_data_start
 
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
 

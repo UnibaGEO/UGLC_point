@@ -11,7 +11,8 @@ import json
 import numpy as np
 from opencage.geocoder import OpenCageGeocode
 from function import get_country_name
-from function import trasforma_data
+from function import trasforma_data_start
+from function import trasforma_data_end
 
 # Native Dataframe 02_GFLD_NATIVE loading
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
@@ -76,9 +77,8 @@ df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
 df_NEW['COUNTRY'] = 'ND'
 df_NEW['ACCURACY'] = "ND"
-df_NEW['Date']=df_OLD['Date']
-df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data)
-df_NEW['END DATE'] = "nd"
+df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['Date'].apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -89,7 +89,13 @@ df_NEW['INJURIES'] = "ND"
 df_NEW['NOTES'] = "  Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS, locality: " + df_NEW['COUNTRY'] + ", description: " + df_OLD['Notes']
 df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
 df_NEW['START DATE'].fillna('1878/01/01', inplace=True)
--------------------------------------------------------------------------------------------------
+df_NEW['END DATE'].fillna('2021/12/31', inplace=True)
+
+celle_vuote = df_NEW['END DATE'].isnull().sum()
+print(celle_vuote)
+print(df_NEW['NEW DATASET'].unique())
+print(df_NEW['OLD DATASET'].unique())
+#-------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------f
