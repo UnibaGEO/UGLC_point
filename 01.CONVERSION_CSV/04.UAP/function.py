@@ -2,7 +2,6 @@ import re
 import pandas as pd
 from shapely.wkt import loads
 import numpy as np
-from geopy.geocoders import Nominatim
 import geopandas as gpd
 from shapely import wkt
 import calendar
