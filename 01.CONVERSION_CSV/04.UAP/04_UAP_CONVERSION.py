@@ -14,6 +14,10 @@ from pandas import DataFrame
 import geopandas as gpd
 from function import trasforma_data_start
 from function import trasforma_data_end
+from function import assign_country_to_points
+from function import trasforma_accuracy
+from function import apply_affidability_calculator
+
 
 # Native Dataframe 02_GFLD_NATIVE loading
 df_OLD: DataFrame = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
@@ -42,6 +46,7 @@ for column in df_OLD.columns:
 
 # null values replacement in the Native Dataframe
 #df_OLD = df_OLD.fillna("ND")
+print(df_OLD.loc[59511])
 
 # New dataframe Configuration
 new_data = {
@@ -69,15 +74,21 @@ new_data = {
 # New dataframe Creation
 df_NEW = pd.DataFrame(new_data)
 
+
+
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
-df_NEW['NEW DATASET'] = "UAP"
+df_NEW['NEW DATASET'] = "UCLC"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "GFLD"
+df_NEW['OLD DATASET'] = "UAP"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
-df_NEW['COUNTRY'] = 'ND'
-df_NEW['ACCURACY'] = "ND"
+
+#uso della funzione country per stabilire il COUNTRY di ogni punto
+df_NEW_with_country = assign_country_to_points(df_OLD)
+df_NEW['COUNTRY'] = df_NEW_with_country['NAME'].fillna('United States of America')
+
+df_NEW['ACCURACY']= df_OLD['Confidence'].apply(trasforma_accuracy)
 df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['Date'].apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
@@ -87,28 +98,10 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = "  Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS, locality: " + df_NEW['COUNTRY'] + ", description: " + df_OLD['Notes']
-df_NEW['LINK'] = "Source: " + df_OLD['InventoryU']
-df_NEW['START DATE'].fillna('1878/01/01', inplace=True)
-df_NEW['END DATE'].fillna('2021/12/31', inplace=True)
-
-celle_vuote = df_NEW['END DATE'].isnull().sum()
-print(celle_vuote)
-print(df_NEW['NEW DATASET'].unique())
-print(df_NEW['OLD DATASET'].unique())
-#-------------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------------------------------
-# Corrections
-#-----------------------------------------------------------------------------------------------------------------------f
-
-#df_NEW['COUNTRY'] = df_NEW['WKT_GEOM'].apply(lambda x: get_country_name(x))
-
-#from function import update_country_column
-#from function import apply_affidability_calculator
-
-#apply_affidability_calculator(df_NEW)
-#apply_country_corrections(df_NEW)
-
+df_NEW['NOTES'] = f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: {df_NEW['COUNTRY']} - description: {df_OLD['Notes']}"
+df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
+#TRASFORMAZIONE
+apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

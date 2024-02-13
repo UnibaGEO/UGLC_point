@@ -101,7 +101,7 @@ from datetime import datetime
 def trasforma_data_start(data):
 
     if pd.isnull(data):
-        return None
+        return '1878/01/01'
 
     # Conversione da d/mm/yyyy a yyyy/mm/d
     try:
@@ -135,7 +135,13 @@ def trasforma_data_start(data):
 
     # Conversione da mm/yyyy a yyyy/mm
     try:
-        nuova_data = datetime.strptime(data, '%m/%Y').strftime('%Y/%m')
+        nuova_data = datetime.strptime(data, '%m/%Y').strftime('%Y/%m/01')
+        return nuova_data
+    except ValueError:
+        pass
+        # Conversione da yyyy/mm a yyyy/mm
+    try:
+        nuova_data = datetime.strptime(data, '%Y/%m').strftime('%Y/%m/01')
         return nuova_data
     except ValueError:
         pass
@@ -153,7 +159,7 @@ def trasforma_data_start(data):
 
     # Conversione da yyyy a yyyy
     try:
-        nuova_data = datetime.strptime(data, '%Y').strftime('%Y')
+        nuova_data = datetime.strptime(data, '%Y').strftime('%Y/01/01')
         return nuova_data
     except ValueError:
         pass
@@ -214,7 +220,7 @@ from datetime import datetime
 def trasforma_data_end(data):
 
     if pd.isnull(data):
-        return None
+        return '2021/12/31'
 
     # Conversione da d/mm/yyyy a yyyy/mm/d
     try:
