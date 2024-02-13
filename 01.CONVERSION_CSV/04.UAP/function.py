@@ -1,11 +1,11 @@
 import re
 import pandas as pd
 from shapely.wkt import loads
-from opencage.geocoder import OpenCageGeocode
 import numpy as np
 from geopy.geocoders import Nominatim
 import geopandas as gpd
 from shapely import wkt
+import calendar
 
 #1
 """
@@ -32,7 +32,7 @@ def apply_country_corrections(df):
             print("_")
             #print(f"Error during the coordinates extraction from the row {idx}: {e}")
             #print("________________________________________________________________________________________")
-"""
+
 
 api_key = '345b70a41acc4ae49b07f28e0bd637c1'
 geocoder = OpenCageGeocode(api_key)
@@ -43,7 +43,7 @@ def get_country_name(row):
         return result[0]['components']['country']
     return 'ND'
 
-
+"""
 
 # -----------------------------------------------------------------------------------------------------------------------
 #2
@@ -252,9 +252,34 @@ def trasforma_data_end(data):
     except ValueError:
         pass
 
-    # Conversione da mm/yyyy a yyyy/mm
     try:
-        nuova_data = datetime.strptime(data, '%m/%Y').strftime('%Y/%m/31')
+        nuova_data = datetime.strptime(data, '%m/%Y')
+        if nuova_data.month == 2:
+            nuovo_giorno = 28
+        elif nuova_data.month == 1:
+            nuovo_giorno = 31
+        elif nuova_data.month == 3:
+            nuovo_giorno = 31
+        elif nuova_data.month == 4:
+            nuovo_giorno = 30
+        elif nuova_data.month == 5:
+            nuovo_giorno = 31
+        elif nuova_data.month == 6:
+            nuovo_giorno = 30
+        elif nuova_data.month == 7:
+            nuovo_giorno = 31
+        elif nuova_data.month == 8:
+            nuovo_giorno = 31
+        elif nuova_data.month == 9:
+            nuovo_giorno = 30
+        elif nuova_data.month == 10:
+            nuovo_giorno = 31
+        elif nuova_data.month == 11:
+            nuovo_giorno = 30
+        elif nuova_data.month == 12:
+            nuovo_giorno = 31
+
+        nuova_data = nuova_data.replace(day=nuovo_giorno).strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
@@ -301,19 +326,14 @@ def trasforma_data_end(data):
         return nuova_data
     except ValueError:
         pass
-    # Conversione da abbreviazione mese/anno a YYYY/MM/01
+
+# Conversione da y1y1y1y1-y2y2y2y2 a y1y1y1y1/01/01
     try:
-        nuova_data = datetime.strptime(data, '%b.%Y').strftime('%Y/%m/31')
+        y1, y2 = data[:4], data[4:]
+        nuova_data = f"{y1}/12/31"
         return nuova_data
     except ValueError:
         pass
-        # Conversione da y1y1y1y1-y2y2y2y2 a y1y1y1y1/01/01
-        try:
-            y1, y2 = data[:4], data[4:]
-            nuova_data = f"{y1}/12/31"
-            return nuova_data
-        except ValueError:
-            pass
     # Conversione da mm/d/yyyy,Giorno settimana a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y, %A').strftime('%Y/%m/%d')
@@ -323,3 +343,44 @@ def trasforma_data_end(data):
 
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
+
+# -----------------------------------------------------------------------------------------------------------------------
+#5 FUNZIONE DI TRASFORMAZIONE COUNTRY
+
+
+import geopandas as gpd
+file_path = "ne_110m_admin_0_countries.zip"
+
+
+def assign_country_to_points(df):
+    # Leggi i confini dei paesi dal file ZIP
+    world = gpd.read_file("zip://" + file_path)
+
+    # Crea un GeoDataFrame per i punti georeferenziati
+    points = gpd.GeoDataFrame(df,
+                              geometry=gpd.points_from_xy(df['long'], df['lat']),
+                              crs='EPSG:4326')
+
+    # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
+    points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
+
+    return points_with_country
+
+
+# Utilizzo della funzione
+file_path = "ne_110m_admin_0_countries.zip"
+
+# -----------------------------------------------------------------------------------------------------------------------
+#6 FUNZIONE DI TRASFORMAZIONE ACCURACY
+
+def trasforma_accuracy(accuracy):
+
+    if pd.isnull(accuracy):
+        return None
+    elif accuracy == 8 or accuracy == 5:
+        return "0"
+    elif accuracy == 3:
+        return "250"
+    elif accuracy == 2 or accuracy == 1:
+        return "50000"
+

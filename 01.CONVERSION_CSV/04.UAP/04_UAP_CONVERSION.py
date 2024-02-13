@@ -23,6 +23,7 @@ from function import apply_affidability_calculator
 df_OLD: DataFrame = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
 
 
+
 # JSON Lookup Tables Loading
 with open('04_UAP_LOOKUPTABLES.json', 'r') as file:
     lookup_config = json.load(file)
@@ -93,7 +94,7 @@ df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['Date'].apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
-df_NEW['AFFIDABILITY'] = "CALC"
+df_NEW['AFFIDABILITY'] ="CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
