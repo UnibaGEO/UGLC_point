@@ -1,15 +1,17 @@
 from calendar import calendar
+
+import gpd
 import pandas as pd
 import json
 import numpy as np
 from opencage.geocoder import OpenCageGeocode
 from datetime import datetime
-from function import trasforma_data_start
 import geopandas as gpd
 from shapely.geometry import Point
 
 
-df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
+
+df_OLD = pd.read_csv("04_UAP_NATIVE.csv",low_memory=False)
 
 
 # Carica il file shapefile dei confini dei paesi
@@ -17,15 +19,14 @@ world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
 
 # Carica il dataset dei punti georeferenziati
 # Supponiamo che il dataset sia in formato CSV con colonne latitudine e longitudine
-points = gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.longitudine, df.latitudine))
+points = gpd.GeoDataFrame(df_OLD, geometry=gpd.points_from_xy(df_OLD.long, df_OLD.lat))
 
 # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
 points_with_country = gpd.sjoin(points, world[['geometry', 'name']], how='left', op='within')
 
+print(points_with_country)
+points_with_country.to_csv('fine.csv')
 # La colonna 'name' conterrà il nome del paese corrispondente
-
-
-
 
 
 

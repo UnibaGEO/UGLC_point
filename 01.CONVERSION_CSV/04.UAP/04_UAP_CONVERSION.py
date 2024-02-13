@@ -10,12 +10,13 @@ import pandas as pd
 import json
 import numpy as np
 from opencage.geocoder import OpenCageGeocode
-from function import get_country_name
+from pandas import DataFrame
+import geopandas as gpd
 from function import trasforma_data_start
 from function import trasforma_data_end
 
 # Native Dataframe 02_GFLD_NATIVE loading
-df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
+df_OLD: DataFrame = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
 
 
 # JSON Lookup Tables Loading
@@ -114,7 +115,7 @@ print(df_NEW['OLD DATASET'].unique())
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED.csv',sep=',', index=False)
 #print("________________________________________________________________________________________")
 #print("COOLR-report points successfully converted as UAP_04_CONVERTED.csv in the DATASET_CONVERTED directory")
 #print("________________________________________________________________________________________")
