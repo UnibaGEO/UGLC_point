@@ -115,23 +115,26 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 
 - <b> TYPE: </b> the content of this field represents the kinematic type of the landslide event (if explicit), standardized using this reference table: 
   
-    | LANDSLIDE CATEGORY   |
-    |----------------------|
-    | <i>(description)</i> |
-    | complex              |
-    | soil creep           | 
-    | debris flow          |  
-    | earth flow           |
-    | lahar                |
-    | slide                |
-    | mudslide             |
-    | riverbank collapse   |
-    | rock slide           |
-    | rock fall            |
-    | rotational slide     |
-    | translational slide  |
-    | snow avalanche       |
-    | ND                   |
+    | LANDSLIDE CATEGORY           |
+    |------------------------------|
+    | <i>(description)</i>         |
+    | complex                      |
+    | soil creep                   | 
+    | debris flow                  |  
+    | earth flow                   |
+    | lahar                        |
+    | earth slide                  |
+    | mudslide                     |
+    | riverbank collapse           |
+    | rock slide                   |
+    | rock fall                    |
+    | rotational sliding           |
+    | translational sliding        |
+    | snow avalanche               |
+    | earth spreading              |
+    | rock spreading               |
+    | glacial lake outburst floods |
+    | ND                           |
 
 
 - <b> TRIGGER: </b> the content of this field represents the trigger that triggered the landslide event (if explicit), standardized using this reference table:

@@ -1,9 +1,12 @@
 import pandas as pd
+import geopandas as gpd
+from shapely import wkt
 from shapely.wkt import loads
-from opencage.geocoder import OpenCageGeocode
-
-import pandas as pd
+from geopy.geocoders import Nominatim
+import requests
 #1
+"""
+file_path = "../../01.CONVERSION_CSV/COUNTRIES.zip"
 
 def apply_country_corrections(df):
     def get_country_name(wkt_geom):
@@ -14,31 +17,40 @@ def apply_country_corrections(df):
         country = location.raw.get('address', {}).get('country')
         return country
 
-    # Indexes rows with 'ND' in the column 'COUNTRY'
-    nd_rows = df[df['COUNTRY'] == 'ND'].index
+    # Leggi i confini dei paesi dal file ZIP
+    world = gpd.read_file("zip://" + file_path)
 
-    # Iterate on the lines and update the country name
-    for idx in nd_rows:
-        wkt_geom = df.at[idx, 'WKT_GEOM']
+    # Converti la colonna WKT in geometrie Shapely
+    df['geometry'] = df['WKT_GEOM'].apply(wkt.loads)
 
-        try:
-            country_name = get_country_name(wkt_geom)
-            df.at[idx, 'COUNTRY'] = country_name
-        except Exception as e:
-            print("________________________________________________________________________________________")
-            #print(f"Error during the coordinates extraction from the row {idx}: {e}")
-            #print("________________________________________________________________________________________")
+    # Crea un GeoDataFrame per i punti georeferenziati
+    points = gpd.GeoDataFrame(df,
+                              geometry='geometry',
+                              crs='EPSG:4326')
 
+    # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
+    points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
+
+    # Seleziona le righe con 'ND' nella colonna 'COUNTRY'
+    #nd_rows = points_with_country[points_with_country['COUNTRY'] == 'ND'].index
+
+    # Applica il reverse geocoding solo alle righe selezionate
+    #points_with_country.loc[nd_rows, 'COUNTRY'] = points_with_country.loc[nd_rows, 'WKT_GEOM'].apply(get_country_name)
+
+    print("________________________________________________________________________________________")
+    print("                             COUNTRY Corrections: DONE                                  ")
+    print("________________________________________________________________________________________")
+
+    return points_with_country
+
+"""
 # -----------------------------------------------------------------------------------------------------------------------
 #2
 
 def apply_affidability_calculator(df):
-    # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
-    df['ACCURACY'] = pd.to_numeric(df['ACCURACY'], errors='coerce')
-
-    # Funzione di trasformazione per assegnare un valore da 1 a 10 alla colonna 'AFFIDABILITY'
+   # Affidability calculations
     def assign_affidability(row):
-        accuracy = row['ACCURACY']
+        accuracy = pd.to_numeric(row['ACCURACY'])
         start_date = pd.to_datetime(row['START DATE'])
         end_date = pd.to_datetime(row['END DATE'])
 
@@ -68,12 +80,9 @@ def apply_affidability_calculator(df):
         else:  # 'ND' case
             return 10
 
-    # Applica la funzione di trasformazione alla colonna 'AFFIDABILITY'
+    # Apply the addifability calculation
     df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
 
-    # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
-    df['ACCURACY'] = df['ACCURACY'].fillna('ND')
-
     print("________________________________________________________________________________________")
-    print("Valori di 'AFFIDABILITY' assegnati con successo.")
+    print("                             AFFIDABILITY Calculation: DONE                             ")
     print("________________________________________________________________________________________")
