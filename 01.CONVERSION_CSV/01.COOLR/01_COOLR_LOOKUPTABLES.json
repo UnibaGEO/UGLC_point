@@ -52,6 +52,7 @@
             "topple": "rock fall",
             "translational_slide": "translational slide",
             "unknown": "ND",
+            "Unknown": "ND",
             "Unkown": "ND",
             "null": "ND"
         },

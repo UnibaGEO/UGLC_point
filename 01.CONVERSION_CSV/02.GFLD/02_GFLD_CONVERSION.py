@@ -11,7 +11,7 @@ import json
 import numpy as np
 
 
-# Native Dataframe 02_COOLR_NATIVE loading
+# Native Dataframe 02_GFLD_NATIVE loading
 df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv",low_memory=False)
 
 # JSON Lookup Tables Loading
@@ -102,6 +102,6 @@ print(df_NEW['TRIGGER'].unique())
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("COOLR-report points successfully converted as GFLD_02_CONVERTED.csv in the DATASET_CONVERTED directory")
+print("                            02_GFLD_NATIVE conversion: DONE                             ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
