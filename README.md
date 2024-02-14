@@ -79,8 +79,13 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
         Landslide Inventories across the United States version2 (USGS)
 
         <b>[TOTAL POINTS: 176427]</b>. 
+    
+    - [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue): 
+        Australia Landslide Catalogue
 
-        ...
+        <b>[TOTAL POINTS: 1653]</b>. 
+        
+    ...
 
 
 
