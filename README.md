@@ -98,7 +98,8 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> COUNTRY: </b> the content of this field represents the country where the event was located (where missing it was derived using its coordinates
 
 
-- <b> ACCURACY: </b> the content of this field represents the precision in meters of the relative deviation of the georeferenced point from the actual landslide (if there is one)
+- <b> ACCURACY: </b> the content of this field represents the precision in meters of the relative deviation of the georeferenced point from 
+    the actual landslide (if there is one), where the NaN values are represented by the value -99999
 
 
 - <b> START DATE: </b> the contents of this field represent the date of the event (if specified exactly in the source dataset) 
