@@ -55,39 +55,19 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> NEW DATASET: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
 
 
-- <b> ID: </b> the content of this field contains a unique ID for each landslide event int othe UGLC dataset.
+- <b> ID: </b> the content of this field contains a unique ID for each landslide event included into the UGLC dataset.
 
 
 - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
 
-    - [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
-        Cooperative Open Online Landslide Repository (NASA) (both Event Points and Report Points are used together, 
-        eliminating overlapping points at same coordinates.
-    
-        <b>[TOTAL POINTS: 49718]</b>.  
-    - [02_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521): 
-        Global fatal landslide occurrence from 2004 to 2016 
-    
-        <b>[TOTAL POINTS: 5490]</b>. 
-
-    - [03_ITALICA](https://zenodo.org/records/8009366): 
-        ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)
-
-        <b>[TOTAL POINTS: 6312]</b>. 
-    
-    - [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308): 
-        Landslide Inventories across the United States version2 (USGS)
-
-        <b>[TOTAL POINTS: 176427]</b>. 
-    
-    - [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue): 
-        Australia Landslide Catalogue
-
-        <b>[TOTAL POINTS: 1653]</b>. 
-        
-    ...
-
-
+    | NATIVE DATASET                                                                                                        | DESCRIPTION                                                                                    | N° POINTS |
+    |-----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|
+    | [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521) | Cooperative Open Online Landslide Repository (NASA) Event + Report points (with no duplicates) | 49718     |
+    | [02_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)  | Global fatal landslide occurrence from 2004 to 2016                                            | 5490      |
+    | [03_ITALICA](https://zenodo.org/records/8009366)                                                                      | ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)                                     | 6312      |
+    | [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308)                                           | Landslide Inventories across the United States version2 (USGS)                                 | 176427    |
+    | [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue)                                                   | Australia Landslide Catalogue                                                                  | 1653      |
+ 
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
 
@@ -98,7 +78,8 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> COUNTRY: </b> the content of this field represents the country where the event was located (where missing it was derived using its coordinates
 
 
-- <b> ACCURACY: </b> the content of this field represents the precision in meters of the relative deviation of the georeferenced point from the actual landslide (if there is one)
+- <b> ACCURACY: </b> the content of this field represents the precision in meters of the relative deviation of the georeferenced point from 
+    the actual landslide (if there is one), where the NaN values are represented by the value -99999
 
 
 - <b> START DATE: </b> the contents of this field represent the date of the event (if specified exactly in the source dataset) 
@@ -155,19 +136,19 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> AFFIDABILITY: </b> the content of this field represents the reliability of the data based on a decision table that takes into 
     account spatial accuracy (ACCURACY) and temporal accuracy (START DATE, END DATE):
 
-    | SPATIAL AFFIDABILITY   | TEMPORAL AFFIDABILITY          | AFFIDABILITY CLASS                | CODE           |
-    |------------------------|--------------------------------|-----------------------------------|----------------|
-    | <i>(meters)</i>        | <i>(START DATE = END DATE)</i> | <i>(Description)</i>              | <i>(value)</i> |
-    | ( <100 m )             | TRUE                           | Exact point                       | 1              | 
-    | ( <100 m )             | FALSE                          | Almost exact point                | 2              |
-    | ( >100 m and <250 m )  | TRUE                           | Very high reliability point       | 3              | 
-    | ( >100 m and <250 m )  | FALSE                          | High reliability point            | 4              |  
-    | ( >250 m and <500 m )  | TRUE                           | Medium reliability point          | 5              |
-    | ( >250 m and <500 m )  | FALSE                          | Low reliability point             | 6              | 
-    | ( >500 m and <1000 m ) | TRUE                           | Very low reliability point        | 7              | 
-    | ( >500 m and <1000 m ) | FALSE                          | Poor reliability point            | 8              |
-    | ( >1000 m )            | TRUE and FALSE                 | Point with uncertain reliability  | 9              | 
-    | ( -99999)              | TRUE and FALSE                 | Unreliable point                  | 10             | 
+    | SPATIAL AFFIDABILITY   | TEMPORAL AFFIDABILITY          | AFFIDABILITY DESCRIPTION         | CLASS          |
+    |------------------------|--------------------------------|----------------------------------|----------------|
+    | <i>(meters)</i>        | <i>(START DATE = END DATE)</i> | <i>(Description)</i>             | <i>(value)</i> |
+    | ( <100 m )             | TRUE                           | Exact point                      | 1              | 
+    | ( <100 m )             | FALSE                          | Almost exact point               | 2              |
+    | ( >100 m and <250 m )  | TRUE                           | Very high reliability point      | 3              | 
+    | ( >100 m and <250 m )  | FALSE                          | High reliability point           | 4              |  
+    | ( >250 m and <500 m )  | TRUE                           | Medium reliability point         | 5              |
+    | ( >250 m and <500 m )  | FALSE                          | Low reliability point            | 6              | 
+    | ( >500 m and <1000 m ) | TRUE                           | Very low reliability point       | 7              | 
+    | ( >500 m and <1000 m ) | FALSE                          | Poor reliability point           | 8              |
+    | ( >1000 m )            | TRUE and FALSE                 | Point with uncertain reliability | 9              | 
+    | ( -99999)              | TRUE and FALSE                 | Unreliable point                 | 10             | 
 
 
 - <b> RPSV: </b> the content of this field contains the data validation flag through a comparison with the data from Radar Permanent Scatterers product from Sentinel 1 - Copernicus
