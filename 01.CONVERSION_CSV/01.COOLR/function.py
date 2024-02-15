@@ -1,10 +1,54 @@
 import pandas as pd
 import geopandas as gpd
 from shapely import wkt
+from shapely.geometry import Point
 from shapely.wkt import loads
 from geopy.geocoders import Nominatim
+import numpy as np
+from sklearn.neighbors import BallTree
 import requests
+
 #1
+
+def apply_country_corrections(df):
+    """
+    Corregge i valori 'ND' nella colonna 'COUNTRY' del dataframe associando il nome dello stato del punto più vicino.
+
+    Parameters:
+    - df: pandas.DataFrame
+        Il dataframe contenente le informazioni geografiche con colonne 'WKT_GEOM' e 'COUNTRY'.
+
+    Returns:
+    - pandas.Series
+        Una Serie Pandas contenente i nuovi valori corretti della colonna 'COUNTRY'.
+    """
+    # Converti le stringhe nella colonna 'WKT_GEOM' in oggetti Point
+    df['geometry'] = df['WKT_GEOM'].apply(wkt.loads).apply(Point)
+
+    # Crea un GeoDataFrame da df_NEW e specifica 'geometry' come colonna delle geometrie
+    gdf = gpd.GeoDataFrame(df, geometry='geometry')
+
+    # Seleziona solo i punti con valore 'ND' nella colonna 'COUNTRY'
+    points_with_nd = gdf[gdf['COUNTRY'] == 'ND']
+
+    # Seleziona i punti senza 'ND' per il calcolo delle distanze
+    points_without_nd = gdf[gdf['COUNTRY'] != 'ND']
+
+    # Utilizza BallTree per trovare il punto più vicino per ciascun punto con 'ND'
+    tree = BallTree(points_without_nd['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist())
+    distances, indices = tree.query(points_with_nd['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist(), k=1)
+
+    # Ottieni i nomi degli stati corretti
+    corrected_countries = gdf.loc[points_without_nd.index[indices.flatten()], 'COUNTRY'].values
+
+    # Crea una Serie Pandas con i nuovi valori corretti
+    corrected_series = pd.Series(corrected_countries, index=points_with_nd.index)
+
+    # Assegna i nuovi valori corretti al dataframe originale
+    df.loc[corrected_series.index, 'COUNTRY'] = corrected_series.values
+
+    return df['COUNTRY']
+
 """
 file_path = "../../01.CONVERSION_CSV/COUNTRIES.zip"
 
@@ -32,17 +76,16 @@ def apply_country_corrections(df):
     points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
 
     # Seleziona le righe con 'ND' nella colonna 'COUNTRY'
-    #nd_rows = points_with_country[points_with_country['COUNTRY'] == 'ND'].index
+    nd_rows = points_with_country[points_with_country['COUNTRY'] == 'ND'].index
 
     # Applica il reverse geocoding solo alle righe selezionate
-    #points_with_country.loc[nd_rows, 'COUNTRY'] = points_with_country.loc[nd_rows, 'WKT_GEOM'].apply(get_country_name)
+    points_with_country.loc[nd_rows, 'COUNTRY'] = points_with_country.loc[nd_rows, 'WKT_GEOM'].apply(get_country_name)
 
     print("________________________________________________________________________________________")
     print("                             COUNTRY Corrections: DONE                                  ")
     print("________________________________________________________________________________________")
 
     return points_with_country
-
 """
 # -----------------------------------------------------------------------------------------------------------------------
 #2
