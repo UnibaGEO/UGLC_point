@@ -89,10 +89,9 @@ df_NEW['LINK'] = f"Source: {df_OLD['src_link']}"
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-#from function import apply_country_corrections
-from function import apply_affidability_calculator
+from function import apply_affidability_calculator, apply_country_corrections
 
-#apply_country_corrections(df_NEW)
+apply_country_corrections(df_NEW)
 apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -107,8 +106,5 @@ print("                            01_COOLR_NATIVE conversion: DONE             
 print("________________________________________________________________________________________")
 
 #-----------------------------------------------------------------------------------------------------------------------
-
-
-#print(df_NEW['ctry_name'].unique())
 
 print(df_NEW['COUNTRY'].unique())
