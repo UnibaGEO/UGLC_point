@@ -60,34 +60,14 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 
 - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
 
-    - [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521):
-        Cooperative Open Online Landslide Repository (NASA) (both Event Points and Report Points are used together, 
-        eliminating overlapping points at same coordinates.
-    
-        <b>[TOTAL POINTS: 49718]</b>.  
-    - [02_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521): 
-        Global fatal landslide occurrence from 2004 to 2016 
-    
-        <b>[TOTAL POINTS: 5490]</b>. 
-
-    - [03_ITALICA](https://zenodo.org/records/8009366): 
-        ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)
-
-        <b>[TOTAL POINTS: 6312]</b>. 
-    
-    - [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308): 
-        Landslide Inventories across the United States version2 (USGS)
-
-        <b>[TOTAL POINTS: 176427]</b>. 
-    
-    - [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue): 
-        Australia Landslide Catalogue
-
-        <b>[TOTAL POINTS: 1653]</b>. 
-        
-    ...
-
-
+    | NATIVE DATASET                                                                                                        | DESCRIPTION                                                                                    | N° POINTS |
+    |-----------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|
+    | [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521) | Cooperative Open Online Landslide Repository (NASA) Event + Report points (with no duplicates) | 49718     |
+    | [02_GFLD](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)  | Global fatal landslide occurrence from 2004 to 2016                                            | 5490      |
+    | [03_ITALICA](https://zenodo.org/records/8009366)                                                                      | ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)                                     | 6312      |
+    | [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308)                                           | Landslide Inventories across the United States version2 (USGS)                                 | 176427    |
+    | [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue)                                                   | Australia Landslide Catalogue                                                                  | 1653      |
+ 
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
 
