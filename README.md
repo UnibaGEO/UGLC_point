@@ -55,7 +55,7 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> NEW DATASET: </b> the content of this field represents the name of the new dataframe's identifying abbreviation: "UGLC".
 
 
-- <b> ID: </b> the content of this field contains a unique ID for each landslide event int othe UGLC dataset.
+- <b> ID: </b> the content of this field contains a unique ID for each landslide event included into the UGLC dataset.
 
 
 - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
@@ -155,19 +155,19 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> AFFIDABILITY: </b> the content of this field represents the reliability of the data based on a decision table that takes into 
     account spatial accuracy (ACCURACY) and temporal accuracy (START DATE, END DATE):
 
-    | SPATIAL AFFIDABILITY   | TEMPORAL AFFIDABILITY          | AFFIDABILITY CLASS                | CODE           |
-    |------------------------|--------------------------------|-----------------------------------|----------------|
-    | <i>(meters)</i>        | <i>(START DATE = END DATE)</i> | <i>(Description)</i>              | <i>(value)</i> |
-    | ( <100 m )             | TRUE                           | Exact point                       | 1              | 
-    | ( <100 m )             | FALSE                          | Almost exact point                | 2              |
-    | ( >100 m and <250 m )  | TRUE                           | Very high reliability point       | 3              | 
-    | ( >100 m and <250 m )  | FALSE                          | High reliability point            | 4              |  
-    | ( >250 m and <500 m )  | TRUE                           | Medium reliability point          | 5              |
-    | ( >250 m and <500 m )  | FALSE                          | Low reliability point             | 6              | 
-    | ( >500 m and <1000 m ) | TRUE                           | Very low reliability point        | 7              | 
-    | ( >500 m and <1000 m ) | FALSE                          | Poor reliability point            | 8              |
-    | ( >1000 m )            | TRUE and FALSE                 | Point with uncertain reliability  | 9              | 
-    | ( -99999)              | TRUE and FALSE                 | Unreliable point                  | 10             | 
+    | SPATIAL AFFIDABILITY   | TEMPORAL AFFIDABILITY          | AFFIDABILITY DESCRIPTION         | CLASS          |
+    |------------------------|--------------------------------|----------------------------------|----------------|
+    | <i>(meters)</i>        | <i>(START DATE = END DATE)</i> | <i>(Description)</i>             | <i>(value)</i> |
+    | ( <100 m )             | TRUE                           | Exact point                      | 1              | 
+    | ( <100 m )             | FALSE                          | Almost exact point               | 2              |
+    | ( >100 m and <250 m )  | TRUE                           | Very high reliability point      | 3              | 
+    | ( >100 m and <250 m )  | FALSE                          | High reliability point           | 4              |  
+    | ( >250 m and <500 m )  | TRUE                           | Medium reliability point         | 5              |
+    | ( >250 m and <500 m )  | FALSE                          | Low reliability point            | 6              | 
+    | ( >500 m and <1000 m ) | TRUE                           | Very low reliability point       | 7              | 
+    | ( >500 m and <1000 m ) | FALSE                          | Poor reliability point           | 8              |
+    | ( >1000 m )            | TRUE and FALSE                 | Point with uncertain reliability | 9              | 
+    | ( -99999)              | TRUE and FALSE                 | Unreliable point                 | 10             | 
 
 
 - <b> RPSV: </b> the content of this field contains the data validation flag through a comparison with the data from Radar Permanent Scatterers product from Sentinel 1 - Copernicus
