@@ -79,8 +79,13 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
         Landslide Inventories across the United States version2 (USGS)
 
         <b>[TOTAL POINTS: 176427]</b>. 
+    
+    - [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue): 
+        Australia Landslide Catalogue
 
-        ...
+        <b>[TOTAL POINTS: 1653]</b>. 
+        
+    ...
 
 
 
@@ -110,23 +115,26 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 
 - <b> TYPE: </b> the content of this field represents the kinematic type of the landslide event (if explicit), standardized using this reference table: 
   
-    | LANDSLIDE CATEGORY   |
-    |----------------------|
-    | <i>(description)</i> |
-    | complex              |
-    | soil creep           | 
-    | debris flow          |  
-    | earth flow           |
-    | lahar                |
-    | slide                |
-    | mudslide             |
-    | riverbank collapse   |
-    | rock slide           |
-    | rock fall            |
-    | rotational slide     |
-    | translational slide  |
-    | snow avalanche       |
-    | ND                   |
+    | LANDSLIDE CATEGORY           |
+    |------------------------------|
+    | <i>(description)</i>         |
+    | complex                      |
+    | soil creep                   | 
+    | debris flow                  |  
+    | earth flow                   |
+    | lahar                        |
+    | earth slide                  |
+    | mudslide                     |
+    | riverbank collapse           |
+    | rock slide                   |
+    | rock fall                    |
+    | rotational sliding           |
+    | translational sliding        |
+    | snow avalanche               |
+    | earth spreading              |
+    | rock spreading               |
+    | glacial lake outburst floods |
+    | ND                           |
 
 
 - <b> TRIGGER: </b> the content of this field represents the trigger that triggered the landslide event (if explicit), standardized using this reference table:
@@ -147,19 +155,19 @@ The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
 - <b> AFFIDABILITY: </b> the content of this field represents the reliability of the data based on a decision table that takes into 
     account spatial accuracy (ACCURACY) and temporal accuracy (START DATE, END DATE):
 
-    | SPATIAL AFFIDABILITY | TEMPORAL AFFIDABILITY          | AFFIDABILITY CLASS                | CODE           |
-    |----------------------|--------------------------------|-----------------------------------|----------------|
-    | <i>(meters)</i>      | <i>(START DATE = END DATE)</i> | <i>(Description)</i>              | <i>(value)</i> |
-    | <100 m               | TRUE                           | Exact point                       | 1              | 
-    | <100 m               | FALSE                          | Almost exact point                | 2              |
-    | >100 m and <250 m    | TRUE                           | Very high reliability point       | 3              | 
-    | >100 m and <250 m    | FALSE                          | High reliability point            | 4              |  
-    | >250 m and <500 m    | TRUE                           | Medium reliability point          | 5              |
-    | >250 m and <500 m    | FALSE                          | Low reliability point             | 6              | 
-    | >500 m and <1000 m   | TRUE                           | Very low reliability point        | 7              | 
-    | >500 m and <1000 m   | FALSE                          | Poor reliability point            | 8              |
-    | >1000 m              | TRUE and FALSE                 | Point with uncertain reliability  | 9              | 
-    | ND                   | TRUE and FALSE                 | Unreliable point                  | 10             | 
+    | SPATIAL AFFIDABILITY   | TEMPORAL AFFIDABILITY          | AFFIDABILITY CLASS                | CODE           |
+    |------------------------|--------------------------------|-----------------------------------|----------------|
+    | <i>(meters)</i>        | <i>(START DATE = END DATE)</i> | <i>(Description)</i>              | <i>(value)</i> |
+    | ( <100 m )             | TRUE                           | Exact point                       | 1              | 
+    | ( <100 m )             | FALSE                          | Almost exact point                | 2              |
+    | ( >100 m and <250 m )  | TRUE                           | Very high reliability point       | 3              | 
+    | ( >100 m and <250 m )  | FALSE                          | High reliability point            | 4              |  
+    | ( >250 m and <500 m )  | TRUE                           | Medium reliability point          | 5              |
+    | ( >250 m and <500 m )  | FALSE                          | Low reliability point             | 6              | 
+    | ( >500 m and <1000 m ) | TRUE                           | Very low reliability point        | 7              | 
+    | ( >500 m and <1000 m ) | FALSE                          | Poor reliability point            | 8              |
+    | ( >1000 m )            | TRUE and FALSE                 | Point with uncertain reliability  | 9              | 
+    | ( -99999)              | TRUE and FALSE                 | Unreliable point                  | 10             | 
 
 
 - <b> RPSV: </b> the content of this field contains the data validation flag through a comparison with the data from Radar Permanent Scatterers product from Sentinel 1 - Copernicus
@@ -227,13 +235,21 @@ pictures of the UGLC dataframe.
 
 Specifica eventuali requisiti hardware o software necessari per eseguire gli script. Ad esempio:
 
-- Python 3.6 o versioni successive
+- Python 3.11 o versioni successive
 - Altri moduli o librerie specifici
+
+----------------------------------------------------------------------------------------------------------------
+                                                        IN PROGRESS
+----------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------
 ## Installazione
 
 Spiega come installare eventuali dipendenze o configurare l'ambiente di lavoro per eseguire gli script.
+
+----------------------------------------------------------------------------------------------------------------
+                                                        IN PROGRESS
+----------------------------------------------------------------------------------------------------------------
 
 ```bash
 pip install -r requirements.txt
