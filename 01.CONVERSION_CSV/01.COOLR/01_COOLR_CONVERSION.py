@@ -75,8 +75,8 @@ df_NEW['COUNTRY'] = df_OLD['ctry_name'].fillna('ND')
 df_NEW['ACCURACY'] = df_OLD['loc_acc']
 df_NEW['START DATE'] = df_OLD['ev_date'].fillna('1956/01/01')
 df_NEW['END DATE'] = df_OLD['ev_date'].fillna('2023/01/01')
-df_NEW['TYPE'] = df_OLD['ls_cat']
-df_NEW['TRIGGER'] = df_OLD['ls_trig']
+df_NEW['TYPE'] = df_OLD['ls_cat'].fillna('ND')
+df_NEW['TRIGGER'] = df_OLD['ls_trig'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
@@ -102,9 +102,9 @@ apply_affidability_calculator(df_NEW)
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv', index=False)
 
 print("________________________________________________________________________________________")
-print("                            01_COOLR_NATIVE conversion: DONE                            ")
+print("                             01_COOLR_NATIVE conversion: DONE                           ")
 print("________________________________________________________________________________________")
 
 #-----------------------------------------------------------------------------------------------------------------------
-
-print(df_NEW['COUNTRY'].unique())
+# End
+#-----------------------------------------------------------------------------------------------------------------------
