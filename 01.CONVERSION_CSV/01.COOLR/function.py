@@ -12,40 +12,44 @@ import requests
 
 def apply_country_corrections(df):
     """
-    Corregge i valori 'ND' nella colonna 'COUNTRY' del dataframe associando il nome dello stato del punto più vicino.
+    This function fixes all 'ND' value in the 'COUNTRY' column of the dataframe, using the Country name closest to the point coordinates.
 
-    Parameters:
+    Input parameters:
     - df: pandas.DataFrame
-        Il dataframe contenente le informazioni geografiche con colonne 'WKT_GEOM' e 'COUNTRY'.
+        The dataframe contain all the geographic informations of the 'WKT_GEOM' and 'COUNTRY' columns.
 
     Returns:
     - pandas.Series
-        Una Serie Pandas contenente i nuovi valori corretti della colonna 'COUNTRY'.
+        A Pandas series wich contain the new fixed 'COUNTRY' column values.
     """
-    # Converti le stringhe nella colonna 'WKT_GEOM' in oggetti Point
+    # Convert the 'WKT_GEOM' column strings into point objects
     df['geometry'] = df['WKT_GEOM'].apply(wkt.loads).apply(Point)
 
-    # Crea un GeoDataFrame da df_NEW e specifica 'geometry' come colonna delle geometrie
+    # Create a GeoDataFrame from df_NEW and specify 'geometry' as the geometry column
     gdf = gpd.GeoDataFrame(df, geometry='geometry')
 
-    # Seleziona solo i punti con valore 'ND' nella colonna 'COUNTRY'
+    # Selects only points with value 'ND' in column 'COUNTRY'
     points_with_nd = gdf[gdf['COUNTRY'] == 'ND']
 
-    # Seleziona i punti senza 'ND' per il calcolo delle distanze
+    # Select points without 'ND' to calculate distances
     points_without_nd = gdf[gdf['COUNTRY'] != 'ND']
 
-    # Utilizza BallTree per trovare il punto più vicino per ciascun punto con 'ND'
+    # Use BallTree to find the closest point for each point with 'ND'
     tree = BallTree(points_without_nd['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist())
     distances, indices = tree.query(points_with_nd['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist(), k=1)
 
-    # Ottieni i nomi degli stati corretti
+    # Get the names of the correct states
     corrected_countries = gdf.loc[points_without_nd.index[indices.flatten()], 'COUNTRY'].values
 
-    # Crea una Serie Pandas con i nuovi valori corretti
+    # Create a Pandas Series with the new corrected values
     corrected_series = pd.Series(corrected_countries, index=points_with_nd.index)
 
-    # Assegna i nuovi valori corretti al dataframe originale
+    # Assigns the new corrected values to the original dataframe
     df.loc[corrected_series.index, 'COUNTRY'] = corrected_series.values
+
+    print("________________________________________________________________________________________")
+    print("                             COUNTRY Corrections: DONE                                  ")
+    print("________________________________________________________________________________________")
 
     return df['COUNTRY']
 
