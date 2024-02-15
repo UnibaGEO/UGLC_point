@@ -17,18 +17,15 @@ from function import trasforma_data_end
 from function import assign_country_to_points
 from function import trasforma_accuracy
 from function import apply_affidability_calculator
-
+from function import apply_country_corrections
 
 # Native Dataframe 02_GFLD_NATIVE loading
 df_OLD: DataFrame = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
-
-
 
 # JSON Lookup Tables Loading
 with open('04_UAP_LOOKUPTABLES.json', 'r') as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["04_UAP LOOKUP TABLES"]
-
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -47,7 +44,6 @@ for column in df_OLD.columns:
 
 # null values replacement in the Native Dataframe
 #df_OLD = df_OLD.fillna("ND")
-print(df_OLD.loc[59511])
 
 # New dataframe Configuration
 new_data = {
@@ -75,8 +71,6 @@ new_data = {
 # New dataframe Creation
 df_NEW = pd.DataFrame(new_data)
 
-
-
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UCLC"
@@ -102,6 +96,8 @@ df_NEW['INJURIES'] = "ND"
 df_NEW['NOTES'] = f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: {df_NEW['COUNTRY']} - description: {df_OLD['Notes']}"
 df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
 #TRASFORMAZIONE
+
+apply_country_corrections(df_NEW)
 apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------

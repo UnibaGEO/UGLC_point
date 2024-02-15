@@ -6,6 +6,30 @@ import geopandas as gpd
 from shapely import wkt
 import calendar
 
+import geopandas as gpd
+from shapely.wkt import loads
+from sklearn.neighbors import BallTree
+
+def apply_country_corrections(df):
+    # Leggi lo shapefile dal file .zip
+    with gpd.read_file("zip://01.CONVERSION_CSV/COUNTRIES.zip") as world:
+        # Converti il dataframe in GeoDataFrame
+        gdf = gpd.GeoDataFrame(df, geometry=df['WKT_GEOM'].apply(loads))
+
+        # Utilizza BallTree per trovare lo stato più vicino per ogni punto
+        tree = BallTree(world['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist())
+        distances, indices = tree.query(gdf['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist(), k=1)
+
+        # Aggiorna df_NEW['COUNTRY'] con i nomi corretti degli stati
+        corrected_countries = world.loc[indices.flatten(), 'name'].values
+        df['COUNTRY'] = corrected_countries
+
+        print("________________________________________________________________________________________")
+        print("                             COUNTRY Corrections: DONE                                  ")
+        print("________________________________________________________________________________________")
+
+    return df['COUNTRY']
+
 #1
 """
 def apply_country_corrections(df):
