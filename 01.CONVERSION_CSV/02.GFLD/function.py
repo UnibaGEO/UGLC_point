@@ -1,47 +1,14 @@
-import pandas as pd
 from shapely.wkt import loads
-from opencage.geocoder import OpenCageGeocode
 import numpy as np
-
 import pandas as pd
+import geopandas as gpd
+
 #1
-
-def apply_country_corrections(df):
-    def get_country_name(wkt_geom):
-        geometry = loads(wkt_geom)
-        longitude, latitude = geometry.xy
-        geolocator = Nominatim(user_agent="country_lookup")
-        location = geolocator.reverse((latitude[0], longitude[0]), language='en')
-        country = location.raw.get('address', {}).get('country')
-        return country
-
-    # Indexes rows with 'ND' in the column 'COUNTRY'
-    nd_rows = df[df['COUNTRY'] == 'ND'].index
-
-    # Iterate on the lines and update the country name
-    for idx in nd_rows:
-        wkt_geom = df.at[idx, 'WKT_GEOM']
-
-        try:
-            country_name = get_country_name(wkt_geom)
-            df.at[idx, 'COUNTRY'] = country_name
-        except Exception as e:
-            print("________________________________________________________________________________________")
-            #print(f"Error during the coordinates extraction from the row {idx}: {e}")
-            #print("________________________________________________________________________________________")
-
-    print("________________________________________________________________________________________")
-    print("                             COUNTRY correction: DONE                                   ")
-    print("________________________________________________________________________________________")
-
-# -----------------------------------------------------------------------------------------------------------------------
-#2
-
 def apply_affidability_calculator(df):
-    # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
+    # Convert 'ACCURACY' column to numbers, treating 'ND' as NaN
     df['ACCURACY'] = pd.to_numeric(df['ACCURACY'], errors='coerce')
 
-    # Funzione di trasformazione per assegnare un valore da 1 a 10 alla colonna 'AFFIDABILITY'
+    # Transformation function to assign a value from 1 to 10 to the 'AFFIDABILITY' column
     def assign_affidability(row):
         accuracy = row['ACCURACY']
         start_date = pd.to_datetime(row['START DATE'])
@@ -73,10 +40,10 @@ def apply_affidability_calculator(df):
         else:  # 'ND' case
             return 10
 
-    # Applica la funzione di trasformazione alla colonna 'AFFIDABILITY'
+    # Applies the transformation function to the column 'AFFIDABILITY'
     df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
 
-    # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
+    # Reconvert the 'ACCURACY' column into strings, turning NaNs into 'NDs'
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
     print("________________________________________________________________________________________")
@@ -84,4 +51,3 @@ def apply_affidability_calculator(df):
     print("________________________________________________________________________________________")
 
 # -----------------------------------------------------------------------------------------------------------------------
-
