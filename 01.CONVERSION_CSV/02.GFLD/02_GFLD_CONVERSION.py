@@ -72,20 +72,19 @@ df_NEW['OLD DATASET'] = "GFLD"
 df_NEW['OLD ID'] = df_OLD['LandslideN']
 df_NEW['VERSION'] = "2017"
 df_NEW['COUNTRY'] = df_OLD['Country']
-df_NEW['ACCURACY'] = round(np.sqrt((df_OLD['Precision'].astype(int)/ np.pi)),0)
-df_NEW['START DATE'] = df_OLD['Year'].astype(str) + "/" + df_OLD['Month'].astype(str) + "/" + df_OLD['Day'].astype(str)
-df_NEW['END DATE'] = df_OLD['Year'].astype(str) + "/" + df_OLD['Month'].astype(str) + "/" + df_OLD['Day'].astype(str)
+df_NEW['ACCURACY'] = (np.sqrt(df_OLD['Precision'].astype(float) / np.pi)).apply(round).astype(int)
+df_NEW['START DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
+df_NEW['END DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = df_OLD['Trigger']
+df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['Fatalities']
+df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('ND')
 df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = " Global fatal landslide, locality: " + df_OLD['Location_M'] + ", description: " + df_OLD['Report_1']
-df_NEW['LINK'] = "Source: " + df_OLD['Source_1']
+df_NEW['NOTES'] = f" Global fatal landslide, locality: {df_OLD['Location_M']}, description: {df_OLD['Report_1']}"
+df_NEW['LINK'] = f"Source: {df_OLD['Source_1']}"
 
-#-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------f
@@ -95,13 +94,12 @@ from function import apply_affidability_calculator
 apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
-print(df_NEW['TRIGGER'].unique())
+
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv', index=False)
 print("________________________________________________________________________________________")
-print("                            02_GFLD_NATIVE conversion: DONE                             ")
+print("                             02_GFLD_NATIVE conversion: DONE                            ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
