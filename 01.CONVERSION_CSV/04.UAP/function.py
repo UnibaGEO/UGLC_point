@@ -2,50 +2,35 @@ import re
 import pandas as pd
 from shapely.wkt import loads
 import numpy as np
-import geopandas as gpd
 from shapely import wkt
 import calendar
+import geopandas as gpd
+from sklearn.neighbors import BallTree
 
-#1
-"""
-def apply_country_corrections(df):
-    def get_country_name(WKT_GEOM):
-        geometry = loads(WKT_GEOM)
-        longitude, latitude = geometry.xy
-        geolocator = Nominatim(user_agent="country_lookup")
-        location = geolocator.reverse((latitude[0], longitude[0]), language='en')
-        country = location.raw.get('address', {}).get('country')
-        return country
-
-    # Indexes rows with 'ND' in the column 'COUNTRY'
-    nd_rows = df[df['COUNTRY'] == 'ND'].index
-
-    # Iterate on the lines and update the country name
-    for idx in nd_rows:
-        WKT_GEOM = df.at[idx, 'WKT_GEOM']
-
-        try:
-            country_name = get_country_name(WKT_GEOM)
-            df.at[idx, 'COUNTRY'] = country_name
-        except Exception as e:
-            print("_")
-            #print(f"Error during the coordinates extraction from the row {idx}: {e}")
-            #print("________________________________________________________________________________________")
+#2
+file_path = "../../01.CONVERSION_CSV/COUNTRIES.zip"
 
 
-api_key = '345b70a41acc4ae49b07f28e0bd637c1'
-geocoder = OpenCageGeocode(api_key)
-def get_country_name(row):
-    # Utilizza il geocoder di OpenCage Geocode per ottenere il nome del paese
-    result = geocoder.geocode(f"{row['lat']}, {row['long']}", no_annotations=1)
-    if result and 'components' in result[0]:
-        return result[0]['components']['country']
-    return 'ND'
+def assign_country_to_points(df):
+    # Leggi i confini dei paesi dal file ZIP
+    world = gpd.read_file("zip://" + file_path)
 
-"""
+    # Crea un GeoDataFrame per i punti georeferenziati
+    points = gpd.GeoDataFrame(df,
+                              geometry=gpd.points_from_xy(df['long'], df['lat']),
+                              crs='EPSG:4326')
+
+    # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
+    points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
+
+    return points_with_country
+
+print("________________________________________________________________________________________")
+print("                             COUNTRY Corrections: DONE                                  ")
+print("________________________________________________________________________________________")
 
 # -----------------------------------------------------------------------------------------------------------------------
-#2
+#3
 
 def apply_affidability_calculator(df):
     # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
@@ -90,11 +75,11 @@ def apply_affidability_calculator(df):
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
     print("________________________________________________________________________________________")
-    print("Valori di 'AFFIDABILITY' assegnati con successo.")
+    print("                             AFFIDABILITY  calculation: DONE                            ")
     print("________________________________________________________________________________________")
 
 # -----------------------------------------------------------------------------------------------------------------------
-#3 FUNZIONE DI TRASFORMAZIONE START_DATE
+#4 FUNZIONE DI TRASFORMAZIONE START_DATE
 from datetime import datetime
 
 def trasforma_data_start(data):
@@ -213,7 +198,7 @@ def trasforma_data_start(data):
     return data
 
 # -----------------------------------------------------------------------------------------------------------------------
-#4 FUNZIONE DI TRASFORMAZIONE END_DATE
+#5 FUNZIONE DI TRASFORMAZIONE END_DATE
 from datetime import datetime
 
 def trasforma_data_end(data):
@@ -343,33 +328,7 @@ def trasforma_data_end(data):
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
 
-# -----------------------------------------------------------------------------------------------------------------------
-#5 FUNZIONE DI TRASFORMAZIONE COUNTRY
-
-
-import geopandas as gpd
-file_path = "ne_110m_admin_0_countries.zip"
-
-
-def assign_country_to_points(df):
-    # Leggi i confini dei paesi dal file ZIP
-    world = gpd.read_file("zip://" + file_path)
-
-    # Crea un GeoDataFrame per i punti georeferenziati
-    points = gpd.GeoDataFrame(df,
-                              geometry=gpd.points_from_xy(df['long'], df['lat']),
-                              crs='EPSG:4326')
-
-    # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
-    points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
-
-    return points_with_country
-
-
-# Utilizzo della funzione
-file_path = "ne_110m_admin_0_countries.zip"
-
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 #6 FUNZIONE DI TRASFORMAZIONE ACCURACY
 
 def trasforma_accuracy(accuracy):

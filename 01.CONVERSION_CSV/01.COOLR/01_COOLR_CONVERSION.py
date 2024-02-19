@@ -10,7 +10,7 @@ import pandas as pd
 import json
 
 # Native Dataframe 01_COOLR_NATIVE loading
-df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/01_COOLR_NATIVE/01_COOLR_NATIVE.csv",low_memory=False)
+df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/01_COOLR_NATIVE/01_COOLR_NATIVE.csv",low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
 with open('01_COOLR_LOOKUPTABLES.json', 'r') as file:
@@ -99,7 +99,7 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/01_COOLR_CONVERTED.csv', index=False, encoding="utf-8")
 
 print("________________________________________________________________________________________")
 print("                             01_COOLR_NATIVE conversion: DONE                           ")
@@ -108,3 +108,5 @@ print("_________________________________________________________________________
 #-----------------------------------------------------------------------------------------------------------------------
 # End
 #-----------------------------------------------------------------------------------------------------------------------
+
+print(df_NEW['COUNTRY'].unique())
