@@ -11,7 +11,7 @@ from shapely.geometry import Point
 
 
 
-df_OLD = pd.read_csv("04_UAP_NATIVE.csv",low_memory=False)
+df_OLD = pd.read_csv("04_UAP_native.csv",low_memory=False)
 
 
 # Carica il file shapefile dei confini dei paesi
@@ -79,6 +79,6 @@ righe_con_data_specifica = df_NEW[df_NEW['OLD_DATA'] == '1869/10/01']
 print(righe_con_data_specifica)
 
 # Utilizzo della funzione per trasformare il file CSV
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED_temp_data5.csv')
+df_NEW.to_csv('../../output/converted_datasets/04_UAP_CONVERTED_temp_data5.csv')
 
 """
