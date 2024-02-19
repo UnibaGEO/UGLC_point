@@ -20,8 +20,6 @@
     "Location_M_lookup": "ND",
     "Precision_lookup": "ND",
     "Location_R_lookup": "ND",
-
-
     "Inventory_lookup": {
       "AK DOT": "ND",
       "USGS AK St Elias": "ND",
@@ -229,8 +227,6 @@
       "June, 1999": "1999/06/30",
       "2/1962": "1962/02/28"
     },
-
-
      "TRIGGER_lookup": {
       "AK DOT": "ND",
       "USGS AK St Elias": "ND",

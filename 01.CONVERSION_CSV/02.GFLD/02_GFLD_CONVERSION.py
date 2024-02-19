@@ -9,13 +9,13 @@
 import pandas as pd
 import json
 import numpy as np
-
+from function import apply_affidability_calculator
 
 # Native Dataframe 02_GFLD_NATIVE loading
-df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv",low_memory=False)
+df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv",low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('02_GFLD_LOOKUPTABLES.json', 'r') as file:
+with open('02_GFLD_LOOKUPTABLES.json', 'r', encoding='utf-8') as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["02_GFLD LOOKUP TABLES"]
 
@@ -77,7 +77,7 @@ df_NEW['START DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD[
 df_NEW['END DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
 df_NEW['TYPE'] = "ND"
 df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
-df_NEW['AFFIDABILITY'] = "CALC"
+df_NEW['AFFIDABILITY'] = apply_affidability_calculator(df_NEW)
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('ND')
@@ -86,20 +86,15 @@ df_NEW['NOTES'] = f" Global fatal landslide, locality: {df_OLD['Location_M']}, d
 df_NEW['LINK'] = f"Source: {df_OLD['Source_1']}"
 
 #-----------------------------------------------------------------------------------------------------------------------
-# Corrections
-#-----------------------------------------------------------------------------------------------------------------------f
-
-from function import apply_affidability_calculator
-
-apply_affidability_calculator(df_NEW)
-
-#-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv', index=False)
+df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv', index=False, encoding="utf-8")
+
 print("________________________________________________________________________________________")
 print("                             02_GFLD_NATIVE conversion: DONE                            ")
 print("________________________________________________________________________________________")
 #-----------------------------------------------------------------------------------------------------------------------
+
+print(df_NEW['COUNTRY'].unique())

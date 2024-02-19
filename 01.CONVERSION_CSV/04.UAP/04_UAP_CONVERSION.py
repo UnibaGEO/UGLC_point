@@ -17,7 +17,8 @@ from function import trasforma_data_end
 from function import assign_country_to_points
 from function import trasforma_accuracy
 from function import apply_affidability_calculator
-from function import apply_country_corrections
+#from function import apply_country_corrections
+
 
 # Native Dataframe 02_GFLD_NATIVE loading
 df_OLD: DataFrame = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
@@ -78,37 +79,31 @@ df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "UAP"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
-
-#uso della funzione country per stabilire il COUNTRY di ogni punto
-df_NEW_with_country = assign_country_to_points(df_OLD)
-df_NEW['COUNTRY'] = df_NEW_with_country['NAME'].fillna('United States of America')
-
+df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
 df_NEW['ACCURACY']= df_OLD['Confidence'].apply(trasforma_accuracy)
 df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['Date'].apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
-df_NEW['AFFIDABILITY'] ="CALC"
+df_NEW['AFFIDABILITY'] = apply_affidability_calculator(df_NEW)
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "ND"
 df_NEW['NOTES'] = f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: {df_NEW['COUNTRY']} - description: {df_OLD['Notes']}"
 df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
-#TRASFORMAZIONE
 
-apply_country_corrections(df_NEW)
-apply_affidability_calculator(df_NEW)
-#-----------------------------------------------------------------------------------------------------------------------
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED.csv',sep=',', index=False)
-#print("________________________________________________________________________________________")
-#print("COOLR-report points successfully converted as UAP_04_CONVERTED.csv in the DATASET_CONVERTED directory")
-#print("________________________________________________________________________________________")
+
+print("________________________________________________________________________________________")
+print("                             04_UAP_NATIVE conversion: DONE                             ")
+print("________________________________________________________________________________________")
 
 
 
