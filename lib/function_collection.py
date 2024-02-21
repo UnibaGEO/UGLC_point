@@ -10,7 +10,7 @@ import numpy as np
 import requests
 
 #1 ASSIGN COUNTRY ( FROM NODATA, WITHOUT COLUMN)
-file_path = "../../csv/COUNTRIES.zip"
+file_path = "G:/Il mio Drive/UGLC/COUNTRIES.zip"
 
 
 def assign_country_to_points(df):
@@ -25,11 +25,13 @@ def assign_country_to_points(df):
     # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
     points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
 
+    print("________________________________________________________________________________________")
+    print("                             COUNTRY Assignment: DONE                                  ")
+    print("________________________________________________________________________________________")
+
     return points_with_country
 
-print("________________________________________________________________________________________")
-print("                             COUNTRY Assignment: DONE                                  ")
-print("________________________________________________________________________________________")
+
 
 # -----------------------------------------------------------------------------------------------------------------------
 #2 CORRECTION ND COUNTRY POINTS
@@ -70,13 +72,12 @@ def apply_country_corrections(df):
     # Assigns the new corrected values to the original dataframe
     df.loc[corrected_series.index, 'COUNTRY'] = corrected_series.values
     df.drop(columns=['geometry'], inplace=True)
-    return df['COUNTRY']
 
     print("________________________________________________________________________________________")
     print("                             COUNTRY Corrections: DONE                                  ")
     print("________________________________________________________________________________________")
 
-
+    return df['COUNTRY']
 
 # -----------------------------------------------------------------------------------------------------------------------
 #3 AFFIDABILITY CALCULATOR
@@ -380,9 +381,9 @@ def trasforma_data_end(data):
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
 
-print("________________________________________________________________________________________")
-print("                             END DATE  correction: DONE                            ")
-print("________________________________________________________________________________________")
+    print("________________________________________________________________________________________")
+    print("                             END DATE  correction: DONE                            ")
+    print("________________________________________________________________________________________")
 # ----------------------------------------------------------------------------------------------------------------------
 #6 ACCURACY CORRECTION (only UAP)
 
@@ -397,6 +398,6 @@ def trasforma_accuracy(accuracy):
     elif accuracy == 2 or accuracy == 1:
         return "50000"
 
-print("________________________________________________________________________________________")
-print("                             ACCURACY  correction: DONE                            ")
-print("________________________________________________________________________________________")
+    print("________________________________________________________________________________________")
+    print("                             ACCURACY  correction: DONE                            ")
+    print("________________________________________________________________________________________")

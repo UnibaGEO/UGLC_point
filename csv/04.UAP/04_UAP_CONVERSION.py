@@ -5,17 +5,21 @@
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
-
 import pandas as pd
 import json
+import os
 import numpy as np
 from pandas import DataFrame
 import geopandas as gpd
-from UGLC.lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
+from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
+from dotenv import load_dotenv
 
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
 
-# Native Dataframe 02_GFLD_native loading
-df_OLD: DataFrame = pd.read_csv("../../input/native_dataset/04_UAP_native/04_UAP_NATIVE.csv", low_memory=False,encoding="utf-8")
+# Native Dataframe 01_COOLR_native loading
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/04_UAP_NATIVE.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
 with open('04_UAP_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
@@ -103,7 +107,7 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../output/converted_datasets/04_UAP_CONVERTED.csv',sep=',', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_CONVERTED.csv", sep=',', index=False,encoding="utf-8")
 
 print("________________________________________________________________________________________")
 print("                             04_UAP_native conversion: DONE                             ")

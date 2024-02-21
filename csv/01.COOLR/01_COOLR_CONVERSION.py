@@ -5,14 +5,19 @@
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
-
-import pandas as pd
 import json
-from UGLC.lib.function_collection import apply_affidability_calculator,apply_country_corrections
+from lib.function_collection import apply_affidability_calculator, apply_country_corrections
+import pandas as pd
+import os
+from dotenv import load_dotenv
 
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv("../../input/native_dataset/01_COOLR_native/01_COOLR_NATIVE.csv", low_memory=False, encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/01_COOLR_NATIVE.csv", low_memory=False, encoding="utf-8")
+
 
 # JSON Lookup Tables Loading
 with open('01_COOLR_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
@@ -82,7 +87,7 @@ df_NEW['END DATE'] = df_OLD['ev_date'].fillna('2023/01/01')
 df_NEW['TYPE'] = df_OLD['ls_cat'].fillna('ND')
 df_NEW['TRIGGER'] = df_OLD['ls_trig'].fillna('ND')
 df_NEW['AFFIDABILITY'] = 'CALC'
-df_NEW['PSV'] = "CALC"
+df_NEW['PSV'] = "PROVA"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['fatalities']
 df_NEW['INJURIES'] = df_OLD['injuries']
@@ -101,7 +106,7 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../output/converted_datasets/01_COOLR_CONVERTED.csv', index=False, encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/01_COOLR_CONVERTED.csv", index=False, encoding="utf-8")
 
 print("________________________________________________________________________________________")
 print("                             01_COOLR_native conversion: DONE                           ")
@@ -110,4 +115,3 @@ print("_________________________________________________________________________
 #-----------------------------------------------------------------------------------------------------------------------
 # End
 #-----------------------------------------------------------------------------------------------------------------------
-

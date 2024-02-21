@@ -7,11 +7,16 @@
 #-----------------------------------------------------------------------------------------------------------------------
 import pandas as pd
 import json
-from UGLC.lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_affidability_calculator
+from dotenv import load_dotenv
+import os
 
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
 
-# Native Dataframe 02_COOLR_NATIVE loading
-df_OLD = pd.read_csv("../../input/native_dataset/03_ITALICA_native/03_ITALICA_NATIVE.csv", low_memory=False,encoding="utf-8")
+# Native Dataframe 01_COOLR_native loading
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/03_ITALICA_NATIVE.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
 with open('03_ITALICA_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
@@ -93,7 +98,7 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../output/converted_datasets/03_ITALICA_CONVERTED.csv', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/03_ITALICA_CONVERTED.csv", index=False,encoding="utf-8")
 print("________________________________________________________________________________________")
 print("                            03_ITALICA_native conversion: DONE                          ")
 print("________________________________________________________________________________________")
