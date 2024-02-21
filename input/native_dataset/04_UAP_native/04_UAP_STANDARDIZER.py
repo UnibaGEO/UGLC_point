@@ -35,4 +35,4 @@ gdf_orig['TRIGGER']=gdf_orig['Inventory']
 gdf_orig['DATEf']=gdf_orig['Date']
 
 # Salva il GeoDataFrame in un nuovo CSV
-gdf_orig.to_csv('04_UAP_NATIVE.csv', index=False)
+gdf_orig.to_csv('04_UAP_native.csv', index=False)

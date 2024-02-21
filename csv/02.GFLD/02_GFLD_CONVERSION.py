@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     UAP - Landslide Inventories across the United States version2_USGS, Mirus, B.B., Jones, E.S., Baum, R.L. et al.
+# native dataframe:     GFLD - Global fatal landslide occurrence from 2004 to 2016, Froude, M. J. and Petley, D. N
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
@@ -9,24 +9,20 @@
 import pandas as pd
 import json
 import numpy as np
-from opencage.geocoder import OpenCageGeocode
-from pandas import DataFrame
-import geopandas as gpd
-from function import trasforma_data_start
-from function import trasforma_data_end
-from function import assign_country_to_points
-from function import trasforma_accuracy
-from function import apply_affidability_calculator
-#from function import apply_country_corrections
+from UGLC.lib.function_collection import apply_affidability_calculator
 
-
-# Native Dataframe 02_GFLD_NATIVE loading
-df_OLD: DataFrame = pd.read_csv("../../00.INPUT/NATIVE_DATASET/04_UAP_NATIVE/04_UAP_NATIVE.csv",low_memory=False)
+# Native Dataframe 02_GFLD_native loading
+df_OLD = pd.read_csv("../../input/native_dataset/02_GFLD_native/02_UGLC_NATIVE.csv", low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('04_UAP_LOOKUPTABLES.json', 'r') as file:
+with open('02_GFLD_LOOKUPTABLES.json', 'r', encoding='utf-8') as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["04_UAP LOOKUP TABLES"]
+    lookup_tables = lookup_config["02_GFLD LOOKUP TABLES"]
+
+# null values replacement in the Native Dataframe
+df_OLD['Report_1']=df_OLD['Report_1'].fillna('ND')
+df_OLD['Location_M']=df_OLD['Location_M'].fillna('ND')
+df_OLD['Source_1']=df_OLD['Source_1'].fillna('ND')
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -43,8 +39,7 @@ for column in df_OLD.columns:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
 
-# null values replacement in the Native Dataframe
-#df_OLD = df_OLD.fillna("ND")
+
 
 # New dataframe Configuration
 new_data = {
@@ -74,38 +69,41 @@ df_NEW = pd.DataFrame(new_data)
 
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
-df_NEW['NEW DATASET'] = "UCLC"
+df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "UAP"
-df_NEW['OLD ID'] = df_OLD['OBJECTID']
-df_NEW['VERSION'] = "V2 - 2022/06/03"
-df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
-df_NEW['ACCURACY']= df_OLD['Confidence'].apply(trasforma_accuracy)
-df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
-df_NEW['END DATE'] = df_OLD['Date'].apply(trasforma_data_end)
-df_NEW['TYPE'] = df_OLD['Inventory']
-df_NEW['TRIGGER'] = df_OLD['TRIGGER']
-df_NEW['AFFIDABILITY'] = apply_affidability_calculator(df_NEW)
+df_NEW['OLD DATASET'] = "GFLD"
+df_NEW['OLD ID'] = df_OLD['LandslideN']
+df_NEW['VERSION'] = "2017"
+df_NEW['COUNTRY'] = df_OLD['Country']
+df_NEW['ACCURACY'] = (np.sqrt(df_OLD['Precision'].astype(float) / np.pi)).apply(round).astype(int)
+df_NEW['START DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
+df_NEW['END DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
+df_NEW['TYPE'] = "ND"
+df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
+df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['Fatalities']
+df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('ND')
 df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: {df_NEW['COUNTRY']} - description: {df_OLD['Notes']}"
-df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f" Global fatal landslide, locality: {row['Location_M']}, description: {row['Report_1']}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['Source_1']}",axis=1)
 
+
+# Corrections
+#-----------------------------------------------------------------------------------------------------------------------
+
+apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
+
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/04_UAP_CONVERTED.csv',sep=',', index=False)
+df_NEW.to_csv('../../output/converted_datasets/02_GFLD_CONVERTED.csv', index=False, encoding="utf-8")
 
 print("________________________________________________________________________________________")
-print("                             04_UAP_NATIVE conversion: DONE                             ")
+print("                             02_GFLD_native conversion: DONE                            ")
 print("________________________________________________________________________________________")
-
-
-
-
 #-----------------------------------------------------------------------------------------------------------------------
+

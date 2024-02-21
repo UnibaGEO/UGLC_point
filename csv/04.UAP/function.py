@@ -8,7 +8,7 @@ import geopandas as gpd
 from sklearn.neighbors import BallTree
 
 #2
-file_path = "../../01.CONVERSION_CSV/COUNTRIES.zip"
+file_path = "../COUNTRIES.zip"
 
 
 def assign_country_to_points(df):

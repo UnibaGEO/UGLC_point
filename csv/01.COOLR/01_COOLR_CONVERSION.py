@@ -1,24 +1,31 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     GFLD - Global fatal landslide occurrence from 2004 to 2016, Froude, M. J. and Petley, D. N
+# native dataframe:     COOLR report points - NASA
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
 
 import pandas as pd
 import json
-import numpy as np
-from function import apply_affidability_calculator
+from UGLC.lib.function_collection import apply_affidability_calculator,apply_country_corrections
 
-# Native Dataframe 02_GFLD_NATIVE loading
-df_OLD = pd.read_csv("../../00.INPUT/NATIVE_DATASET/02_GFLD_NATIVE/02_UGLC_NATIVE.csv",low_memory=False, encoding="utf-8")
+
+# Native Dataframe 01_COOLR_native loading
+df_OLD = pd.read_csv("../../input/native_dataset/01_COOLR_native/01_COOLR_NATIVE.csv", low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('02_GFLD_LOOKUPTABLES.json', 'r', encoding='utf-8') as file:
+with open('01_COOLR_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["02_GFLD LOOKUP TABLES"]
+    lookup_tables = lookup_config["01_COOLR LOOKUP TABLES"]
 
+# null values replacement in the Native Dataframe
+df_OLD['injuries']=df_OLD['injuries'].fillna('ND')
+df_OLD['fatalities']=df_OLD['fatalities'].fillna('ND')
+df_OLD['loc_acc']=df_OLD['loc_acc'].fillna('-99999')
+df_OLD['src_link']=df_OLD['src_link'].fillna('ND')
+df_OLD['loc_desc']=df_OLD['loc_desc'].fillna('ND')
+df_OLD['ev_desc']=df_OLD['ev_desc'].fillna('ND')
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -34,9 +41,6 @@ for column in df_OLD.columns:
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
-
-# null values replacement in the Native Dataframe
-df_OLD = df_OLD.fillna("ND")
 
 # New dataframe Configuration
 new_data = {
@@ -65,36 +69,45 @@ new_data = {
 df_NEW = pd.DataFrame(new_data)
 
 # New Dataframe Updating with the Old Dataframe columns content values
-df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
+df_NEW['WKT_GEOM'] = df_OLD['WKT']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "GFLD"
-df_NEW['OLD ID'] = df_OLD['LandslideN']
-df_NEW['VERSION'] = "2017"
-df_NEW['COUNTRY'] = df_OLD['Country']
-df_NEW['ACCURACY'] = (np.sqrt(df_OLD['Precision'].astype(float) / np.pi)).apply(round).astype(int)
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
-df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
-df_NEW['AFFIDABILITY'] = apply_affidability_calculator(df_NEW)
+df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
+df_NEW['OLD DATASET'] = df_OLD['source']
+df_NEW['OLD ID'] = df_OLD['ev_id']
+df_NEW['VERSION'] = "2019"
+df_NEW['COUNTRY'] = df_OLD['ctry_name'].fillna('ND')
+df_NEW['ACCURACY'] = df_OLD['loc_acc']
+df_NEW['START DATE'] = df_OLD['ev_date'].fillna('1956/01/01')
+df_NEW['END DATE'] = df_OLD['ev_date'].fillna('2023/01/01')
+df_NEW['TYPE'] = df_OLD['ls_cat'].fillna('ND')
+df_NEW['TRIGGER'] = df_OLD['ls_trig'].fillna('ND')
+df_NEW['AFFIDABILITY'] = 'CALC'
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('ND')
-df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = f" Global fatal landslide, locality: {df_OLD['Location_M']}, description: {df_OLD['Report_1']}"
-df_NEW['LINK'] = f"Source: {df_OLD['Source_1']}"
+df_NEW['FATALITIES'] = df_OLD['fatalities']
+df_NEW['INJURIES'] = df_OLD['injuries']
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Cooperative Open Online Landslide Repository - NASA, locality: {row['loc_desc']}, description: {row['ev_desc']}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {row['src_link']}",axis=1)
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Corrections
+#-----------------------------------------------------------------------------------------------------------------------
+
+apply_country_corrections(df_NEW)
+apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../02.OUTPUT/DATASET_CONVERTED/02_GFLD_CONVERTED.csv', index=False, encoding="utf-8")
+df_NEW.to_csv('../../output/converted_datasets/01_COOLR_CONVERTED.csv', index=False, encoding="utf-8")
 
 print("________________________________________________________________________________________")
-print("                             02_GFLD_NATIVE conversion: DONE                            ")
+print("                             01_COOLR_native conversion: DONE                           ")
 print("________________________________________________________________________________________")
+
+#-----------------------------------------------------------------------------------------------------------------------
+# End
 #-----------------------------------------------------------------------------------------------------------------------
 
-print(df_NEW['COUNTRY'].unique())

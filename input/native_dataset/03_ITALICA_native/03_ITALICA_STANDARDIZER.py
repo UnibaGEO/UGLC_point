@@ -23,7 +23,7 @@ gdf_orig['WKT_GEOM'] = gdf_orig.geometry.apply(lambda geom: geom.wkt)
 df_output = gdf_orig[['WKT_GEOM', 'id', 'landslide_type', 'municipality', 'province', 'region', 'geographic_accuracy', 'utc_date']]
 
 # Salva il GeoDataFrame in un nuovo CSV
-df_output.to_csv('03_ITALICA_NATIVE.csv', index=False)
+df_output.to_csv('03_ITALICA_native.csv', index=False)
 
 
 

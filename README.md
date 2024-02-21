@@ -33,7 +33,7 @@ surface instability phenomena using two strong geospatial products such as:
 ----------------------------------------------------------------------------------------------------------------
 
 ## License
-The whole code is published under the [MIT License](README_FILES/LICENSE.txt).
+The whole code is published under the [MIT License](files/LICENSE.txt).
 
 ----------------------------------------------------------------------------------------------------------------
 
