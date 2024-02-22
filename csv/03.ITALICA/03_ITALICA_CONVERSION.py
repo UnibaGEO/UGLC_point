@@ -16,7 +16,7 @@ load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/03_ITALICA_NATIVE.csv", low_memory=False,encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/03_ITALICA_native.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
 with open('03_ITALICA_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
@@ -82,8 +82,8 @@ df_NEW['TRIGGER'] = "rainfall"
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = "ND"
-df_NEW['INJURIES'] = "ND"
+df_NEW['FATALITIES'] = "-99999"
+df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_OLD.apply(lambda row:f" ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI, locality:{row['province']}, {row['region']},description: ND",axis=1)
 df_NEW['LINK'] = "Source: ND"
 
@@ -98,7 +98,7 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/03_ITALICA_CONVERTED.csv", index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/03_ITALICA_converted.csv", index=False,encoding="utf-8")
 print("________________________________________________________________________________________")
 print("                            03_ITALICA_native conversion: DONE                          ")
 print("________________________________________________________________________________________")

@@ -8,9 +8,6 @@
 import pandas as pd
 import json
 import os
-import numpy as np
-from pandas import DataFrame
-import geopandas as gpd
 from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
 from dotenv import load_dotenv
 
@@ -19,7 +16,7 @@ load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/04_UAP_NATIVE.csv", low_memory=False,encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/04_UAP_native.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
 with open('04_UAP_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
@@ -82,14 +79,14 @@ df_NEW['VERSION'] = "V2 - 2022/06/03"
 df_NEW['COUNTRY'] =assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
 df_NEW['ACCURACY']= df_OLD['Confidence'].apply(trasforma_accuracy)
 df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
-df_NEW['END DATE'] = df_OLD['Date'].apply(trasforma_data_end)
+df_NEW['END DATE'] = df_OLD['DATEf'].apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
-df_NEW['INJURIES'] = "ND"
+df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: ND - description: {df_OLD['Notes']}"
 df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
 
@@ -100,6 +97,8 @@ df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
 
 
 apply_affidability_calculator(df_NEW)
+trasforma_data_start(df_NEW['END DATE'])
+trasforma_data_end()
 
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
@@ -107,13 +106,11 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_CONVERTED.csv", sep=',', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_converted.csv", sep=',', index=False,encoding="utf-8")
 
 print("________________________________________________________________________________________")
 print("                             04_UAP_native conversion: DONE                             ")
 print("________________________________________________________________________________________")
-
-
 
 
 #-----------------------------------------------------------------------------------------------------------------------

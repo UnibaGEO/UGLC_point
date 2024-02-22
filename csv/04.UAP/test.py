@@ -1,133 +1,11 @@
-import re
 import pandas as pd
-from shapely.wkt import loads
-from shapely import wkt
-import calendar
-import geopandas as gpd
-from sklearn.neighbors import BallTree
-from shapely.geometry import Point
-import numpy as np
-import requests
-
-#1 ASSIGN COUNTRY ( FROM NODATA, WITHOUT COLUMN)
-file_path = "G:/Il mio Drive/UGLC/COUNTRIES.zip"
+import json
+import os
+#from lib.function_collection import trasforma_data_start,trasforma_data_end #,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
+from dotenv import load_dotenv
 
 
-def assign_country_to_points(df):
-    # Leggi i confini dei paesi dal file ZIP
-    world = gpd.read_file("zip://" + file_path)
-
-    # Crea un GeoDataFrame per i punti georeferenziati
-    points = gpd.GeoDataFrame(df,
-                              geometry=gpd.points_from_xy(df['long'], df['lat']),
-                              crs='EPSG:4326')
-
-    # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
-    points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
-
-    print("________________________________________________________________________________________")
-    print("                             COUNTRY Assignment: DONE                                  ")
-    print("________________________________________________________________________________________")
-
-    return points_with_country
-
-
-
-# -----------------------------------------------------------------------------------------------------------------------
-#2 CORRECTION ND COUNTRY POINTS
-def apply_country_corrections(df):
-    """
-    This function fixes all 'ND' value in the 'COUNTRY' column of the dataframe, using the Country name closest to the point coordinates.
-
-    Input parameters:
-    - df: pandas.DataFrame
-        The dataframe contain all the geographic informations of the 'WKT_GEOM' and 'COUNTRY' columns.
-
-    Returns:
-    - pandas.Series
-        A Pandas series wich contain the new fixed 'COUNTRY' column values.
-    """
-    # Convert the 'WKT_GEOM' column strings into point objects
-    df['geometry'] = df['WKT_GEOM'].apply(wkt.loads).apply(Point)
-
-    # Create a GeoDataFrame from df_NEW and specify 'geometry' as the geometry column
-    gdf = gpd.GeoDataFrame(df, geometry='geometry')
-
-    # Selects only points with value 'ND' in column 'COUNTRY'
-    points_with_nd = gdf[gdf['COUNTRY'] == 'ND']
-
-    # Select points without 'ND' to calculate distances
-    points_without_nd = gdf[gdf['COUNTRY'] != 'ND']
-
-    # Use BallTree to find the closest point for each point with 'ND'
-    tree = BallTree(points_without_nd['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist())
-    distances, indices = tree.query(points_with_nd['geometry'].apply(lambda geom: (geom.x, geom.y)).tolist(), k=1)
-
-    # Get the names of the correct states
-    corrected_countries = gdf.loc[points_without_nd.index[indices.flatten()], 'COUNTRY'].values
-
-    # Create a Pandas Series with the new corrected values
-    corrected_series = pd.Series(corrected_countries, index=points_with_nd.index)
-
-    # Assigns the new corrected values to the original dataframe
-    df.loc[corrected_series.index, 'COUNTRY'] = corrected_series.values
-    df.drop(columns=['geometry'], inplace=True)
-
-    print("________________________________________________________________________________________")
-    print("                             COUNTRY Corrections: DONE                                  ")
-    print("________________________________________________________________________________________")
-
-    return df['COUNTRY']
-
-# -----------------------------------------------------------------------------------------------------------------------
-#3 AFFIDABILITY CALCULATOR
-
-def apply_affidability_calculator(df):
-    # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
-    df['ACCURACY'] = pd.to_numeric(df['ACCURACY'], errors='coerce')
-
-    # Funzione di trasformazione per assegnare un valore da 1 a 10 alla colonna 'AFFIDABILITY'
-    def assign_affidability(row):
-        accuracy = row['ACCURACY']
-        start_date = pd.to_datetime(row['START DATE'])
-        end_date = pd.to_datetime(row['END DATE'])
-
-        if pd.notna(accuracy):
-            if accuracy <= 100:
-                if start_date == end_date:
-                    return 1
-                else:
-                    return 2
-            elif 100 < accuracy <= 250:
-                if start_date == end_date:
-                    return 3
-                else:
-                    return 4
-            elif 250 < accuracy <= 500:
-                if start_date == end_date:
-                    return 5
-                else:
-                    return 6
-            elif 500 < accuracy <= 1000:
-                if start_date == end_date:
-                    return 7
-                else:
-                    return 8
-            elif accuracy > 1000:
-                return 9
-        else:  # 'ND' case
-            return 10
-
-    # Applica la funzione di trasformazione alla colonna 'AFFIDABILITY'
-    df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
-
-    # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
-    df['ACCURACY'] = df['ACCURACY'].fillna('ND')
-
-    print("________________________________________________________________________________________")
-    print("                             AFFIDABILITY  calculation: DONE                            ")
-    print("________________________________________________________________________________________")
-
+#-------
 #4 START_DATE CORRECTION
 from datetime import datetime
 
@@ -399,19 +277,61 @@ def trasforma_data_end(data):
     print("                             END DATE  correction: DONE                            ")
     print("________________________________________________________________________________________")
 # ----------------------------------------------------------------------------------------------------------------------
-#6 ACCURACY CORRECTION (only UAP)
+#-------
 
-def trasforma_accuracy(accuracy):
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
 
-    if pd.isnull(accuracy):
-        return None
-    elif accuracy == 8 or accuracy == 5:
-        return "0"
-    elif accuracy == 3:
-        return "250"
-    elif accuracy == 2 or accuracy == 1:
-        return "50000"
+# Native Dataframe 01_COOLR_native loading
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/04_UAP_native.csv", low_memory=False,encoding="utf-8")
 
-    print("________________________________________________________________________________________")
-    print("                             ACCURACY  correction: DONE                            ")
-    print("________________________________________________________________________________________")
+# JSON Lookup Tables Loading
+with open('04_UAP_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
+    lookup_config = json.load(file)
+    lookup_tables = lookup_config["04_UAP LOOKUP TABLES"]
+
+
+# Application of lookup Tables to the columns of the old DataFrame
+for column in df_OLD.columns:
+    lookup_table_key = f"{column}_lookup"  # Lookup table match-Key construction
+
+    # Lookup Tables check if is a string or a dictionary
+    if lookup_table_key in lookup_tables and isinstance(lookup_tables[lookup_table_key], dict):
+        lookup_table = lookup_tables[lookup_table_key]
+
+        # If the lookup table is marked as "ND" the sytem will keep the original content
+        if lookup_table == "ND":
+            continue
+        else:
+            # Update just the no-"ND" columns
+            df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
+
+
+df_OLD['Date'] = df_OLD['Date'].fillna('1878/01/01')
+df_OLD['Date'] = df_OLD['Date'].apply(trasforma_data_start)
+
+#print("first")
+
+df_OLD['DATEf'] = df_OLD['DATEf'].fillna('2021/12/31')
+df_OLD['DATEf'] = df_OLD['DATEf'].apply(trasforma_data_end)
+
+
+#df_OLD['Date'] = pd.to_datetime(df_OLD['Date'],format='%Y/%m/%d',exact=False)
+#df_OLD['Date'] = pd.to_datetime(df_OLD['Date'],format='%Y/%m/%d',exact=False)
+
+
+
+'''
+df_OLD[df_OLD['Date']=="1948"]
+df_OLD['Date'] = pd.to_datetime(df_OLD['Date'].fillna('1878/01/01'))
+df_OLD['Date'] = df_OLD['Date'].apply(trasforma_data_start)
+
+df_OLD['DATEf'] = pd.to_datetime(df_OLD['DATEf'].fillna('2021/12/31'))
+df_OLD['DATEf'] = df_OLD['DATEf'].apply(trasforma_data_end)
+'''
+print(df_OLD.iloc[18776])
+print(type(df_OLD.iloc[18776]['Date']))
+print(type(df_OLD.iloc[18776]['DATEf']))
+
+#df_OLD.to_csv(f"{root}/input/native_datasets/prova04.csv", sep=',', index=False,encoding="utf-8")
