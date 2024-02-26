@@ -1,16 +1,18 @@
-import re
 import pandas as pd
-from shapely.wkt import loads
 from shapely import wkt
-import calendar
 import geopandas as gpd
 from sklearn.neighbors import BallTree
 from shapely.geometry import Point
-import numpy as np
-import requests
+from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
 
 #1 ASSIGN COUNTRY ( FROM NODATA, WITHOUT COLUMN)
-file_path = "G:/Il mio Drive/UGLC/COUNTRIES.zip"
+file_path = f"{root}/COUNTRIES.zip"
 
 
 def assign_country_to_points(df):
@@ -25,9 +27,9 @@ def assign_country_to_points(df):
     # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
     points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             COUNTRY Assignment: DONE                                  ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
     return points_with_country
 
@@ -73,9 +75,9 @@ def apply_country_corrections(df):
     df.loc[corrected_series.index, 'COUNTRY'] = corrected_series.values
     df.drop(columns=['geometry'], inplace=True)
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             COUNTRY Corrections: DONE                                  ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
     return df['COUNTRY']
 
@@ -124,17 +126,24 @@ def apply_affidability_calculator(df):
     # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             AFFIDABILITY  calculation: DONE                            ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
 #4 START_DATE CORRECTION
 from datetime import datetime
 
 def trasforma_data_start(data):
 
-    #if pd.isnull(data):
-    #   return pd.to_datetime('1878/01/01').strftime('%Y/%m/%d')
+# ----------------DA FIXARE---------------------------
+    if pd.isnull(data) or data.lower() == 'nd':
+        return pd.to_datetime('1878/01/01').strftime('%Y/%m/%d')
+        # Rimuovi eventuali spazi bianchi
+    data = data.strip()
+    if data == '1878/01/01':
+        return pd.to_datetime(data).strftime('%Y/%m/%d')
+
+# ----------------DA FIXARE---------------------------
 
     # Conversione da d/mm/yyyy a yyyy/mm/d
     try:
@@ -256,9 +265,9 @@ def trasforma_data_start(data):
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             START DATE  correction: DONE                            ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
 # -----------------------------------------------------------------------------------------------------------------------
 #5 END DATE CORRECTION
@@ -266,8 +275,16 @@ from datetime import datetime
 
 def trasforma_data_end(data):
 
-    #if pd.isnull(data):
-     #   return pd.to_datetime('2021/12/31').strftime('%Y/%m/%d')
+    # ----------------DA FIXARE---------------------------
+    if pd.isnull(data) or data.lower() == 'nd':
+        return pd.to_datetime('2021/12/31').strftime('%Y/%m/%d')
+        # Rimuovi eventuali spazi bianchi
+    data = data.strip()
+    if data == '2021/12/31':
+        return pd.to_datetime(data).strftime('%Y/%m/%d')
+
+    # ----------------DA FIXARE---------------------------
+
 
     # Conversione da d/mm/yyyy a yyyy/mm/d
     try:
@@ -401,9 +418,10 @@ def trasforma_data_end(data):
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             END DATE  correction: DONE                            ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
+
 # ----------------------------------------------------------------------------------------------------------------------
 #6 ACCURACY CORRECTION (only UAP)
 
@@ -418,6 +436,7 @@ def trasforma_accuracy(accuracy):
     elif accuracy == 2 or accuracy == 1:
         return "50000"
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             ACCURACY  correction: DONE                            ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
+

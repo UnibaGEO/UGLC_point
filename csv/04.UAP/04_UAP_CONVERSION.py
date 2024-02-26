@@ -8,8 +8,8 @@
 import pandas as pd
 import json
 import os
-from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
 from dotenv import load_dotenv
+from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
@@ -76,12 +76,10 @@ df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "UAP"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
-df_NEW['COUNTRY'] =assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
-df_NEW['ACCURACY']= df_OLD['Confidence'].apply(trasforma_accuracy)
-df_NEW['START DATE'] =df_OLD['Date'].fillna('1878/01/01')#.strftime('%Y/%m/%d')
-df_NEW['START DATE'] =df_NEW['START DATE'].apply(trasforma_data_start)
-df_NEW['END DATE'] = df_OLD['DATEf'].fillna('2021/12/31')#.strftime('%Y/%m/%d')
-df_NEW['END DATE'] = df_NEW['END DATE'].apply(trasforma_data_end)
+df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
+df_NEW['ACCURACY'] = df_OLD['Confidence'].apply(trasforma_accuracy)
+df_NEW['START DATE'] = df_OLD['Date'].fillna('1878/01/01').apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['DATEf'].fillna('2021/12/31').apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -99,8 +97,7 @@ df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
 
 
 apply_affidability_calculator(df_NEW)
-#trasforma_data_start(df_NEW['START DATE'])
-#trasforma_data_end(df_NEW['END DATE'])
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
@@ -109,9 +106,6 @@ apply_affidability_calculator(df_NEW)
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_converted.csv", sep=',', index=False,encoding="utf-8")
 
-print("________________________________________________________________________________________")
+print("__________________________________________________________________________________________")
 print("                             04_UAP_native conversion: DONE                             ")
-print("________________________________________________________________________________________")
-
-
-#-----------------------------------------------------------------------------------------------------------------------
+print("__________________________________________________________________________________________")
