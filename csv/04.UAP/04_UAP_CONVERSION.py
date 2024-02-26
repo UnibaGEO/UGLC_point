@@ -78,8 +78,10 @@ df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
 df_NEW['COUNTRY'] =assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
 df_NEW['ACCURACY']= df_OLD['Confidence'].apply(trasforma_accuracy)
-df_NEW['START DATE'] =df_OLD['Date'].apply(trasforma_data_start)
-df_NEW['END DATE'] = df_OLD['DATEf'].apply(trasforma_data_end)
+df_NEW['START DATE'] =df_OLD['Date'].fillna('1878/01/01')#.strftime('%Y/%m/%d')
+df_NEW['START DATE'] =df_NEW['START DATE'].apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['DATEf'].fillna('2021/12/31')#.strftime('%Y/%m/%d')
+df_NEW['END DATE'] = df_NEW['END DATE'].apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
@@ -97,10 +99,9 @@ df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
 
 
 apply_affidability_calculator(df_NEW)
-trasforma_data_start(df_NEW['END DATE'])
-trasforma_data_end()
+#trasforma_data_start(df_NEW['START DATE'])
+#trasforma_data_end(df_NEW['END DATE'])
 
-#-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------

@@ -133,8 +133,29 @@ from datetime import datetime
 
 def trasforma_data_start(data):
 
-    if pd.isnull(data):
-        return pd.to_datetime('1878/01/01').strftime('%Y/%m/%d')
+    #if pd.isnull(data):
+    #   return pd.to_datetime('1878/01/01').strftime('%Y/%m/%d')
+
+    # Conversione da d/mm/yyyy a yyyy/mm/d
+    try:
+        nuova_data = datetime.strptime(data, '%d/%m/%Y').strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
+
+    # Conversione da yyyy/d/mm a yyyy/mm/d
+    try:
+        nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
+
+    # Conversione da mm/d/yyyy a yyyy/mm/d
+    try:
+        nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
 
     # Conversione da yyyy/mm/d a yyyy/mm/d ----------------------------
     try:
@@ -143,24 +164,6 @@ def trasforma_data_start(data):
     except ValueError:
         pass
 
-    # Conversione da d/mm/yyyy a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%d/%m/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-        # Conversione da yyyy/d/mm a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-    # Conversione da mm/d/yyyy a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
     # Conversione da mm/d/yyyy,Periodo a yyyy/mm/d
     try:
         # Splitta la data e il periodo
@@ -263,8 +266,8 @@ from datetime import datetime
 
 def trasforma_data_end(data):
 
-    if pd.isnull(data):
-        return pd.to_datetime('2021/12/31').strftime('%Y/%m/%d')
+    #if pd.isnull(data):
+     #   return pd.to_datetime('2021/12/31').strftime('%Y/%m/%d')
 
     # Conversione da d/mm/yyyy a yyyy/mm/d
     try:
@@ -272,18 +275,21 @@ def trasforma_data_end(data):
         return nuova_data
     except ValueError:
         pass
-        # Conversione da yyyy/d/mm a yyyy/mm/d
+
+    # Conversione da yyyy/d/mm a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da mm/d/yyyy a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da mm/d/yyyy,Periodo a yyyy/mm/d
     try:
         # Splitta la data e il periodo

@@ -310,16 +310,17 @@ for column in df_OLD.columns:
 
 df_OLD['Date'] = df_OLD['Date'].fillna('1878/01/01')
 df_OLD['Date'] = df_OLD['Date'].apply(trasforma_data_start)
-
+df_OLD['Date'] = df_OLD['Date'].astype(str)
 #print("first")
 
 df_OLD['DATEf'] = df_OLD['DATEf'].fillna('2021/12/31')
 df_OLD['DATEf'] = df_OLD['DATEf'].apply(trasforma_data_end)
-
+df_OLD['DATEf'] = df_OLD['DATEf'].astype(str)
 
 #df_OLD['Date'] = pd.to_datetime(df_OLD['Date'],format='%Y/%m/%d',exact=False)
 #df_OLD['Date'] = pd.to_datetime(df_OLD['Date'],format='%Y/%m/%d',exact=False)
 
+df_OLD.to_csv(f"{root}/output/converted_csv/04_UAP_TEST.csv", sep=',', index=False,encoding="utf-8")
 
 
 '''
