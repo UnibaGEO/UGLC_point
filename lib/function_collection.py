@@ -135,23 +135,6 @@ from datetime import datetime
 
 def trasforma_data_start(data):
 
-# ----------------DA FIXARE---------------------------
-    if pd.isnull(data) or data.lower() == 'nd':
-        return pd.to_datetime('1878/01/01').strftime('%Y/%m/%d')
-        # Rimuovi eventuali spazi bianchi
-    data = data.strip()
-    if data == '1878/01/01':
-        return pd.to_datetime(data).strftime('%Y/%m/%d')
-
-# ----------------DA FIXARE---------------------------
-
-    # Conversione da d/mm/yyyy a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%d/%m/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-
     # Conversione da yyyy/d/mm a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
@@ -162,13 +145,6 @@ def trasforma_data_start(data):
     # Conversione da mm/d/yyyy a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-
-    # Conversione da yyyy/mm/d a yyyy/mm/d ----------------------------
-    try:
-        nuova_data = datetime.strptime(data, '%Y/%m/%d').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
@@ -226,10 +202,11 @@ def trasforma_data_start(data):
 
     # Conversione da -yyyy a yyyy
     try:
-        nuova_data = datetime.strptime(data[1:], '%Y').strftime('%Y')
+        nuova_data = datetime.strptime(data[1:], '%Y').strftime('%Y/01/01')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da -mm/d/yyyy h:m:s AM/PM in yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y %I:%M:%S %p').strftime('%Y/%m/%d')
@@ -275,24 +252,6 @@ from datetime import datetime
 
 def trasforma_data_end(data):
 
-    # ----------------DA FIXARE---------------------------
-    if pd.isnull(data) or data.lower() == 'nd':
-        return pd.to_datetime('2021/12/31').strftime('%Y/%m/%d')
-        # Rimuovi eventuali spazi bianchi
-    data = data.strip()
-    if data == '2021/12/31':
-        return pd.to_datetime(data).strftime('%Y/%m/%d')
-
-    # ----------------DA FIXARE---------------------------
-
-
-    # Conversione da d/mm/yyyy a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%d/%m/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-
     # Conversione da yyyy/d/mm a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
@@ -319,8 +278,43 @@ def trasforma_data_end(data):
     except ValueError:
         pass
 
+    #Conversione da mm/yyyy a yyyy/mm/dd
+
     try:
         nuova_data = datetime.strptime(data, '%m/%Y')
+        if nuova_data.month == 2:
+            nuovo_giorno = 28
+        elif nuova_data.month == 1:
+            nuovo_giorno = 31
+        elif nuova_data.month == 3:
+            nuovo_giorno = 31
+        elif nuova_data.month == 4:
+            nuovo_giorno = 30
+        elif nuova_data.month == 5:
+            nuovo_giorno = 31
+        elif nuova_data.month == 6:
+            nuovo_giorno = 30
+        elif nuova_data.month == 7:
+            nuovo_giorno = 31
+        elif nuova_data.month == 8:
+            nuovo_giorno = 31
+        elif nuova_data.month == 9:
+            nuovo_giorno = 30
+        elif nuova_data.month == 10:
+            nuovo_giorno = 31
+        elif nuova_data.month == 11:
+            nuovo_giorno = 30
+        elif nuova_data.month == 12:
+            nuovo_giorno = 31
+
+        nuova_data = nuova_data.replace(day=nuovo_giorno).strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
+
+    #Conversione da yyyy/mm a yyyy/mm/dd
+    try:
+        nuova_data = datetime.strptime(data, '%Y/%m')
         if nuova_data.month == 2:
             nuovo_giorno = 28
         elif nuova_data.month == 1:
@@ -388,6 +382,7 @@ def trasforma_data_end(data):
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da -mm/d/yyyy h:m:s AM/PM in yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y %I:%M:%S %p').strftime('%Y/%m/%d')

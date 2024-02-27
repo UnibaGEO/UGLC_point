@@ -91,8 +91,8 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('-99999')
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f" Global fatal landslide, locality: {row['Location_M']}, description: {row['Report_1']}",axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['Source_1']}",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f" Global fatal landslide, locality: {repr(row['Location_M'])}, description: {repr(row['Report_1'])}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {repr(row['Source_1'])}",axis=1)
 
 
 # Corrections

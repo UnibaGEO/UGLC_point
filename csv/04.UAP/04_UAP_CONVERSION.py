@@ -26,6 +26,7 @@ with open('04_UAP_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
 # null values replacement in the Native Dataframe
 df_OLD['Notes']=df_OLD['Notes'].fillna('ND')
 df_OLD['InventoryU']=df_OLD['InventoryU'].fillna('ND')
+df_OLD['Catalog']=df_OLD['Inventory']
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -73,7 +74,7 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "UAP"
+df_NEW['OLD DATASET'] = df_OLD.apply(lambda row:f"UAP - {row['Catalog']}",axis=1)
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
 df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
@@ -87,8 +88,8 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: ND - description: {df_OLD['Notes']}"
-df_NEW['LINK'] = f"Source: {df_OLD['InventoryU']}"
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: ND - description: {repr(row['Notes'])}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['InventoryU']}",axis=1)
 
 
 #-----------------------------------------------------------------------------------------------------------------------
