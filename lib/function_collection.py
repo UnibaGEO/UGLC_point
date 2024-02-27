@@ -85,46 +85,35 @@ def apply_country_corrections(df):
 #3 AFFIDABILITY CALCULATOR
 
 def apply_affidability_calculator(df):
-    # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
-    df['ACCURACY'] = pd.to_numeric(df['ACCURACY'], errors='coerce')
+    accuracy = df['ACCURACY']
+    start_date = pd.to_datetime(df['START DATE'])
+    end_date = pd.to_datetime(df['END DATE'])
 
-    # Funzione di trasformazione per assegnare un valore da 1 a 10 alla colonna 'AFFIDABILITY'
-    def assign_affidability(row):
-        accuracy = row['ACCURACY']
-        start_date = pd.to_datetime(row['START DATE'])
-        end_date = pd.to_datetime(row['END DATE'])
-
-        if pd.notna(accuracy):
-            if accuracy <= 100:
-                if start_date == end_date:
-                    return 1
-                else:
-                    return 2
-            elif 100 < accuracy <= 250:
-                if start_date == end_date:
-                    return 3
-                else:
-                    return 4
-            elif 250 < accuracy <= 500:
-                if start_date == end_date:
-                    return 5
-                else:
-                    return 6
-            elif 500 < accuracy <= 1000:
-                if start_date == end_date:
-                    return 7
-                else:
-                    return 8
-            elif accuracy > 1000:
-                return 9
-        else:  # 'ND' case
-            return 10
-
-    # Applica la funzione di trasformazione alla colonna 'AFFIDABILITY'
-    df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
-
-    # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
-    df['ACCURACY'] = df['ACCURACY'].fillna('ND')
+    if pd.notna(accuracy):
+        if accuracy <= 100:
+            if start_date == end_date:
+                return 1
+            else:
+                return 2
+        elif 100 < accuracy <= 250:
+            if start_date == end_date:
+                return 3
+            else:
+                return 4
+        elif 250 < accuracy <= 500:
+            if start_date == end_date:
+                return 5
+            else:
+                return 6
+        elif 500 < accuracy <= 1000:
+            if start_date == end_date:
+                return 7
+            else:
+                return 8
+        elif accuracy > 1000:
+            return 9
+    else:  # 'ND' case
+        return 10
 
     print("__________________________________________________________________________________________")
     print("                             AFFIDABILITY  calculation: DONE                            ")
@@ -423,13 +412,28 @@ def trasforma_data_end(data):
 def trasforma_accuracy(accuracy):
 
     if pd.isnull(accuracy):
-        return None
+        return "-99999"
     elif accuracy == 8 or accuracy == 5:
         return "0"
     elif accuracy == 3:
         return "250"
     elif accuracy == 2 or accuracy == 1:
         return "50000"
+    elif accuracy == "Place name search":
+        return "-99999"
+    elif accuracy == "Gps measurement":
+        return "0"
+    elif accuracy == "Other":
+        return "1000"
+    elif accuracy == "Location edited by gis methods":
+        return "0"
+    elif accuracy == "Reported location":
+        return "0"
+    elif accuracy == "Map located":
+        return "1000"
+    elif accuracy == "Satellite imagery":
+        return "0"
+
 
     print("__________________________________________________________________________________________")
     print("                             ACCURACY  correction: DONE                            ")
