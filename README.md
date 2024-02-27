@@ -179,7 +179,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 
 --------------------------------------------------------
-<img alt="Dataframe Folder Structure" src="README_FILES/Dataframe structure v1.png"/>
+<img alt="Dataframe Folder Structure" src="files/Dataframe structure v1.png"/>
 <p align="center"><i> Folder Structure Scheme </i></p>
 
 --------------------------------------------------------
