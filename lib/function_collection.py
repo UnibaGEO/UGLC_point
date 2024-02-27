@@ -1,16 +1,18 @@
-import re
 import pandas as pd
-from shapely.wkt import loads
 from shapely import wkt
-import calendar
 import geopandas as gpd
 from sklearn.neighbors import BallTree
 from shapely.geometry import Point
-import numpy as np
-import requests
+from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
 
 #1 ASSIGN COUNTRY ( FROM NODATA, WITHOUT COLUMN)
-file_path = "../../csv/COUNTRIES.zip"
+file_path = f"{root}/COUNTRIES.zip"
 
 
 def assign_country_to_points(df):
@@ -25,11 +27,13 @@ def assign_country_to_points(df):
     # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
     points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
 
+    print("__________________________________________________________________________________________")
+    print("                             COUNTRY Assignment: DONE                                  ")
+    print("__________________________________________________________________________________________")
+
     return points_with_country
 
-print("________________________________________________________________________________________")
-print("                             COUNTRY Assignment: DONE                                  ")
-print("________________________________________________________________________________________")
+
 
 # -----------------------------------------------------------------------------------------------------------------------
 #2 CORRECTION ND COUNTRY POINTS
@@ -70,13 +74,12 @@ def apply_country_corrections(df):
     # Assigns the new corrected values to the original dataframe
     df.loc[corrected_series.index, 'COUNTRY'] = corrected_series.values
     df.drop(columns=['geometry'], inplace=True)
-    return df['COUNTRY']
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             COUNTRY Corrections: DONE                                  ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
-
+    return df['COUNTRY']
 
 # -----------------------------------------------------------------------------------------------------------------------
 #3 AFFIDABILITY CALCULATOR
@@ -123,36 +126,29 @@ def apply_affidability_calculator(df):
     # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             AFFIDABILITY  calculation: DONE                            ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
 #4 START_DATE CORRECTION
 from datetime import datetime
 
 def trasforma_data_start(data):
 
-    if pd.isnull(data):
-        return '1878/01/01'
-
-    # Conversione da d/mm/yyyy a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%d/%m/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-        # Conversione da yyyy/d/mm a yyyy/mm/d
+    # Conversione da yyyy/d/mm a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da mm/d/yyyy a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da mm/d/yyyy,Periodo a yyyy/mm/d
     try:
         # Splitta la data e il periodo
@@ -206,10 +202,11 @@ def trasforma_data_start(data):
 
     # Conversione da -yyyy a yyyy
     try:
-        nuova_data = datetime.strptime(data[1:], '%Y').strftime('%Y')
+        nuova_data = datetime.strptime(data[1:], '%Y').strftime('%Y/01/01')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da -mm/d/yyyy h:m:s AM/PM in yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y %I:%M:%S %p').strftime('%Y/%m/%d')
@@ -245,9 +242,9 @@ def trasforma_data_start(data):
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
 
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
     print("                             START DATE  correction: DONE                            ")
-    print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
 
 # -----------------------------------------------------------------------------------------------------------------------
 #5 END DATE CORRECTION
@@ -255,27 +252,20 @@ from datetime import datetime
 
 def trasforma_data_end(data):
 
-    if pd.isnull(data):
-        return '2021/12/31'
-
-    # Conversione da d/mm/yyyy a yyyy/mm/d
-    try:
-        nuova_data = datetime.strptime(data, '%d/%m/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-        # Conversione da yyyy/d/mm a yyyy/mm/d
+    # Conversione da yyyy/d/mm a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da mm/d/yyyy a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da mm/d/yyyy,Periodo a yyyy/mm/d
     try:
         # Splitta la data e il periodo
@@ -288,8 +278,43 @@ def trasforma_data_end(data):
     except ValueError:
         pass
 
+    #Conversione da mm/yyyy a yyyy/mm/dd
+
     try:
         nuova_data = datetime.strptime(data, '%m/%Y')
+        if nuova_data.month == 2:
+            nuovo_giorno = 28
+        elif nuova_data.month == 1:
+            nuovo_giorno = 31
+        elif nuova_data.month == 3:
+            nuovo_giorno = 31
+        elif nuova_data.month == 4:
+            nuovo_giorno = 30
+        elif nuova_data.month == 5:
+            nuovo_giorno = 31
+        elif nuova_data.month == 6:
+            nuovo_giorno = 30
+        elif nuova_data.month == 7:
+            nuovo_giorno = 31
+        elif nuova_data.month == 8:
+            nuovo_giorno = 31
+        elif nuova_data.month == 9:
+            nuovo_giorno = 30
+        elif nuova_data.month == 10:
+            nuovo_giorno = 31
+        elif nuova_data.month == 11:
+            nuovo_giorno = 30
+        elif nuova_data.month == 12:
+            nuovo_giorno = 31
+
+        nuova_data = nuova_data.replace(day=nuovo_giorno).strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
+
+    #Conversione da yyyy/mm a yyyy/mm/dd
+    try:
+        nuova_data = datetime.strptime(data, '%Y/%m')
         if nuova_data.month == 2:
             nuovo_giorno = 28
         elif nuova_data.month == 1:
@@ -344,12 +369,20 @@ def trasforma_data_end(data):
     except ValueError:
         pass
 
+    # Conversione da yyyy/mm/d a yyyy/mm/d ----------------------------
+    try:
+        nuova_data = datetime.strptime(data, '%Y/%m/%d').strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
+
     # Conversione da -yyyy a yyyy
     try:
         nuova_data = datetime.strptime(data[1:], '%Y').strftime('%Y/12/31')
         return nuova_data
     except ValueError:
         pass
+
     # Conversione da -mm/d/yyyy h:m:s AM/PM in yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y %I:%M:%S %p').strftime('%Y/%m/%d')
@@ -380,9 +413,10 @@ def trasforma_data_end(data):
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
     return data
 
-print("________________________________________________________________________________________")
-print("                             END DATE  correction: DONE                            ")
-print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
+    print("                             END DATE  correction: DONE                            ")
+    print("__________________________________________________________________________________________")
+
 # ----------------------------------------------------------------------------------------------------------------------
 #6 ACCURACY CORRECTION (only UAP)
 
@@ -397,6 +431,7 @@ def trasforma_accuracy(accuracy):
     elif accuracy == 2 or accuracy == 1:
         return "50000"
 
-print("________________________________________________________________________________________")
-print("                             ACCURACY  correction: DONE                            ")
-print("________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
+    print("                             ACCURACY  correction: DONE                            ")
+    print("__________________________________________________________________________________________")
+

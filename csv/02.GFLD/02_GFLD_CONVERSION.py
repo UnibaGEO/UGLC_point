@@ -9,10 +9,16 @@
 import pandas as pd
 import json
 import numpy as np
-from UGLC.lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_affidability_calculator
+from dotenv import load_dotenv
+import os
 
-# Native Dataframe 02_GFLD_native loading
-df_OLD = pd.read_csv("../../input/native_dataset/02_GFLD_native/02_UGLC_NATIVE.csv", low_memory=False, encoding="utf-8")
+# Load the enviroment variables from config.env file
+load_dotenv("../../config.env")
+root = os.getenv("FILES_REPO")
+
+# Native Dataframe 01_COOLR_native loading
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/02_GFLD_native.csv", low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
 with open('02_GFLD_LOOKUPTABLES.json', 'r', encoding='utf-8') as file:
@@ -83,10 +89,10 @@ df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('ND')
-df_NEW['INJURIES'] = "ND"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f" Global fatal landslide, locality: {row['Location_M']}, description: {row['Report_1']}",axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['Source_1']}",axis=1)
+df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('-99999')
+df_NEW['INJURIES'] = "-99999"
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f" Global fatal landslide, locality: {repr(row['Location_M'])}, description: {repr(row['Report_1'])}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {repr(row['Source_1'])}",axis=1)
 
 
 # Corrections
@@ -100,7 +106,7 @@ apply_affidability_calculator(df_NEW)
 
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv('../../output/converted_datasets/02_GFLD_CONVERTED.csv', index=False, encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/02_GFLD_converted.csv", index=False, encoding="utf-8")
 
 print("________________________________________________________________________________________")
 print("                             02_GFLD_native conversion: DONE                            ")
