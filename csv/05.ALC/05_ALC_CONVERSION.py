@@ -5,6 +5,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
+import numpy as np
 import pandas as pd
 import json
 import os
@@ -17,6 +18,10 @@ root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
 df_OLD = pd.read_csv(f"{root}/input/native_datasets/05_ALC_native.csv", low_memory=False,encoding="utf-8")
+
+#null values replacement in the Native Dataframe
+
+df_OLD['Land Cover']=df_OLD['Land Cover'].fillna('ND')
 
 # JSON Lookup Tables Loading
 with open('05_ALC_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
@@ -87,7 +92,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Australia Landslide catalogue - locality: locality:{row['Location']},description: {row['Land Cover']}",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Australia Landslide catalogue -locality:{row['Location']},description: {repr(row['Land Cover'])}",axis=1)
 df_NEW['LINK'] ="Source: ND"
 
 
@@ -110,4 +115,3 @@ df_NEW.to_csv(f"{root}/output/converted_csv/05_ALC_converted.csv", sep=',', inde
 print("__________________________________________________________________________________________")
 print("                             05_ALC_native conversion: DONE                             ")
 print("__________________________________________________________________________________________")
-print(df_NEW['ACCURACY'].unique())
