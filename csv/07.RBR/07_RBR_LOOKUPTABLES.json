@@ -1,0 +1,13 @@
+{
+  "07_RBR LOOKUP TABLES": {
+    "ID_lookup": "ND",
+    "area_lookup": "ND",
+    "dep_area": "ND",
+    "Year": "ND",
+    "geometry": "ND",
+    "WKT_GEOM": "ND",
+    "lat": "ND",
+    "long": "ND"
+  }
+
+}
