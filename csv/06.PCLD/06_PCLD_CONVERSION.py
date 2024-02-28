@@ -1,27 +1,40 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     ITALICA - CNR IRPI
+# native dataframe:     PCLD - Preliminary Canadian Landslide Database, Brideau Marc-Andre, Brayshaw Drew, Lipovsky Panya
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
 import pandas as pd
 import json
-from lib.function_collection import apply_affidability_calculator
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
+#
+# DA FINIRE IL CODICE E LA LOOKUP TABLES
+#
+#
+
+
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/03_ITALICA_native.csv", low_memory=False, encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/06_PCLD_native.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('03_ITALICA_LOOKUPTABLES.json', 'r', encoding="utf-8") as file:
+with open('06_PCLD_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["03_ITALICA LOOKUP TABLES"]
+    lookup_tables = lookup_config["06_PCLD LOOKUP TABLES"]
+
+# null values replacement in the Native Dataframe
+df_OLD['Trigger'] = df_OLD['Trigger'].fillna('ND')
+df_OLD['Reference'] = df_OLD['Reference'].fillna('ND')
+df_OLD['START DATE'].fillna('1771/01/01')
+df_OLD['END DATE'].fillna('2023/12/31')
+
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -31,12 +44,13 @@ for column in df_OLD.columns:
     if lookup_table_key in lookup_tables and isinstance(lookup_tables[lookup_table_key], dict):
         lookup_table = lookup_tables[lookup_table_key]
 
-        # If the lookup table is marked as "ND" the system will keep the original content
+        # If the lookup table is marked as "ND" the sytem will keep the original content
         if lookup_table == "ND":
             continue
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
+
 
 # New dataframe Configuration
 new_data = {
@@ -67,37 +81,40 @@ df_NEW = pd.DataFrame(new_data)
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "ITALICA"
-df_NEW['OLD ID'] = df_OLD['id']
-df_NEW['VERSION'] = "V2 - 2023"
-df_NEW['COUNTRY'] = "Italy"
-df_NEW['ACCURACY'] = df_OLD['geographic_accuracy']
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
-df_NEW['TYPE'] = df_OLD['landslide_type']
-df_NEW['TRIGGER'] = "rainfall"
+df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
+df_NEW['OLD DATASET'] = "PCLD"
+df_NEW['OLD ID'] = df_OLD['LS_ID']
+df_NEW['VERSION'] = "V6.1"
+df_NEW['COUNTRY'] = "Canada"
+df_NEW['ACCURACY'] = df_OLD['Confidence'].apply(trasforma_accuracy)
+df_NEW['START DATE'] = df_OLD['Date'].fillna('1878/01/01').apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['DATEf'].fillna('2021/12/31').apply(trasforma_data_end)
+df_NEW['TYPE'] = df_OLD['Inventory']
+df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = "-99999"
+df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f" ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI, locality:{row['province']}, {row['region']},description: ND", axis=1)
-df_NEW['LINK'] = "Source: ND"
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: ND - description: {repr(row['Notes'])}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['InventoryU']}",axis=1)
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
+
 apply_affidability_calculator(df_NEW)
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/03_ITALICA_converted.csv", index=False, encoding="utf-8")
-print("________________________________________________________________________________________")
-print("                            03_ITALICA_native conversion: DONE                          ")
-print("________________________________________________________________________________________")
-#-----------------------------------------------------------------------------------------------------------------------
+df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_converted.csv", sep=',', index=False,encoding="utf-8")
+
+print("__________________________________________________________________________________________")
+print("                             04_UAP_native conversion: DONE                             ")
+print("__________________________________________________________________________________________")
