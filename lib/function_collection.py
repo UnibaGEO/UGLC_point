@@ -84,6 +84,7 @@ def apply_country_corrections(df):
 # -----------------------------------------------------------------------------------------------------------------------
 #3 AFFIDABILITY CALCULATOR
 
+
 def apply_affidability_calculator(df):
     # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
     df['ACCURACY'] = pd.to_numeric(df['ACCURACY'], errors='coerce')
@@ -95,7 +96,7 @@ def apply_affidability_calculator(df):
         end_date = pd.to_datetime(row['END DATE'])
 
         if pd.notna(accuracy):
-            if accuracy <= 100:
+            if 0 <= accuracy <= 100:
                 if start_date == end_date:
                     return 1
                 else:
@@ -117,14 +118,17 @@ def apply_affidability_calculator(df):
                     return 8
             elif accuracy > 1000:
                 return 9
-        else:  # 'ND' case
-            return 10
+            elif accuracy == -99999:
+                return 10
+
 
     # Applica la funzione di trasformazione alla colonna 'AFFIDABILITY'
     df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
 
     # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
     df['ACCURACY'] = df['ACCURACY'].fillna('ND')
+
+    return df
 
     print("__________________________________________________________________________________________")
     print("                             AFFIDABILITY  calculation: DONE                            ")
@@ -435,3 +439,28 @@ def trasforma_accuracy(accuracy):
     print("                             ACCURACY  correction: DONE                            ")
     print("__________________________________________________________________________________________")
 
+# ----------------------------------------------------------------------------------------------------------------------
+# 7 DATEs and DATEf conversion (only PCLD)
+
+# Conversion DATEs from yyyy to yyyy/mm/dd
+def date_s_correction(input_date_s):
+    try:
+        corrected_date = datetime.strptime(input_date_s, '%Y').strftime('%Y/01/01')
+        return corrected_date
+    except ValueError:
+        return input_date_s
+print("__________________________________________________________________________________________")
+print("                             START DATE  correction: DONE                            ")
+print("__________________________________________________________________________________________")
+
+# Conversion DATEf from yyyy to yyyy/mm/dd
+def date_f_correction(input_date_f):
+
+    try:
+        corrected_date = datetime.strptime(input_date_f, '%Y').strftime('%Y/12/31')
+        return corrected_date
+    except ValueError:
+        return input_date_f
+print("__________________________________________________________________________________________")
+print("                             END DATE  correction: DONE                            ")
+print("__________________________________________________________________________________________")
