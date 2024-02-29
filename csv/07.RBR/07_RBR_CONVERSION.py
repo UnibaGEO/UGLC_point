@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     ALC - Landslide Inventories across the United States version2_USGS, Mirus, B.B., Jones, E.S., Baum, R.L. et al.
+# native dataframe:     RBR - Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi), Arthur Depicker, Gerard Govers, et al.
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
@@ -31,8 +31,6 @@ with open('07_RBR_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["07_RBR LOOKUP TABLES"]
 
-
-
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
     lookup_table_key = f"{column}_lookup"  # Lookup table match-Key construction
@@ -47,7 +45,6 @@ for column in df_OLD.columns:
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
-
 
 
 # New dataframe Configuration
@@ -83,8 +80,8 @@ df_NEW['ID'] = "CALC"
 df_NEW['OLD DATASET'] = "RBR"
 df_NEW['OLD ID'] = df_OLD['ID']
 df_NEW['VERSION'] = "Version v1.0"
-df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME']
-df_NEW['ACCURACY'] = "calc"
+df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].replace('Dem. Rep. Congo', 'Democratic Republic of Congo')
+df_NEW['ACCURACY'] =  (np.sqrt(df_OLD['area'].astype(float) / np.pi)).apply(round).astype(int)
 df_NEW['START DATE'] = df_OLD['Year'].apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['Year'].apply(trasforma_data_end)
 df_NEW['TYPE'] = "ND"
@@ -94,15 +91,14 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-#df_NEW['NOTES'] = df_NEW.apply(lambda row:f"SHALLOW LANDSLIDE INVENTORY  for 2000-2019 (eastern DRC, Rwanda, Burundi) -locality:{row['COUNTRY']},description:ND" )
+df_NEW['NOTES'] = df_NEW.apply(lambda row:f"Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi) - locality: {repr(row['COUNTRY'])} - description: ND ",axis=1)
 df_NEW['LINK'] ="Source: ND"
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-#apply_affidability_calculator(df_NEW)
-
+apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
@@ -111,6 +107,6 @@ df_NEW['LINK'] ="Source: ND"
 df_NEW.to_csv(f"{root}/output/converted_csv/07_RBR_converted.csv", sep=',', index=False,encoding="utf-8")
 
 print("__________________________________________________________________________________________")
-print("                             05_ALC_native conversion: DONE                             ")
+print("                             07_RBR_native conversion: DONE                             ")
 print("__________________________________________________________________________________________")
 #--------------------------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
 import geopandas as gpd
-from shapely.wkt import loads
+from lib.function_collection import convert_to_int
 
 # Load the environment variables from config.env file
 load_dotenv("../../config.env")
@@ -16,13 +16,6 @@ df_orig['WKT_GEOM'] = df_orig['geometry'].apply(lambda geom: geom.wkt)
 df_orig['long'] = df_orig['geometry'].x
 df_orig['lat'] = df_orig['geometry'].y
 print(df_orig['long'].dtypes)
-def convert_to_int(value):
-    if isinstance(value, str):
-        return int(value.split('.')[0])
-    elif isinstance(value, (int, float)):
-        return int(value)
-    else:
-        return value  # Se il tipo non è una stringa, un intero o un float, mantieni il valore originale
 
 df_orig['ID'] = df_orig['ID'].apply(convert_to_int)
 df_orig['Year']=df_orig['Year'].apply(convert_to_int)

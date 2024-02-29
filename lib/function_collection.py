@@ -453,3 +453,12 @@ def trasforma_accuracy(accuracy):
     print("                             ACCURACY  correction: DONE                            ")
     print("__________________________________________________________________________________________")
 
+# ----------------------------------------------------------------------------------------------------------------------
+#7 TYPE CORRECTION
+def convert_to_int(value):
+    if isinstance(value, str):
+        return int(value.split('.')[0])
+    elif isinstance(value, (int, float)):
+        return int(value)
+    else:
+        return value
