@@ -1,32 +1,35 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     UAP - Landslide Inventories across the United States version2_USGS, Mirus, B.B., Jones, E.S., Baum, R.L. et al.
+# native dataframe:     RBR - Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi), Arthur Depicker, Gerard Govers, et al.
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
+import numpy as np
 import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
+from lib.function_collection import trasforma_accuracy,apply_affidability_calculator,trasforma_data_end,trasforma_data_start,assign_country_to_points
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/04_UAP_native.csv", low_memory=False,encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/07_RBR_native.csv", low_memory=False,encoding="utf-8")
+print(df_OLD.columns.values)
+
+df_OLD['Year'] = df_OLD['Year'].astype(str)
+print(df_OLD['Year'].dtypes)
+print(df_OLD['Year'].unique())
+#null values replacement in the Native Dataframe
+
 
 # JSON Lookup Tables Loading
-with open('04_UAP_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
+with open('07_RBR_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["04_UAP LOOKUP TABLES"]
-
-# null values replacement in the Native Dataframe
-df_OLD['Notes']=df_OLD['Notes'].fillna('ND')
-df_OLD['InventoryU']=df_OLD['InventoryU'].fillna('ND')
-df_OLD['Catalog']=df_OLD['Inventory']
+    lookup_tables = lookup_config["07_RBR LOOKUP TABLES"]
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -73,40 +76,37 @@ df_NEW = pd.DataFrame(new_data)
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "UAP"
-df_NEW['OLD ID'] = df_OLD['OBJECTID']
-df_NEW['VERSION'] = "V2 - 2022/06/03"
-df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
-df_NEW['ACCURACY'] = df_OLD['Confidence'].apply(trasforma_accuracy)
-df_NEW['START DATE'] = df_OLD['Date'].fillna('1878/01/01').apply(trasforma_data_start)
-df_NEW['END DATE'] = df_OLD['DATEf'].fillna('2021/12/31').apply(trasforma_data_end)
-df_NEW['TYPE'] = df_OLD['Inventory']
-df_NEW['TRIGGER'] = df_OLD['TRIGGER']
+df_NEW['ID'] = "CALC"
+df_NEW['OLD DATASET'] = "RBR"
+df_NEW['OLD ID'] = df_OLD['ID']
+df_NEW['VERSION'] = "Version v1.0"
+df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].replace('Dem. Rep. Congo', 'Democratic Republic of Congo')
+df_NEW['ACCURACY'] =  (np.sqrt(df_OLD['area'].astype(float) / np.pi)).apply(round).astype(int)
+df_NEW['START DATE'] = df_OLD['Year'].apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['Year'].apply(trasforma_data_end)
+df_NEW['TYPE'] = "ND"
+df_NEW['TRIGGER'] = "ND"
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['Fatalities']
+df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: ND - description: {repr(row['Notes'])}",axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['InventoryU']}",axis=1)
-
+df_NEW['NOTES'] = df_NEW.apply(lambda row:f"Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi) - locality: {repr(row['COUNTRY'])} - description: ND ",axis=1)
+df_NEW['LINK'] ="Source: ND"
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-
 apply_affidability_calculator(df_NEW)
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
-#-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_converted.csv", sep=',', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/07_RBR_converted.csv", sep=',', index=False,encoding="utf-8")
 
 print("__________________________________________________________________________________________")
-print("                             04_UAP_native conversion: DONE                             ")
+print("                             07_RBR_native conversion: DONE                             ")
 print("__________________________________________________________________________________________")
+#--------------------------------------------------------------------------------------------------------------------

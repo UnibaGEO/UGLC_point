@@ -3,7 +3,6 @@ from shapely import wkt
 import geopandas as gpd
 from sklearn.neighbors import BallTree
 from shapely.geometry import Point
-from datetime import datetime
 from dotenv import load_dotenv
 import os
 
@@ -427,20 +426,45 @@ def trasforma_data_end(data):
 def trasforma_accuracy(accuracy):
 
     if pd.isnull(accuracy):
-        return None
+        return "-99999"
     elif accuracy == 8 or accuracy == 5:
         return "0"
     elif accuracy == 3:
         return "250"
     elif accuracy == 2 or accuracy == 1:
         return "50000"
+    elif accuracy == "Place name search":
+        return "-99999"
+    elif accuracy == "Gps measurement":
+        return "0"
+    elif accuracy == "Other":
+        return "1000"
+    elif accuracy == "Location edited by gis methods":
+        return "0"
+    elif accuracy == "Reported location":
+        return "0"
+    elif accuracy == "Map located":
+        return "1000"
+    elif accuracy == "Satellite imagery":
+        return "0"
+
 
     print("__________________________________________________________________________________________")
     print("                             ACCURACY  correction: DONE                            ")
     print("__________________________________________________________________________________________")
 
 # ----------------------------------------------------------------------------------------------------------------------
-# 7 DATEs and DATEf conversion (only PCLD)
+#7 TYPE CORRECTION
+def convert_to_int(value):
+    if isinstance(value, str):
+        return int(value.split('.')[0])
+    elif isinstance(value, (int, float)):
+        return int(value)
+    else:
+        return value
+
+# ----------------------------------------------------------------------------------------------------------------------
+# 8 DATEs and DATEf conversion (only PCLD)
 
 # Conversion DATEs from yyyy to yyyy/mm/dd
 def date_s_correction(input_date_s):
