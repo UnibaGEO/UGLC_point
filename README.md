@@ -186,38 +186,44 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 --------------------------------------------------------
 
 
-The entire UGLC structure is allocated in 4 main folders :
-- input
+The entire UGLC structure is allocated in 2 main repositories:
+- GitHub Scripts Repository (GSR)
+- Drive Files Repository (DFR)
 
-  This folder contains the "download" and "native_datasets" folders. The first one contains the downloader scripts,
-  one for each dataset, that manage the automatic download of the native datasets (as .csv/.shp/.gpkg etc) from the
-  source sites (Entities, Government agencies, Universities, Various repositories etc.).
-  The second folder contains standardizer scripts wich create a standardized .csv ready to be converted into the UGLC
-  format.
+The GSR contains 5 main folders :
+- input
+  This folder contains the "download" and "native_datasets" folders. The first one contains the downloader scripts
+  ("N_DATAFRAME_downloader.py"), one for each dataset, that manage the automatic download of the native datasets
+  (as .csv/.shp/.gpkg etc) from the source sites (Entities, Government agencies, Universities, Various repositories
+  etc.) and save them into the DFR download folder.
+  The second folder contains standardizer scripts ("N_DATAFRAME_standardizer.py") wich read the downloaded files into
+  the DFR creating a standardized .csv ready to be converted into the UGLC format, and save it ("N_DATAFRAME_native.csv")
+  into the DFR native_dataset folder.
 
 - csv
 
-      This folder contains the different folders named after the native datasets ("NN_DATASETNAME") within the
-      "NN_CONVERTER.py," "NN_FUNCTIONS.py," and "NN_LOOKUPTABLES.json" scripts which allow the filtering of the native 
-      datasets and its conversion into a new dataset having the same format as the final UGLC dataframe, and will be 
-      allocated in "02.OUTPUT\CONVERTED_DATAFRAMES" directory.
+  This folder contains one folder named after each different native datasets ("N_DATAFRAME") contains the converter script
+  ("N_DATAFRAME_converter.py") and the lookup tables ("NN_DATAFRAME_lookuptables.json") which read the native datasets from
+  the DFR, then filter and convert each native datasets into the UGLC standard using also the functions from the lib folder,
+  and save them ("N_DATAFRAME_converted.csv") into the DFR output/converted_csv folder.
 
 - output
 
-      This folder contains the script "UNIFIER.py" that allows the union of all converted and adapted datasets 
-      present in the  "02.OUTPUT\CONVERTED_DATAFRAMES" directory, into the final UGLC dataframe allocated into the 
-      "FINAL_DATAFRAME" folder.
+  This folder contains the unifier script ("unifier.py") that read the converted datasets from the DFR output/converted_csv
+  folderand and merge all converted and standardized datasets, generating the final UGLC dataframe ("UGLC_version_N.csv"),
+  saving it into the DFR output folder.
   
 - lib
 
-      This folder contains the script "UNIFIER.py" that allows the union of all converted and adapted datasets 
-      present in the  "02.OUTPUT\CONVERTED_DATAFRAMES" directory, into the final UGLC dataframe allocated into the 
-      "FINAL_DATAFRAME" folder.
+  This folder contains the functions script ("function_collection.py") wich are called from the converter scripts into the
+  GPR for various data conversion.
 
-All the scripts are commanded by the "ORCHESTRATOR.py" master script in the main folder "UGLC".
-
-Into the main folder there is also the README.txt and the sub-folder "README_FILES" wich contain all this informations and the 
-pictures of the UGLC dataframe.
+- files
+  This folder contains all the files used by this readme file, like pictures and the license.
+  
+All the scripts are managed by the "orchestrator.py" master script in the main folder.
+Into the main folder there is also this readme file wich contains all this informations and the pictures of the UGLC 
+dataframe.
 
 --------------------------------------------------------
 ## :red_circle: Requirements
