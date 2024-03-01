@@ -9,7 +9,7 @@
 ----------------------------------------------------------------------------------------------------------------
 
 
-## <span style="color: red;">Authors</span>
+## <span style="color: red">Authors</span>
 
 ----------------------------------------------------------------------------------------------------------------
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari).
