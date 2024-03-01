@@ -186,22 +186,29 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 --------------------------------------------------------
 
 
-The entire UGLC structure is allocated in 3 main folders :
-- 00.INPUT
+The entire UGLC structure is allocated in 4 main folders :
+- input
 
-      This folder contains the "DOWNLOADER.py" and "STANDARDIZER.py" scripts that allow the automatic download of 
-      native datasets from the source sites (Entities, Government agencies, Universities, Various repositories etc.),
-      the standardization of the file name (NN_DATASETNAME_NATIVE.csv format) and allocation in the subfolder named 
-      "00.INPUT\NATIVE_DATAFRAMES\NN_DATASETNAME_NATIVE" sub folder.
+  This folder contains the "download" and "native_datasets" folders. The first one contains the downloader scripts,
+  one for each dataset, that manage the automatic download of the native datasets (as .csv/.shp/.gpkg etc) from the
+  source sites (Entities, Government agencies, Universities, Various repositories etc.).
+  The second folder contains standardizer scripts wich create a standardized .csv ready to be converted into the UGLC
+  format.
 
-- 01.CONVERSION_CSV
+- csv
 
       This folder contains the different folders named after the native datasets ("NN_DATASETNAME") within the
       "NN_CONVERTER.py," "NN_FUNCTIONS.py," and "NN_LOOKUPTABLES.json" scripts which allow the filtering of the native 
       datasets and its conversion into a new dataset having the same format as the final UGLC dataframe, and will be 
       allocated in "02.OUTPUT\CONVERTED_DATAFRAMES" directory.
 
-- 02.OUTPUT
+- output
+
+      This folder contains the script "UNIFIER.py" that allows the union of all converted and adapted datasets 
+      present in the  "02.OUTPUT\CONVERTED_DATAFRAMES" directory, into the final UGLC dataframe allocated into the 
+      "FINAL_DATAFRAME" folder.
+  
+- lib
 
       This folder contains the script "UNIFIER.py" that allows the union of all converted and adapted datasets 
       present in the  "02.OUTPUT\CONVERTED_DATAFRAMES" directory, into the final UGLC dataframe allocated into the 
