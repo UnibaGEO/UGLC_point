@@ -79,7 +79,7 @@ df_NEW = pd.DataFrame(new_data)
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC" # range(1, len(df_OLD) + 1)
+df_NEW['ID'] = "CALC"# range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "PCLD"
 df_NEW['OLD ID'] = df_OLD['LS_ID']
 df_NEW['VERSION'] = "V6.1"
