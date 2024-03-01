@@ -20,7 +20,7 @@
 
 ----------------------------------------------------------------------------------------------------------------
 
-## Project description
+## :red_circle: Project description
 
 The purpose of this project is generating a single global-scale landslide dataset that collects and standardizes within it all 
 global, national, and sub-national landslide catalogs, provided with spatial, temporal, and general information about each event.
@@ -32,12 +32,12 @@ surface instability phenomena using two strong geospatial products such as:
 
 ----------------------------------------------------------------------------------------------------------------
 
-## License
+## :red_circle: License
 The whole code is published under the [MIT License](files/LICENSE.txt).
 
 ----------------------------------------------------------------------------------------------------------------
 
-## Attribute fields summary
+## :red_circle: Attribute fields summary
 
 |        | WKT_GEOM         | NEW DATASET | ID     | OLD DATASET | OLD ID | VERSION  | COUNTRY  | ACCURACY | START DATE | END DATE | TYPE    | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
 |--------|------------------|-------------|--------|-------------|--------|----------|----------|----------|------------|----------|---------|---------|--------------|----------|----------|------------|----------|--------|--------|
@@ -46,7 +46,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 ----------------------------------------------------------------------------------------------------------------
 
-## Attributes description
+## :red_circle: Attributes description
 
 
 - <b> WKT_GEOM: </b> The contents of this field contain information about the georeferencing of each point described in the dataframe using the WGS84 reference system.
@@ -175,7 +175,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 --------------------------------------------------------
 
-## Folder Structure
+## :red_circle: Folder Structure
 
 
 
@@ -213,9 +213,9 @@ Into the main folder there is also the README.txt and the sub-folder "README_FIL
 pictures of the UGLC dataframe.
 
 --------------------------------------------------------
-## Requisiti
+## :red_circle: Requirements
 
-Specifica eventuali requisiti hardware o software necessari per eseguire gli script. Ad esempio:
+Specificare gli eventuali requisiti hardware o software necessari per eseguire gli script. Ad esempio:
 
 - Python 3.11 o versioni successive
 - Altri moduli o librerie specifici
@@ -225,9 +225,9 @@ Specifica eventuali requisiti hardware o software necessari per eseguire gli scr
 ----------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------
-## Installazione
+## :red_circle: Installation
 
-Spiega come installare eventuali dipendenze o configurare l'ambiente di lavoro per eseguire gli script.
+Spiegare come installare eventuali dipendenze o configurare l'ambiente di lavoro per eseguire gli script.
 
 ----------------------------------------------------------------------------------------------------------------
                                                         IN PROGRESS
