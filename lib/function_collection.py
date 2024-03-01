@@ -462,3 +462,29 @@ def convert_to_int(value):
         return int(value)
     else:
         return value
+
+# ----------------------------------------------------------------------------------------------------------------------
+# 8 DATEs and DATEf conversion (only PCLD)
+
+# Conversion DATEs from yyyy to yyyy/mm/dd
+def date_s_correction(input_date_s):
+    try:
+        corrected_date = datetime.strptime(input_date_s, '%Y').strftime('%Y/01/01')
+        return corrected_date
+    except ValueError:
+        return input_date_s
+print("__________________________________________________________________________________________")
+print("                             START DATE  correction: DONE                            ")
+print("__________________________________________________________________________________________")
+
+# Conversion DATEf from yyyy to yyyy/mm/dd
+def date_f_correction(input_date_f):
+
+    try:
+        corrected_date = datetime.strptime(input_date_f, '%Y').strftime('%Y/12/31')
+        return corrected_date
+    except ValueError:
+        return input_date_f
+print("__________________________________________________________________________________________")
+print("                             END DATE  correction: DONE                            ")
+print("__________________________________________________________________________________________")

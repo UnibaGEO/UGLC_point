@@ -39,10 +39,10 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 ## Attribute fields summary
 
-|        | WKT_GEOM          | NEW DATASET   | ID     | OLD DATASET   | OLD ID | VERSION   | COUNTRY   | ACCURACY   | START DATE   | END DATE   | TYPE     | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
-|--------|-------------------|---------------|--------|---------------|--------|-----------|-----------|------------|--------------|------------|----------|---------|--------------|----------|----------|------------|----------|--------|--------|
-| TYPE   | Well known text   | String        | Int    | String        | String | String    | String    | String     | Date         | Date       | String   | String  | Int          | Bool     | Bool     | Int        | Int      | String | String |
-| STATUS | active            | Active        | Active | Active        | Active | Active    | Active    | Active     | Active       | Active     | Active   | Active  | Active       | Inactive | inactive | Active     | Active   | Active | Active |
+|        | WKT_GEOM         | NEW DATASET | ID     | OLD DATASET | OLD ID | VERSION  | COUNTRY  | ACCURACY | START DATE | END DATE | TYPE    | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
+|--------|------------------|-------------|--------|-------------|--------|----------|----------|----------|------------|----------|---------|---------|--------------|----------|----------|------------|----------|--------|--------|
+| TYPE   | Well known text  | String      | Int    | String      | String | String   | String   | String   | Date       | Date     | String  | String  | Int          | Bool     | Bool     | Int        | Int      | String | String |
+| STATUS | active           | Active      | Active | Active      | Active | Active   | Active   | Active   | Active     | Active   | Active  | Active  | Active       | Inactive | inactive | Active     | Active   | Active | Active |
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +67,8 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [03_ITALICA](https://zenodo.org/records/8009366)                                                                      | ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)                                     | 6312      |
     | [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308)                                           | Landslide Inventories across the United States version2 (USGS)                                 | 176427    |
     | [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue)                                                   | Australia Landslide Catalogue                                                                  | 1653      |
- 
+    | [06_PCLD](https://doi.org/10.5281/zenodo.10271431)                                                                    | Preliminary Canadian Landslide Database                                                        | 8302      |
+    | [07_RBR](https://esurf.copernicus.org/articles/9/445/2021/)                                                           | Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi)                       | 7945      |
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
 
@@ -161,10 +162,10 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
       NOT YET IMPLEMENTED
 
 
-- <b> FATALITIES: </b> the content of this field contains the number of fatalities related to the event (if explicit)
+- <b> FATALITIES: </b> the content of this field contains the number of fatalities related to the event (if explicit), where the NaN values are represented by the value -99999
   
 
-- <b> INJURIES: </b> the content of this field contains the number of injuries related to the event (if explicit)
+- <b> INJURIES: </b> the content of this field contains the number of injuries related to the event (if explicit), where the NaN values are represented by the value -99999
 
 
 - <b> NOTES: </b> the content of this field contains the notes and information relate to the event (if explicit)
@@ -179,7 +180,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 
 --------------------------------------------------------
-<img alt="Dataframe Folder Structure" src="files/Dataframe structure v1.png"/>
+<img alt="Dataframe Folder Structure" src="files/dataframe_structure.png"/>
 <p align="center"><i> Folder Structure Scheme </i></p>
 
 --------------------------------------------------------
