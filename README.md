@@ -69,6 +69,10 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [05_ALC](https://oasishub.co/dataset/australia-landslide-catalogue)                                                   | Australia Landslide Catalogue                                                                  | 1653      |
     | [06_PCLD](https://doi.org/10.5281/zenodo.10271431)                                                                    | Preliminary Canadian Landslide Database                                                        | 8302      |
     | [07_RBR](https://esurf.copernicus.org/articles/9/445/2021/)                                                           | Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi)                       | 7945      |
+    | [08_NZK]()                                                                                                            |                                                                                                |           |
+    | [09_CA]()                                                                                                             |                                                                                                |           |
+    | [10_BGS]()                                                                                                            |                                                                                                |           |
+    | [11_NTMI]()                                                                                                           |                                                                                                |           |
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
 

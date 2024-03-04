@@ -15,10 +15,6 @@ from lib.function_collection import date_f_correction, date_s_correction, apply_
 ---------------------------------------------------MEMO-----------------------------------------------------------------
 Funziona tutto, circa, tranne le solite date ##### su excell.
 C'è un problema con le date più vecchie del 1600 con la lib datetime, è da esplorare.
-L'affidability viene calcolata bene, tuttavia bisogna modificare lo standardizer, perchè non tutti i vuoti dell'
-devono essere -99999 perchè spesso sono presi da lidar o da gps.
-Bisogna leggere il paper richiesto l'altro giorno, dove spiega ogni catalogo incluso in questo dataset com'è stato 
-rilevato per assegnarli la giusta accuracy e quindi affidability.
 #-----------------------------------------------------------------------------------------------------------------------
 '''
 
@@ -48,7 +44,6 @@ for column in df_OLD.columns:
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
-
 
 # New dataframe Configuration
 new_data = {

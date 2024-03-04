@@ -9,7 +9,7 @@ load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Load the CSV
-df_orig = pd.read_csv(f"{root}/input/download/06_PCLD/Canadian_landslide_database_Dec2023_version7.csv", sep=',', low_memory=False, encoding="utf-8")
+df_orig = pd.read_csv(f"{root}/input/download/06_PCLD/Canadian_landslide_database_Dec2023_version7.csv", sep=',', low_memory= False, encoding="utf-8")
 
 df_orig['longitude'] = pd.to_numeric(df_orig['Longitude'], errors='coerce')
 df_orig['latitude'] = pd.to_numeric(df_orig['Latitude'], errors='coerce')
@@ -40,7 +40,8 @@ gdf_orig['Info'] = gdf_orig.apply(lambda row: f"{row['Study area']}, {row['Name'
 
 #standardize ACCURACY field content
 gdf_orig['Accuracy'] = gdf_orig['Location confidence']
-gdf_orig['Accuracy'] = gdf_orig['Accuracy'].fillna('ND')
+gdf_orig['Accuracy'] = gdf_orig.apply(lambda row: row['Reference'] if pd.isnull(row['Accuracy']) else row['Accuracy'], axis=1)
+gdf_orig['Accuracy'] = gdf_orig['Accuracy'].fillna('30')
 
 # Salva il GeoDataFrame come CSV
 gdf_orig.to_csv(f"{root}/input/native_datasets/06_PCLD_native.csv", index=False)
