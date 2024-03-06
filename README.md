@@ -74,7 +74,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [10_BGS](https://www.bgs.ac.uk/geology-projects/landslides/national-landslide-database/a-guide-to-the-national-landslide-database-on-the-geoindex/)| National Landslide Database - Index data (BGS)                                                 | 15050     |
     | [11_NTMI](https://data.gov.ie/dataset/gsi-landslide-events-data)                                                                                   | Landslide Events Data (GSI)                                                                    | 2811      |
     | [12_VLS](https://anrgeodata.vermont.gov/datasets/landslides/explore?location=43.920513%2C-72.678150%2C8.82)                                        | Vermont Geological Survey's preliminary landslide inventory                                    | 3049      |
-    | [13_SLIDO](https://www.oregon.gov/dogami/slido/Pages/data.aspx)                                                                                    | Statewide Landslide Information Database for Oregon (DOGAMI)                                   | 7918      |
+    | [13_SLIDO](https://www.oregon.gov/dogami/slido/Pages/data.aspx)                                                                                    | Statewide Landslide Information Database for Oregon (DOGAMI)                                   | 15866     |
   
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
