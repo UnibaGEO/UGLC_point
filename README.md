@@ -58,9 +58,9 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 - <b> ID: </b> the content of this field contains a unique ID for each landslide event included into the UGLC dataset.
 
 
-- <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset using an identification abbreviation:
+- <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset used into the UGLC creation:
 
-    | NATIVE DATASET                                                                                                                                     | DESCRIPTION                                                                                    | N° POINTS |
+    | REFERING                                                                                                                                           | NAME                                                                                           | N° POINTS |
     |----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|
     | [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)                              | Cooperative Open Online Landslide Repository (NASA) Event + Report points (with no duplicates) | 49718     |
     | [02_GFLD](https://nhess.copernicus.org/articles/18/2161/2018/)                                                                                     | Global fatal landslide occurrence from 2004 to 2016                                            | 5490      |
