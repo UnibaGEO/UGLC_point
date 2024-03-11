@@ -471,20 +471,37 @@ def date_s_correction(input_date_s):
     try:
         corrected_date = datetime.strptime(input_date_s, '%Y').strftime('%Y/01/01')
         return corrected_date
+        print("__________________________________________________________________________________________")
+        print("                             START DATE  correction: DONE                            ")
+        print("__________________________________________________________________________________________")
     except ValueError:
         return input_date_s
-print("__________________________________________________________________________________________")
-print("                             START DATE  correction: DONE                            ")
-print("__________________________________________________________________________________________")
 
 # Conversion DATEf from yyyy to yyyy/mm/dd
 def date_f_correction(input_date_f):
-
     try:
         corrected_date = datetime.strptime(input_date_f, '%Y').strftime('%Y/12/31')
         return corrected_date
+        print("__________________________________________________________________________________________")
+        print("                             END DATE  correction: DONE                                   ")
+        print("__________________________________________________________________________________________")
     except ValueError:
         return input_date_f
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# 9 DATEs and DATEf conversion (only BGS)
+
+def date_format(input_date):
+    try:
+        # Replace all '-' with '/'
+        fixed_date = input_date.replace('-', '/')
+        # Convert 'yyyy/mm/dd' strings into a datetime object
+        date_object = datetime.strptime(fixed_date, '%Y/%m/%d')
+        formatted_date = date_object.strftime('%Y/%m/%d')
+        return formatted_date
+    except ValueError:
+        return 'error'
 print("__________________________________________________________________________________________")
-print("                             END DATE  correction: DONE                            ")
+print("                             START DATE and END DATE  correction: DONE                    ")
 print("__________________________________________________________________________________________")

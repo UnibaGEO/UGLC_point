@@ -24,8 +24,6 @@ df_orig['dep_area']=df_orig['dep_area'].apply(convert_to_int)
 
 # Create standardized columns from the old dataset
 df_orig['Country']= "calc"
-row_with_id=df_orig.loc[df_orig['ID'] == 1513]
-print(row_with_id)
 
 # Save the GeoDataFrame as a CSV
 df_orig.to_csv(f"{root}/input/native_datasets/07_RBR_native.csv", sep=",", decimal=".", index=False)
