@@ -60,8 +60,9 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset used into the UGLC creation:
 
-  POINT DATASET
-
+    |POINT DATASET|
+    |-------------|
+  
     | REFERING                                                                                                                                            | NAME                                                                                           | N° POINTS | LICENSE                                                                                                             | DOWNLOAD  | IMPLEMENTED              |
     |-----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------|-----------|--------------------------|
     | [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)                               | Cooperative Open Online Landslide Repository (NASA) Event + Report points (with no duplicates) | 49718     | [LICENSE](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)| free      | :heavy_check_mark:       |
