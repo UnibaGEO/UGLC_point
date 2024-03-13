@@ -39,10 +39,10 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 ## :red_circle: Attribute fields summary
 
-|        | WKT_GEOM         | NEW DATASET | ID     | OLD DATASET | OLD ID | VERSION  | COUNTRY  | ACCURACY | START DATE | END DATE | TYPE    | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
-|--------|------------------|-------------|--------|-------------|--------|----------|----------|----------|------------|----------|---------|---------|--------------|----------|----------|------------|----------|--------|--------|
-| TYPE   | Well known text  | String      | Int    | String      | String | String   | String   | String   | Date       | Date     | String  | String  | Int          | Bool     | Bool     | Int        | Int      | String | String |
-| STATUS | active           | Active      | Active | Active      | Active | Active   | Active   | Active   | Active     | Active   | Active  | Active  | Active       | Inactive | inactive | Active     | Active   | Active | Active |
+|        | WKT_GEOM         | NEW DATASET | ID       | OLD DATASET | OLD ID | VERSION  | COUNTRY  | ACCURACY | START DATE | END DATE | TYPE    | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
+|--------|------------------|-------------|----------|-------------|--------|----------|----------|----------|------------|----------|---------|---------|--------------|----------|----------|------------|----------|--------|--------|
+| TYPE   | Well known text  | String      | Int      | String      | String | String   | String   | Float    | Date       | Date     | String  | String  | Int          | Bool     | Bool     | Int        | Int      | String | String |
+| STATUS | active           | Active      | Inactive | Active      | Active | Active   | Active   | Active   | Active     | Active   | Active  | Active  | Active       | Inactive | inactive | Active     | Active   | Active | Active |
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 - <b> OLD DATASET: </b> the contents of this field represent the name of the native dataset used into the UGLC creation:
 
-    ##POINT DATASET
+  ##POINT DATASET
 
     | REFERING                                                                                                                                            | NAME                                                                                                | N° POINTS                     | LICENSE                                                                                                              | DOWNLOAD  |
     |-----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|-------------------------------|----------------------------------------------------------------------------------------------------------------------|-----------|
