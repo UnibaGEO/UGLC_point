@@ -490,7 +490,7 @@ def date_f_correction(input_date_f):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# 9 DATEs and DATEf conversion (only BGS)
+# 9 START DATE and END DATE conversion (only BGS)
 
 def date_format(input_date):
     try:
@@ -505,3 +505,121 @@ def date_format(input_date):
 print("__________________________________________________________________________________________")
 print("                             START DATE and END DATE  correction: DONE                    ")
 print("__________________________________________________________________________________________")
+
+# ----------------------------------------------------------------------------------------------------------------------
+# START DATE and END DATE calculator (only NTMI)
+
+def populate_start_date(row):
+    if pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "Other":
+        return row['EVENT_DATE']
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == " Unknown ":
+        return row['EVENT_DATE']
+    elif pd.notna(row['EVENT_DATE']) and pd.notna(row['DATE_ACCUR']) and pd.notna(row['DATE_ACC_1']):
+        return "1677/12/31"
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Month":
+        return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/01")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "2_Month") or (row['DATE_ACCUR'] == "2_Months")):
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(months=1)).strftime("%Y/%m/01")
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Day":
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(days=1)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Week":
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(weeks=1)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Year":
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(years=1)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "10_Year") or (row['DATE_ACCUR'] == "10_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(years=10)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "2_Year") or (row['DATE_ACCUR'] == "2_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(years=2)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "20_Year") or (row['DATE_ACCUR'] == "20_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(years=20)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "5_Year") or (row['DATE_ACCUR'] == "5_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(years=5)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "6_Month") or (row['DATE_ACCUR'] == "6_Months")):
+        return (pd.to_datetime(row['EVENT_DATE']) - pd.DateOffset(months=6)).strftime("%Y/%m/01")
+    elif row['DATE_ACCUR'] == "Within the last 50 years":
+        return "1970/01/01"
+    elif row['DATE_ACC_1'] == "Within the last 50 years" and row['DATE_ACCUR'] == "other":
+        return "1970/01/01"
+    elif row['DATE_ACC_1'] == "2005-2011":
+        return "2005/01/01"
+    elif row['DATE_ACC_1'] == "2005-2008":
+        return "2005/01/01"
+    elif row['DATE_ACC_1'] == "1990-1991":
+        return "1990/01/01"
+    elif row['DATE_ACC_1'] == "1994-2000":
+        return "1994/01/01"
+    elif row['DATE_ACC_1'] == "2009-2010":
+        return "2009/01/01"
+    elif row['DATE_ACC_1'] == "3-5 Years approx " or row['DATE_ACC_1'] == "3-5 Years ":
+        return "2011/01/01"
+    elif row['DATE_ACC_1'] == "2 Days ":
+        return "2015/09/10"
+    elif pd.isna(row['DATE_ACC_1']) and pd.isna(row['DATE_ACCUR']) and pd.isna(row['EVENT_DATE']):
+        return "1677/12/31"
+    elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR'] == "Unknown":
+        if not pd.isna(row['EVENT_DATE']):
+            return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
+        else:
+            return "1677/12/31"
+    elif pd.isna(row['DATE_ACC_1']) and pd.isna(row['DATE_ACCUR']) and not pd.isna(row['EVENT_DATE']):
+        return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
+    elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR']=="20_Years" and pd.isna(row['EVENT_DATE']):
+        return "2000/01/01"
+
+def populate_end_date(row):
+    if pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "Other":
+        return row['EVENT_DATE']
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == " Unknown ":
+        return row['EVENT_DATE']
+    elif pd.notna(row['EVENT_DATE']) and pd.notna(row['DATE_ACCUR']) and pd.notna(row['DATE_ACC_1']):
+        return "2020/12/31"
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Month":
+        return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")  # Fine del mese
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "2_Month") or (row['DATE_ACCUR'] == "2_Months")):
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(months=2)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Day":
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(days=1)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Week":
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(weeks=1)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "1_Year":
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(years=1)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "10_Year") or (row['DATE_ACCUR'] == "10_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(years=10)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "2_Year") or (row['DATE_ACCUR'] == "2_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(years=2)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "20_Year") or (row['DATE_ACCUR'] == "20_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(years=20)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "5_Year") or (row['DATE_ACCUR'] == "5_Years")):
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(years=5)).strftime("%Y/%m/%d")
+    elif pd.notna(row['EVENT_DATE']) and ((row['DATE_ACCUR'] == "6_Month") or (row['DATE_ACCUR'] == "6_Months")):
+        return (pd.to_datetime(row['EVENT_DATE']) + pd.DateOffset(months=6)).strftime("%Y/%m/%d")
+    elif row['DATE_ACCUR'] == " Within the last 50 years ":
+        return "2020/12/31"
+    elif row['DATE_ACC_1'] == "Within the last 50 years" and row['DATE_ACCUR'] == "other":
+        return "2020/12/31"
+    elif row['DATE_ACC_1'] == "2005-2011":
+        return "2011/12/31"
+    elif row['DATE_ACC_1'] == "2005-2008":
+        return "2008/12/31"
+    elif row['DATE_ACC_1'] == "1990-1991":
+        return "1991/12/31"
+    elif row['DATE_ACC_1'] == "1994-2000":
+        return "2000/12/31"
+    elif row['DATE_ACC_1'] == "2009-2010":
+        return "2010/12/31"
+    elif row['DATE_ACC_1'] == "3-5 Years approx " or row['DATE_ACC_1'] == "3-5 Years ":
+        return "2020/12/31"
+    elif row['DATE_ACC_1'] == "2 Days ":
+        return "2015/09/14"
+    elif pd.isna(row['DATE_ACC_1']) and pd.isna(row['DATE_ACCUR']) and pd.isna(row['EVENT_DATE']):
+        return "2020/12/31"
+    elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR'] == "Unknown":
+        if not pd.isna(row['EVENT_DATE']):
+            return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
+        else:
+            return "2020/12/31"
+    elif pd.isna(row['DATE_ACC_1']) and pd.isna(row['DATE_ACCUR']) and not pd.isna(row['EVENT_DATE']):
+        return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
+    elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR']=="20_Years" and pd.isna(row['EVENT_DATE']):
+        return "2020/12/31"
+# ----------------------------------------------------------------------------------------------------------------------
