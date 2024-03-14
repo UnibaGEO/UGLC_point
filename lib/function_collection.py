@@ -502,9 +502,9 @@ def date_format(input_date):
         return formatted_date
     except ValueError:
         return 'error'
-print("__________________________________________________________________________________________")
-print("                             START DATE and END DATE  correction: DONE                    ")
-print("__________________________________________________________________________________________")
+    print("__________________________________________________________________________________________")
+    print("                             START DATE and END DATE  correction: DONE                    ")
+    print("__________________________________________________________________________________________")
 
 # ----------------------------------------------------------------------------------------------------------------------
 # START DATE and END DATE calculator (only NTMI)
@@ -566,6 +566,10 @@ def populate_start_date(row):
     elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR']=="20_Years" and pd.isna(row['EVENT_DATE']):
         return "2000/01/01"
 
+    print("__________________________________________________________________________________________")
+    print("                             START DATE  correction: DONE                                 ")
+    print("__________________________________________________________________________________________")
+
 def populate_end_date(row):
     if pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "Other":
         return row['EVENT_DATE']
@@ -622,4 +626,8 @@ def populate_end_date(row):
         return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
     elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR']=="20_Years" and pd.isna(row['EVENT_DATE']):
         return "2020/12/31"
+
+    print("__________________________________________________________________________________________")
+    print("                             END DATE  correction: DONE                                 ")
+    print("__________________________________________________________________________________________")
 # ----------------------------------------------------------------------------------------------------------------------
