@@ -4,7 +4,7 @@ import geopandas as gpd
 import pandas as pd
 
 # Load the environment variables from config.env file
-load_dotenv("../../config.env")
+load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
 root = os.getenv("FILES_REPO")
 
 # COOLR_R-----------------------------------------------------------------------

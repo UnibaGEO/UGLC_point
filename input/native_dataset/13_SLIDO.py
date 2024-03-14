@@ -2,7 +2,7 @@ import zipfile
 import geopandas as gpd
 from dotenv import load_dotenv
 import os
-load_dotenv("../../config.env")
+load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
 root = os.getenv("FILES_REPO")
 import fiona
 
@@ -50,11 +50,9 @@ print("Conversione completata!")
 
 df_orig = gpd.read_file(f"{root}/input/download/13_SLIDO/Historic_Landslide_Points.shp",decimal=".",low_memory=False,encoding="utf-8")
 
+
+df_orig['WKT_GEOM'] = df_orig['geometry'].apply(lambda geom: f"POINT ({geom.xy[0][0]} {geom.xy[1][0]})")
+
 df_orig.to_csv(f"{root}/input/native_datasets/13_SLIDO_native.csv", sep=",", decimal=".", index=False)
 
-
-print(df_orig['LOC_METHOD'].unique())
 #_________________________
-print(df_orig['TYPE_MOVE'].unique())
-#_________________________
-print(df_orig['MOVE_CLASS'].unique())

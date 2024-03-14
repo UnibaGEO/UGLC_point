@@ -3,7 +3,7 @@ import geopandas as gpd
 from dotenv import load_dotenv
 
 # Load the environment variables from config.env file
-load_dotenv("../../config.env")
+load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
 root = os.getenv("FILES_REPO")
 
 # Load the shp

@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 import os
 
 # Load the enviroment variables from config.env file
-load_dotenv("../../config.env")
+load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
