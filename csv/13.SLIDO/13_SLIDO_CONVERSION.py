@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_affidability_calculator, start_date_SLIDO
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
@@ -38,10 +38,6 @@ for column in df_OLD.columns:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
 
-df_OLD['LS_TYPE1'] = df_OLD['LS_TYPE1'].fillna('ND')
-df_OLD['TOWN'] = df_OLD['TOWN'].fillna('ND')
-df_OLD['COMMENTS'] = df_OLD['COMMENTS'].fillna('ND')
-
 # New dataframe Configuration
 new_data = {
     'WKT_GEOM': [],
@@ -65,6 +61,9 @@ new_data = {
     'LINK': []
 }
 
+df_OLD['LOC_METHOD'] = df_OLD['LOC_METHOD'].fillna("-99999") #non funziona
+df_OLD['MOVE_CLASS'] = df_OLD['MOVE_CLASS'].fillna("-99999")
+
 # New dataframe Creation
 df_NEW = pd.DataFrame(new_data)
 
@@ -76,24 +75,24 @@ df_NEW['OLD DATASET'] = "Statewide Landslide Information Database for Oregon (DO
 df_NEW['OLD ID'] = df_OLD['UNIQUE_ID']
 df_NEW['VERSION'] = "v. 4.4 2021/10/29"
 df_NEW['COUNTRY'] = "United States of America"
-df_NEW['ACCURACY'] = df_OLD['FIELD_VISI']
-df_NEW['START DATE'] = df_OLD['START DATE']
-df_NEW['END DATE'] = df_OLD['END DATE']
-df_NEW['TYPE'] = df_OLD['LS_TYPE1']
-df_NEW['TRIGGER'] = df_OLD['TRIGGER']
+df_NEW['ACCURACY'] = df_OLD['LOC_METHOD']
+df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1) #FUNZIONA FINALMENTE, va applicato anche per end date però, e bisogna aggiungere le lookup per le df_OLD ["COLONNEe"]
+df_NEW['END DATE'] = "ND"
+df_NEW['TYPE'] = df_OLD['MOVE_CLASS']
+df_NEW['TRIGGER'] = df_OLD['CONTR_FACT'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
-df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f"SLIDO - locality: Oregon, {repr(row['TOWN'])} - description: {repr(row['COMMENTS'])} ", axis=1)
-df_NEW['LINK'] = df_OLD['SOURCE'].fillna('ND')
+df_NEW['INJURIES'] = df_OLD['LOSSES'].fillna('-99999')
+df_NEW['NOTES'] = "ND" #df_OLD.apply(lambda row: f"SLIDO - locality: Oregon, {repr(row['TOWN'])} - description: {repr(row['COMMENTS'])} ", axis=1)
+df_NEW['LINK'] = "ND" #df_OLD['SOURCE'].fillna('ND')
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-apply_affidability_calculator(df_NEW)
+#apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

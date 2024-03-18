@@ -631,3 +631,37 @@ def populate_end_date(row):
     print("                             END DATE  correction: DONE                                 ")
     print("__________________________________________________________________________________________")
 # ----------------------------------------------------------------------------------------------------------------------
+# 10 - START DATE and END DATE calculator (only SLIDO)
+def start_date_SLIDO(row):
+    if not pd.isnull(row["MONTH"]) and row["MONTH"] == "0" or not pd.isnull(row["DAY"]) and row["DAY"] == "0" or not pd.isnull(row["YEAR"]) and row["YEAR"] == "0.0":
+        return "1677/12/31"
+
+    elif pd.isnull(row["YEAR"]) and pd.isnull(row["MONTH"]) and pd.isnull(row["DAY"]) and pd.isnull(
+            row["REACTIVATI"]) and pd.isnull(row["DATE_RANGE"]):
+        return "1677/12/31"
+
+    elif not pd.isnull(row["YEAR"]):
+        year = int(row["YEAR"])
+        month = int(row["MONTH"]) if not pd.isnull(row["MONTH"]) else 1
+        day = int(row["DAY"]) if not pd.isnull(row["DAY"]) else 1
+        return f"{year:04d}/{month:02d}/{day:02d}"
+
+    elif not pd.isnull(row["REACTIVATI"]):
+        reactivati_date_parts = row["REACTIVATI"].split('/')  # Dividi la data di REACTIVATI
+        year = int(reactivati_date_parts[0])  # Estrai l'anno
+        month = int(reactivati_date_parts[1]) if len(reactivati_date_parts) > 1 else (int(row["MONTH"]) if not pd.isnull(row["MONTH"]) else 1)
+        day = int(reactivati_date_parts[2]) if len(reactivati_date_parts) > 2 else (int(row["DAY"]) if not pd.isnull(row["DAY"]) else 1)
+        return f"{year:04d}/{month:02d}/{day:02d}"
+
+    elif not pd.isnull(row["DATE_RANGE"]):
+        date_range_parts = row["DATE_RANGE"].split('/')  # Dividi la data di DATE_RANGE
+        year = int(date_range_parts[0])  # Estrai l'anno
+        month = int(date_range_parts[1]) if len(date_range_parts) > 1 else (int(row["MONTH"]) if not pd.isnull(row["MONTH"]) else 1)
+        day = int(date_range_parts[2]) if len(date_range_parts) > 2 else (int(row["DAY"]) if not pd.isnull(row["DAY"]) else 1)
+        return f"{year:04d}/{month:02d}/{day:02d}"
+
+    else:
+        return "1677/12/31"
+
+
+

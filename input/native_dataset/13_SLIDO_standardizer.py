@@ -44,8 +44,16 @@ df_orig = gpd.read_file(output_shp, decimal=".", low_memory=False, encoding="utf
 # Set the CRS to EPSG 4326
 df_orig = df_orig.to_crs("EPSG:4326")
 
+df_orig['DATE_RANGEe'] = df_orig['DATE_RANGE']
+df_orig['REACTIVATIe'] = df_orig['REACTIVATI']
+df_orig['YEARe'] = df_orig['YEAR']
+df_orig['MONTHe'] = df_orig['MONTH']
+df_orig['DAYe'] = df_orig['DAY']
+
 # Convert geometry to WKT format
 df_orig['WKT_GEOM'] = df_orig['geometry'].apply(lambda geom: f"POINT ({geom.xy[0][0]} {geom.xy[1][0]})")
 
 # Save to CSV
 df_orig.to_csv(f"{root}/input/native_datasets/13_SLIDO_native.csv", sep=",", decimal=".", index=False)
+
+print(df_orig['REACTIVATI'].unique())
