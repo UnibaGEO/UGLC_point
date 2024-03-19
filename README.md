@@ -82,6 +82,16 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [15_CAFLAG](https://data.4tu.nl/articles/dataset/CAmpi_Flegrei_LAndslide_Geodatabase_CAFLAG_/14440757)                                              | The CAmpi Flegrei LAndslide Geodatabase                                                        | 2302      | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                             | free      | :heavy_multiplication_x: |
     | [16_ETGFI](https://www.sciencebase.gov/catalog/item/583f4114e4b04fc80e3c4a1a)                                                                       | ETGFI - Earthquake-Triggered Ground-Failure Inventories (POINTS) - USGS                        | 115402    | Work in progress [LICENSE]()                                                                                        | free      | :heavy_multiplication_x: |
 
+
+    |POLYGONAL DATASET|
+    |-----------------|
+  
+    | REFERING                                                                                                                                            | NAME                                                                                           | N° POINTS | LICENSE                                                                                                             | DOWNLOAD  | IMPLEMENTED              |
+    |-----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------|-----------|--------------------------|
+
+
+
+
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
 
 
