@@ -1,27 +1,27 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     ITALICA - CNR IRPI
+# native dataframe:     SLIDO -  Statewide Landslide Information Database for Oregon (DOGAMI)
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
 import pandas as pd
 import json
-from lib.function_collection import apply_affidability_calculator
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from lib.function_collection import apply_affidability_calculator, start_date_SLIDO, end_date_SLIDO
 
 # Load the enviroment variables from config.env file
-load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
+load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/03_ITALICA_native.csv", low_memory=False, encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/13_SLIDO_native.csv", low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('03_ITALICA_LOOKUPTABLES.json', 'r', encoding="utf-8") as file:
+with open('13_SLIDO_LOOKUPTABLES.json', 'r', encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["03_ITALICA LOOKUP TABLES"]
+    lookup_tables = lookup_config["13_SLIDO LOOKUP TABLES"]
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -31,7 +31,7 @@ for column in df_OLD.columns:
     if lookup_table_key in lookup_tables and isinstance(lookup_tables[lookup_table_key], dict):
         lookup_table = lookup_tables[lookup_table_key]
 
-        # If the lookup table is marked as "ND" the system will keep the original content
+        # If the lookup table is marked as "ND" the sytem will keep the original content
         if lookup_table == "ND":
             continue
         else:
@@ -61,29 +61,35 @@ new_data = {
     'LINK': []
 }
 
+df_OLD['LOC_METHOD'] = df_OLD['LOC_METHOD'].fillna("-99999")
+df_OLD['LOSSES'] = df_OLD['LOSSES'].fillna("-99999")
+df_OLD['COMMENTS'] = df_OLD['COMMENTS'].fillna("ND")
+df_OLD['DAMAGES'] = df_OLD['DAMAGES'].fillna("ND")
+df_OLD['DATA_SOURC'] = df_OLD['DATA_SOURC'].fillna("ND")
+
 # New dataframe Creation
 df_NEW = pd.DataFrame(new_data)
 
 # New Dataframe Updating with the Old Dataframe columns content values
-df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
+df_NEW['WKT_GEOM'] = df_OLD['geometry']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "ITALICA"
-df_NEW['OLD ID'] = df_OLD['id']
-df_NEW['VERSION'] = "V2 - 2023"
-df_NEW['COUNTRY'] = "Italy"
-df_NEW['ACCURACY'] = df_OLD['geographic_accuracy']
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
-df_NEW['TYPE'] = df_OLD['landslide_type']
-df_NEW['TRIGGER'] = "rainfall"
+df_NEW['ID'] = "CALC"
+df_NEW['OLD DATASET'] = "Statewide Landslide Information Database for Oregon (DOGAMI)"
+df_NEW['OLD ID'] = df_OLD['UNIQUE_ID']
+df_NEW['VERSION'] = "v. 4.4 2021/10/29"
+df_NEW['COUNTRY'] = "United States of America"
+df_NEW['ACCURACY'] = df_OLD['LOC_METHOD']
+df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1)
+df_NEW['END DATE'] = df_OLD.apply(end_date_SLIDO, axis=1)
+df_NEW['TYPE'] = df_OLD['MOVE_CLASS']
+df_NEW['TRIGGER'] = df_OLD['CONTR_FACT'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = "-99999"
+df_NEW['FATALITIES'] = df_OLD['LOSSES']
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f" ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI, locality:{row['province']}, {row['region']},description: ND", axis=1)
-df_NEW['LINK'] = "Source: ND"
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"SLIDO - locality: Oregon - description: {repr(row['COMMENTS'])} {repr(row['DAMAGES'])}", axis=1)
+df_NEW['LINK'] = df_OLD['DATA_SOURC'].fillna('ND')
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
@@ -96,8 +102,9 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/03_ITALICA_converted.csv", index=False, encoding="utf-8")
-print("________________________________________________________________________________________")
-print("                            03_ITALICA_native conversion: DONE                          ")
-print("________________________________________________________________________________________")
-#-----------------------------------------------------------------------------------------------------------------------
+df_NEW.to_csv(f"{root}/output/converted_csv/13_SLIDO_converted.csv", sep=',', index=False, encoding="utf-8")
+
+print("__________________________________________________________________________________________")
+print("                             13_SLIDO_native conversion: DONE                             ")
+print("__________________________________________________________________________________________")
+#--------------------------------------------------------------------------------------------------------------------
