@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import apply_affidability_calculator, start_date_SLIDO
+from lib.function_collection import apply_affidability_calculator, start_date_SLIDO, end_date_SLIDO
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
@@ -61,8 +61,11 @@ new_data = {
     'LINK': []
 }
 
-df_OLD['LOC_METHOD'] = df_OLD['LOC_METHOD'].fillna("-99999") #non funziona
-df_OLD['MOVE_CLASS'] = df_OLD['MOVE_CLASS'].fillna("-99999")
+df_OLD['LOC_METHOD'] = df_OLD['LOC_METHOD'].fillna("-99999")
+df_OLD['LOSSES'] = df_OLD['LOSSES'].fillna("-99999")
+df_OLD['COMMENTS'] = df_OLD['COMMENTS'].fillna("ND")
+df_OLD['DAMAGES'] = df_OLD['DAMAGES'].fillna("ND")
+df_OLD['DATA_SOURC'] = df_OLD['DATA_SOURC'].fillna("ND")
 
 # New dataframe Creation
 df_NEW = pd.DataFrame(new_data)
@@ -76,23 +79,23 @@ df_NEW['OLD ID'] = df_OLD['UNIQUE_ID']
 df_NEW['VERSION'] = "v. 4.4 2021/10/29"
 df_NEW['COUNTRY'] = "United States of America"
 df_NEW['ACCURACY'] = df_OLD['LOC_METHOD']
-df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1) #FUNZIONA FINALMENTE, va applicato anche per end date però, e bisogna aggiungere le lookup per le df_OLD ["COLONNEe"]
-df_NEW['END DATE'] = "ND"
+df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1)
+df_NEW['END DATE'] = df_OLD.apply(end_date_SLIDO, axis=1)
 df_NEW['TYPE'] = df_OLD['MOVE_CLASS']
 df_NEW['TRIGGER'] = df_OLD['CONTR_FACT'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = "-99999"
-df_NEW['INJURIES'] = df_OLD['LOSSES'].fillna('-99999')
-df_NEW['NOTES'] = "ND" #df_OLD.apply(lambda row: f"SLIDO - locality: Oregon, {repr(row['TOWN'])} - description: {repr(row['COMMENTS'])} ", axis=1)
-df_NEW['LINK'] = "ND" #df_OLD['SOURCE'].fillna('ND')
+df_NEW['FATALITIES'] = df_OLD['LOSSES']
+df_NEW['INJURIES'] = "-99999"
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"SLIDO - locality: Oregon - description: {repr(row['COMMENTS'])} {repr(row['DAMAGES'])}", axis=1)
+df_NEW['LINK'] = df_OLD['DATA_SOURC'].fillna('ND')
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-#apply_affidability_calculator(df_NEW)
+apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

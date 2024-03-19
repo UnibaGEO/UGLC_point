@@ -5,6 +5,8 @@ from sklearn.neighbors import BallTree
 from shapely.geometry import Point
 from dotenv import load_dotenv
 import os
+import calendar
+from datetime import datetime
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
@@ -85,53 +87,63 @@ def apply_country_corrections(df):
 
 
 def apply_affidability_calculator(df):
-    # Converti la colonna 'ACCURACY' in numeri, trattando 'ND' come NaN
-    df['ACCURACY'] = pd.to_numeric(df['ACCURACY'], errors='coerce')
-
-    # Funzione di trasformazione per assegnare un valore da 1 a 10 alla colonna 'AFFIDABILITY'
+    # Affidability function for assign a value between 1 and 10 into the AFFIDABILITY column
     def assign_affidability(row):
-        accuracy = row['ACCURACY']
-        start_date = pd.to_datetime(row['START DATE'])
-        end_date = pd.to_datetime(row['END DATE'])
+        accuracy = int(row['ACCURACY'])
+        start_date = (row['START DATE'])
+        end_date = (row['END DATE'])
 
-        if pd.notna(accuracy):
-            if 0 <= accuracy <= 100:
-                if start_date == end_date:
+        # 1677/12/31 case
+        if start_date == "1677/12/31":
+            if pd.notna(accuracy):
+                if 0 <= accuracy <= 100:
                     return 1
-                else:
-                    return 2
-            elif 100 < accuracy <= 250:
-                if start_date == end_date:
+                elif 100 < accuracy <= 250:
                     return 3
-                else:
-                    return 4
-            elif 250 < accuracy <= 500:
-                if start_date == end_date:
+                elif 250 < accuracy <= 500:
                     return 5
-                else:
-                    return 6
-            elif 500 < accuracy <= 1000:
-                if start_date == end_date:
+                elif 500 < accuracy <= 1000:
                     return 7
-                else:
-                    return 8
-            elif accuracy > 1000:
-                return 9
-            elif accuracy == -99999:
-                return 10
+                elif accuracy > 1000:
+                    return 9
+                elif accuracy == -99999:
+                    return 10
+        else:
+            # Normal dates case
+            if pd.notna(accuracy):
+                if 0 <= accuracy <= 100:
+                    if start_date == end_date:
+                        return 1
+                    else:
+                        return 2
+                elif 100 < accuracy <= 250:
+                    if start_date == end_date:
+                        return 3
+                    else:
+                        return 4
+                elif 250 < accuracy <= 500:
+                    if start_date == end_date:
+                        return 5
+                    else:
+                        return 6
+                elif 500 < accuracy <= 1000:
+                    if start_date == end_date:
+                        return 7
+                    else:
+                        return 8
+                elif accuracy > 1000:
+                    return 9
+                elif accuracy == -99999:
+                    return 10
 
-
-    # Applica la funzione di trasformazione alla colonna 'AFFIDABILITY'
+    # Apply the affidability on it's column
     df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
-
-    # Riconverti la colonna 'ACCURACY' in stringhe, trasformando i NaN in 'ND'
-    df['ACCURACY'] = df['ACCURACY'].fillna('ND')
 
     return df
 
-    print("__________________________________________________________________________________________")
-    print("                             AFFIDABILITY  calculation: DONE                            ")
-    print("__________________________________________________________________________________________")
+print("__________________________________________________________________________________________")
+print("                             AFFIDABILITY  calculation: DONE                              ")
+print("__________________________________________________________________________________________")
 
 #4 START_DATE CORRECTION
 from datetime import datetime
@@ -632,6 +644,7 @@ def populate_end_date(row):
     print("__________________________________________________________________________________________")
 # ----------------------------------------------------------------------------------------------------------------------
 # 10 - START DATE and END DATE calculator (only SLIDO)
+
 def start_date_SLIDO(row):
     if not pd.isnull(row["MONTH"]) and row["MONTH"] == "0" or not pd.isnull(row["DAY"]) and row["DAY"] == "0" or not pd.isnull(row["YEAR"]) and row["YEAR"] == "0.0":
         return "1677/12/31"
@@ -662,6 +675,47 @@ def start_date_SLIDO(row):
 
     else:
         return "1677/12/31"
+
+def end_date_SLIDO(row):
+    def last_day_of_month(year, month):
+        return calendar.monthrange(year, month)[1]
+
+    def last_month_of_year(year):
+        return 12
+
+    if not pd.isnull(row["MONTHe"]) and row["MONTHe"] == "0" or not pd.isnull(row["DAYe"]) and row["DAYe"] == "0" or not pd.isnull(row["YEARe"]) and row["YEARe"] == "0.0":
+        return "2020/12/31"
+
+    elif pd.isnull(row["YEARe"]) and pd.isnull(row["MONTHe"]) and pd.isnull(row["DAYe"]) and pd.isnull(
+            row["REACTIVATIe"]) and pd.isnull(row["DATE_RANGEe"]):
+        return "2020/12/31"
+
+    elif not pd.isnull(row["YEARe"]):
+        year = int(row["YEARe"])
+        month = int(row["MONTHe"]) if not pd.isnull(row["MONTHe"]) else last_month_of_year(year)
+        day = int(row["DAYe"]) if not pd.isnull(row["DAYe"]) else last_day_of_month(year, month)
+        return f"{year:04d}/{month:02d}/{day:02d}"
+
+    elif not pd.isnull(row["REACTIVATIe"]):
+        reactivati_date_parts = row["REACTIVATIe"].split('/')  # Dividi la data di REACTIVATI
+        year = int(reactivati_date_parts[0])  # Estrai l'anno
+        month = int(reactivati_date_parts[1]) if len(reactivati_date_parts) > 1 else (
+            int(row["MONTHe"]) if not pd.isnull(row["MONTHe"]) else last_month_of_year(year))
+        day = int(reactivati_date_parts[2]) if len(reactivati_date_parts) > 2 else (
+            int(row["DAYe"]) if not pd.isnull(row["DAYe"]) else last_day_of_month(year, month))
+        return f"{year:04d}/{month:02d}/{day:02d}"
+
+    elif not pd.isnull(row["DATE_RANGEe"]):
+        date_range_parts = row["DATE_RANGEe"].split('/')  # Dividi la data di DATE_RANGE
+        year = int(date_range_parts[0])  # Estrai l'anno
+        month = int(date_range_parts[1]) if len(date_range_parts) > 1 else (
+            int(row["MONTHe"]) if not pd.isnull(row["MONTHe"]) else last_month_of_year(year))
+        day = int(date_range_parts[2]) if len(date_range_parts) > 2 else (
+            int(row["DAYe"]) if not pd.isnull(row["DAYe"]) else last_day_of_month(year, month))
+        return f"{year:04d}/{month:02d}/{day:02d}"
+
+    else:
+        return "2020/12/31"
 
 
 
