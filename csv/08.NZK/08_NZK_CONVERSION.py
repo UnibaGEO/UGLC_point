@@ -76,7 +76,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_NEW.apply(lambda row:f"NZK Map of co-seismic Landslides for the 7.8 Kaikoura earthquake, New Zealand - locality: Kaikoura district  - description: The Mw 7.8 14 November 2016 Kaikoura Earthquake generated many thousands of landslides ",axis=1)
+df_NEW['NOTES'] = df_NEW.apply(lambda row:f"NZK - locality: Kaikoura district  - description: The Mw 7.8 14 November 2016 Kaikoura Earthquake generated many thousands of landslides ",axis=1)
 df_NEW['LINK'] ="Source: ND"
 
 #-----------------------------------------------------------------------------------------------------------------------

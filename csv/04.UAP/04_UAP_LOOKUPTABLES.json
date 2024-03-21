@@ -2,7 +2,13 @@
   "04_UAP LOOKUP TABLES": {
     "OBJECTID_lookup": "ND",
     "Fatalities_lookup": "ND",
-    "Confidence_lookup": "ND",
+    "Confidence_lookup": {
+      "8" : "0",
+      "5" : "0",
+      "3" : "250",
+      "2" : "50000",
+      "1" : "50000"
+    },
     "InventoryU_lookup": "ND",
     "Info_source_lookup": "ND",
     "Notes_lookup": "ND",

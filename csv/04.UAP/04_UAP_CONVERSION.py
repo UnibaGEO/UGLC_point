@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import trasforma_data_start,trasforma_data_end,trasforma_accuracy,apply_affidability_calculator,assign_country_to_points
+from lib.function_collection import trasforma_data_start,trasforma_data_end,apply_affidability_calculator,assign_country_to_points
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
@@ -24,9 +24,9 @@ with open('04_UAP_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_tables = lookup_config["04_UAP LOOKUP TABLES"]
 
 # null values replacement in the Native Dataframe
-df_OLD['Notes']=df_OLD['Notes'].fillna('ND')
-df_OLD['InventoryU']=df_OLD['InventoryU'].fillna('ND')
-df_OLD['Catalog']=df_OLD['Inventory']
+df_OLD['Notes'] = df_OLD['Notes'].fillna('ND')
+df_OLD['InventoryU'] = df_OLD['InventoryU'].fillna('ND')
+df_OLD['Catalog'] = df_OLD['Inventory']
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -74,11 +74,11 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "UAP"
+df_NEW['OLD DATASET'] = "Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
 df_NEW['VERSION'] = "V2 - 2022/06/03"
 df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
-df_NEW['ACCURACY'] = df_OLD['Confidence'].apply(trasforma_accuracy)
+df_NEW['ACCURACY'] = df_OLD['Confidence']
 df_NEW['START DATE'] = df_OLD['Date'].fillna('1878/01/01').apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['DATEf'].fillna('2021/12/31').apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Inventory']
@@ -88,7 +88,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS - locality: ND - description: {repr(row['Notes'])}",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"UAP - locality: ND - description: {repr(row['Notes'])}",axis=1)
 df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['InventoryU']}",axis=1)
 
 
@@ -96,9 +96,7 @@ df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['InventoryU']}",axis=1)
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-
 apply_affidability_calculator(df_NEW)
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
@@ -108,5 +106,5 @@ apply_affidability_calculator(df_NEW)
 df_NEW.to_csv(f"{root}/output/converted_csv/04_UAP_converted.csv", sep=',', index=False,encoding="utf-8")
 
 print("__________________________________________________________________________________________")
-print("                             04_UAP_native conversion: DONE                             ")
+print("                             04_UAP_native conversion: DONE                               ")
 print("__________________________________________________________________________________________")

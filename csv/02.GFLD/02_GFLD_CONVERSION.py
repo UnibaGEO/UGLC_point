@@ -5,7 +5,6 @@
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
-
 import pandas as pd
 import json
 import numpy as np
@@ -14,7 +13,7 @@ from dotenv import load_dotenv
 import os
 
 # Load the enviroment variables from config.env file
-load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
+load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
@@ -26,9 +25,9 @@ with open('02_GFLD_LOOKUPTABLES.json', 'r', encoding='utf-8') as file:
     lookup_tables = lookup_config["02_GFLD LOOKUP TABLES"]
 
 # null values replacement in the Native Dataframe
-df_OLD['Report_1']=df_OLD['Report_1'].fillna('ND')
-df_OLD['Location_M']=df_OLD['Location_M'].fillna('ND')
-df_OLD['Source_1']=df_OLD['Source_1'].fillna('ND')
+df_OLD['Report_1'] = df_OLD['Report_1'].fillna('ND')
+df_OLD['Location_M'] = df_OLD['Location_M'].fillna('ND')
+df_OLD['Source_1'] = df_OLD['Source_1'].fillna('ND')
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -44,8 +43,6 @@ for column in df_OLD.columns:
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
-
-
 
 # New dataframe Configuration
 new_data = {
@@ -77,7 +74,7 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "GFLD"
+df_NEW['OLD DATASET'] = "Global fatal landslide Catalog"
 df_NEW['OLD ID'] = df_OLD['LandslideN']
 df_NEW['VERSION'] = "2017"
 df_NEW['COUNTRY'] = df_OLD['Country']
@@ -91,9 +88,8 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('-99999')
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f" Global fatal landslide, locality: {repr(row['Location_M'])}, description: {repr(row['Report_1'])}",axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {repr(row['Source_1'])}",axis=1)
-
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"GFLD, locality: {repr(row['Location_M'])}, description: {repr(row['Report_1'])}", axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['Source_1'])}",axis=1)
 
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
@@ -103,7 +99,6 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
 #-----------------------------------------------------------------------------------------------------------------------
-
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
 df_NEW.to_csv(f"{root}/output/converted_csv/02_GFLD_converted.csv", index=False, encoding="utf-8")
