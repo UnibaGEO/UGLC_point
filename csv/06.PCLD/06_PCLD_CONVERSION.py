@@ -11,13 +11,6 @@ import os
 from dotenv import load_dotenv
 from lib.function_collection import date_f_correction, date_s_correction, apply_affidability_calculator
 
-'''
----------------------------------------------------MEMO-----------------------------------------------------------------
-Funziona tutto, circa, tranne le solite date ##### su excell.
-C'è un problema con le date più vecchie del 1600 con la lib datetime, è da esplorare.
-#-----------------------------------------------------------------------------------------------------------------------
-'''
-
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
@@ -75,7 +68,7 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"# range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "PCLD"
+df_NEW['OLD DATASET'] = "Preliminary Canadian Landslide Database v.6.1 - Brideau et al. 2023"
 df_NEW['OLD ID'] = df_OLD['LS_ID']
 df_NEW['VERSION'] = "V6.1"
 df_NEW['COUNTRY'] = "Canada"
@@ -89,7 +82,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f"Preliminary Canadian Landslide Database v.6.1 - Brideau et al. 2023 - locality: Canada - description: {repr(row['Info'])}", axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"PCLD - locality: Canada - description: {repr(row['Info'])}", axis=1)
 df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {row['Reference']}", axis=1)
 
 #-----------------------------------------------------------------------------------------------------------------------

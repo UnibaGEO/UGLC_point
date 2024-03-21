@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 import os
 
 # Load the enviroment variables from config.env file
-load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
+load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
@@ -68,7 +68,7 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "ITALICA"
+df_NEW['OLD DATASET'] = "ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI"
 df_NEW['OLD ID'] = df_OLD['id']
 df_NEW['VERSION'] = "V2 - 2023"
 df_NEW['COUNTRY'] = "Italy"
@@ -82,7 +82,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f" ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI, locality:{row['province']}, {row['region']},description: ND", axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"ITALICA, locality:{row['province']}, {row['region']},description: ND", axis=1)
 df_NEW['LINK'] = "Source: ND"
 
 #-----------------------------------------------------------------------------------------------------------------------

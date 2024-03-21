@@ -7,17 +7,22 @@ import pandas as pd
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
-# Load the CSV
-df_orig = pd.read_csv(f"{root}/input/download/14_1N/1N_downloaded.csv", sep=';', low_memory=False, encoding="utf-8")
+# Load the GeoDataFrame
+gdf_orig = gpd.read_file(f"{root}/input/download/14_1N/1N_downloaded.csv", sep=';', low_memory=False, encoding="utf-8")
 
-df_orig["Longitude"] = pd.to_numeric(df_orig["Longitude"], errors='coerce')
-df_orig["Latitude"] = pd.to_numeric(df_orig["Latitude"], errors='coerce')
-gdf_orig = gpd.GeoDataFrame(df_orig,
-                            geometry=gpd.points_from_xy(df_orig["Longitude"], df_orig["Latitude"]),
-                            crs='EPSG:4326')  # Set the CRS as EPSG:4326
-gdf_orig['WKT_GEOM'] = gdf_orig.geometry.apply(lambda geom: geom.wkt)
+# Convert 'Longitude' and 'Latitude' columns to numeric, handling errors and create a WKT_GEOM column
+gdf_orig["Longitude"] = pd.to_numeric(gdf_orig["Longitude"], errors='coerce')
+gdf_orig["Latitude"] = pd.to_numeric(gdf_orig["Latitude"], errors='coerce')
+gdf_orig['WKT_GEOM'] = gdf_orig.apply(lambda row: f"POINT ({row['Longitude']} {row['Latitude']})", axis=1)
 
-df_orig = df_orig.dropna(subset=['Latitude', 'Longitude'])
+# Duplicate the Station column for reassign it later as location reference name
+gdf_orig["SiteName"] = gdf_orig["Station"]
 
-# Save the geodataframe as a CSV
-gdf_orig.to_csv(f"{root}/input/native_datasets/14_1N_native.csv", index=False)
+# Drop rows with missing 'Latitude' or 'Longitude' after creating WKT_GEOM column
+gdf_orig = gdf_orig.dropna(subset=['Latitude', 'Longitude'])
+
+# Drop duplicate rows based on 'Station' column
+gdf_unique_station = gdf_orig.drop_duplicates(subset=["Station"])
+
+# Save the GeoDataFrame as a CSV
+gdf_unique_station.to_csv(f"{root}/input/native_datasets/14_1N_native.csv", index=False)

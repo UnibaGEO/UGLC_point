@@ -5,12 +5,11 @@
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
-import numpy as np
 import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import trasforma_accuracy,apply_affidability_calculator
+from lib.function_collection import apply_affidability_calculator
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
@@ -20,16 +19,13 @@ root = os.getenv("FILES_REPO")
 df_OLD = pd.read_csv(f"{root}/input/native_datasets/05_ALC_native.csv", low_memory=False,encoding="utf-8")
 
 #null values replacement in the Native Dataframe
-
-df_OLD['Land Cover']=df_OLD['Land Cover'].fillna('ND')
+df_OLD['Land Cover'] = df_OLD['Land Cover'].fillna('ND')
+df_OLD['Capture Me'] = df_OLD['Capture Me'].fillna('-99999')
 
 # JSON Lookup Tables Loading
 with open('05_ALC_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_config = json.load(file)
     lookup_tables = lookup_config["05_ALC LOOKUP TABLES"]
-
-# null values replacement in the Native Dataframe
-#print(df_OLD['Capture Me'].unique())
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -45,8 +41,6 @@ for column in df_OLD.columns:
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
-
-print(df_OLD['Capture Me'].unique())
 
 # New dataframe Configuration
 new_data = {
@@ -78,11 +72,11 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
-df_NEW['OLD DATASET'] = "ALC"
+df_NEW['OLD DATASET'] = "Australia Landslide Catalogue"
 df_NEW['OLD ID'] = df_OLD['Landslide']
 df_NEW['VERSION'] = "12/06/2018"
 df_NEW['COUNTRY'] = "Australia"
-df_NEW['ACCURACY'] = df_OLD['Capture Me'].apply(trasforma_accuracy)
+df_NEW['ACCURACY'] = df_OLD['Capture Me']
 df_NEW['START DATE'] = "1900/01/01"
 df_NEW['END DATE'] = "2016/12/31"
 df_NEW['TYPE'] = "ND"
@@ -92,18 +86,14 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Australia Landslide catalogue -locality:{row['Location']},description: {repr(row['Land Cover'])}",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"ALC -locality:{row['Location']},description: {repr(row['Land Cover'])}",axis=1)
 df_NEW['LINK'] ="Source: ND"
-
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-
 apply_affidability_calculator(df_NEW)
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

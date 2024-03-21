@@ -12,7 +12,7 @@ import os
 from dotenv import load_dotenv
 
 # Load the enviroment variables from config.env file
-load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
+load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
@@ -24,10 +24,10 @@ with open('01_COOLR_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
     lookup_tables = lookup_config["01_COOLR LOOKUP TABLES"]
 
 # null values replacement in the Native Dataframe
-df_OLD['loc_acc']=df_OLD['loc_acc'].fillna('-99999')
-df_OLD['src_link']=df_OLD['src_link'].fillna('ND')
-df_OLD['loc_desc']=df_OLD['loc_desc'].fillna('ND')
-df_OLD['ev_desc']=df_OLD['ev_desc'].fillna('ND')
+df_OLD['loc_acc'] = df_OLD['loc_acc'].fillna('-99999')
+df_OLD['src_link'] = df_OLD['src_link'].fillna('ND')
+df_OLD['loc_desc'] = df_OLD['loc_desc'].fillna('ND')
+df_OLD['ev_desc'] = df_OLD['ev_desc'].fillna('ND')
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -74,7 +74,7 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = df_OLD['OLD DATASET']
+df_NEW['OLD DATASET'] = "Cooperative Open Online Landslide Repository - NASA"
 df_NEW['OLD ID'] = df_OLD['ev_id']
 df_NEW['VERSION'] = "2019"
 df_NEW['COUNTRY'] = df_OLD['ctry_name'].fillna('ND')
@@ -88,7 +88,7 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['fatalities']
 df_NEW['INJURIES'] = df_OLD['injuries']
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"Cooperative Open Online Landslide Repository - NASA, locality: {repr(row['loc_desc'])}, description: {repr(row['src_name'])} {repr(row['ev_desc'])}",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"{row['OLD DATASET']}, locality: {repr(row['loc_desc'])}, description: {repr(row['src_name'])} {repr(row['ev_desc'])}",axis=1)
 df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['src_link'])}",axis=1)
 
 #-----------------------------------------------------------------------------------------------------------------------

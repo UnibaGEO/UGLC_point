@@ -15,7 +15,6 @@ root = os.getenv("FILES_REPO")
 #1 ASSIGN COUNTRY ( FROM NODATA, WITHOUT COLUMN)
 file_path = f"{root}/COUNTRIES.zip"
 
-
 def assign_country_to_points(df):
     # Leggi i confini dei paesi dal file ZIP
     world = gpd.read_file("zip://" + file_path)
@@ -85,7 +84,6 @@ def apply_country_corrections(df):
 # -----------------------------------------------------------------------------------------------------------------------
 #3 AFFIDABILITY CALCULATOR
 
-
 def apply_affidability_calculator(df):
     # Affidability function for assign a value between 1 and 10 into the AFFIDABILITY column
     def assign_affidability(row):
@@ -93,48 +91,43 @@ def apply_affidability_calculator(df):
         start_date = (row['START DATE'])
         end_date = (row['END DATE'])
 
-        # 1677/12/31 case
-        if start_date == "1677/12/31":
-            if pd.notna(accuracy):
-                if 0 <= accuracy <= 100:
-                    return 1
-                elif 100 < accuracy <= 250:
-                    return 3
-                elif 250 < accuracy <= 500:
-                    return 5
-                elif 500 < accuracy <= 1000:
-                    return 7
-                elif accuracy > 1000:
-                    return 9
-                elif accuracy == -99999:
-                    return 10
+        # accuracy NaN case
+        if accuracy == -99999:
+            return "10"
+        # Out of range time case (1677/12/31)
+        elif start_date == "1677/12/31":
+            if 0 <= accuracy <= 100 and start_date == "1677/12/31":
+                return "2"
+            elif 100 < accuracy <= 250 and start_date == "1677/12/31":
+                return "4"
+            elif 250 < accuracy <= 500 and start_date == "1677/12/31":
+                return "6"
+            elif 500 < accuracy <= 1000 and start_date == "1677/12/31":
+                return "8"
+            elif accuracy > 1000 and start_date == "1677/12/31":
+                return "9"
+        # Normal dates case
         else:
-            # Normal dates case
-            if pd.notna(accuracy):
-                if 0 <= accuracy <= 100:
-                    if start_date == end_date:
-                        return 1
-                    else:
-                        return 2
-                elif 100 < accuracy <= 250:
-                    if start_date == end_date:
-                        return 3
-                    else:
-                        return 4
-                elif 250 < accuracy <= 500:
-                    if start_date == end_date:
-                        return 5
-                    else:
-                        return 6
-                elif 500 < accuracy <= 1000:
-                    if start_date == end_date:
-                        return 7
-                    else:
-                        return 8
-                elif accuracy > 1000:
-                    return 9
-                elif accuracy == -99999:
-                    return 10
+            if 0 <= accuracy <= 100 and start_date == end_date:
+                return "1"
+            elif 0 <= accuracy <= 100 and start_date != end_date:
+                return "2"
+            elif 100 <= accuracy <= 250 and start_date == end_date:
+                return "3"
+            elif 100 <= accuracy <= 250 and start_date != end_date:
+                return "4"
+            elif 250 <= accuracy <= 500 and start_date == end_date:
+                return "5"
+            elif 250 <= accuracy <= 500 and start_date != end_date:
+                return "6"
+            elif 500 <= accuracy <= 1000 and start_date == end_date:
+                return "7"
+            elif 500 <= accuracy <= 1000 and start_date != end_date:
+                return "8"
+            elif accuracy > 1000 and start_date == end_date:
+                return "9"
+            elif accuracy > 1000 and start_date != end_date:
+                return "9"
 
     # Apply the affidability on it's column
     df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
@@ -145,9 +138,8 @@ print("_________________________________________________________________________
 print("                             AFFIDABILITY  calculation: DONE                              ")
 print("__________________________________________________________________________________________")
 
-#4 START_DATE CORRECTION
-from datetime import datetime
 
+#4 START_DATE CORRECTION
 def trasforma_data_start(data):
 
     # Conversione da yyyy/d/mm a yyyy/mm/d
@@ -433,40 +425,7 @@ def trasforma_data_end(data):
     print("__________________________________________________________________________________________")
 
 # ----------------------------------------------------------------------------------------------------------------------
-#6 ACCURACY CORRECTION (only UAP)
-
-def trasforma_accuracy(accuracy):
-
-    if pd.isnull(accuracy):
-        return "-99999"
-    elif accuracy == 8 or accuracy == 5:
-        return "0"
-    elif accuracy == 3:
-        return "250"
-    elif accuracy == 2 or accuracy == 1:
-        return "50000"
-    elif accuracy == "Place name search":
-        return "-99999"
-    elif accuracy == "Gps measurement":
-        return "0"
-    elif accuracy == "Other":
-        return "1000"
-    elif accuracy == "Location edited by gis methods":
-        return "0"
-    elif accuracy == "Reported location":
-        return "0"
-    elif accuracy == "Map located":
-        return "1000"
-    elif accuracy == "Satellite imagery":
-        return "0"
-
-
-    print("__________________________________________________________________________________________")
-    print("                             ACCURACY  correction: DONE                            ")
-    print("__________________________________________________________________________________________")
-
-# ----------------------------------------------------------------------------------------------------------------------
-#7 TYPE CORRECTION
+#6 TYPE CORRECTION
 def convert_to_int(value):
     if isinstance(value, str):
         return int(value.split('.')[0])
