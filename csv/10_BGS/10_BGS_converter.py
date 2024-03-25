@@ -1,20 +1,28 @@
+#-----------------------------------------------------------------------------------------------------------------------
+#                                              UGLC DATAFRAME CONVERTER
+#-----------------------------------------------------------------------------------------------------------------------
+# native dataframe:     BGS - National Landslide Database (British Geological Survey)
+#-----------------------------------------------------------------------------------------------------------------------
+# Conversion
+#-----------------------------------------------------------------------------------------------------------------------
+import numpy as np
 import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_affidability_calculator, date_format
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/08_NZK_native.csv", low_memory=False,encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/10_BGS_native.csv", low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('08_NZK_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
+with open('10_BGS_lookuptables.json', 'r', encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["08_NZK LOOKUP TABLES"]
+    lookup_tables = lookup_config["10_BGS LOOKUP TABLES"]
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -62,21 +70,21 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
-df_NEW['OLD DATASET'] = "Map of co-seismic Landslides for the 7.8 Kaikoura earthquake, New Zealand"
-df_NEW['OLD ID'] = df_OLD['Source_ID']
-df_NEW['VERSION'] = "PRJ-2765 -V2.0"
-df_NEW['COUNTRY'] = "New Zealand"
-df_NEW['ACCURACY'] = "0"
-df_NEW['START DATE'] = "2016/11/14"
-df_NEW['END DATE'] = "2016/11/14"
+df_NEW['OLD DATASET'] = "National Landslide Database (British Geological Survey)"
+df_NEW['OLD ID'] = df_OLD['LS_ID'].fillna('ND')
+df_NEW['VERSION'] = "Last update 2020"
+df_NEW['COUNTRY'] = "United Kingdom"
+df_NEW['ACCURACY'] = df_OLD['PLUS_OR_MI'].astype(int).fillna('-99999')
+df_NEW['START DATE'] = df_OLD['FIRST_KN_1'].fillna("1678-01-01").apply(date_format)
+df_NEW['END DATE'] = df_OLD['FIRST_KN_1'].fillna("2023-12-31").apply(date_format)
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = "seismic"
+df_NEW['TRIGGER'] = "ND"
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_NEW.apply(lambda row:f"NZK - locality: Kaikoura district  - description: The Mw 7.8 14 November 2016 Kaikoura Earthquake generated many thousands of landslides ",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"BGS - locality: {repr(row['LOCATION'])}, {repr(row['NAME'])} - description: ND ", axis=1)
 df_NEW['LINK'] ="Source: ND"
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -90,9 +98,9 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/08_NZK_converted.csv", sep=',', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/10_BGS_converted.csv", sep=',', index=False, encoding="utf-8")
 
 print("__________________________________________________________________________________________")
-print("                             08_NZK_native conversion: DONE                             ")
+print("                             10_BGS_native conversion: DONE                               ")
 print("__________________________________________________________________________________________")
 #--------------------------------------------------------------------------------------------------------------------

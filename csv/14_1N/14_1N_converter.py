@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     ALC - Landslide Inventories across the United States version2_USGS, Mirus, B.B., Jones, E.S., Baum, R.L. et al.
+# native dataframe:     1N -  French Landslide Observatory – OMIV (Temporary data)
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
@@ -16,16 +16,12 @@ load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/05_ALC_native.csv", low_memory=False,encoding="utf-8")
-
-#null values replacement in the Native Dataframe
-df_OLD['Land Cover'] = df_OLD['Land Cover'].fillna('ND')
-df_OLD['Capture Me'] = df_OLD['Capture Me'].fillna('-99999')
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/14_1N_native.csv", low_memory=False, encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('05_ALC_LOOKUPTABLES.json', 'r',encoding="utf-8") as file:
+with open('14_1N_lookuptables.json', 'r', encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["05_ALC LOOKUP TABLES"]
+    lookup_tables = lookup_config["14_1N LOOKUP TABLES"]
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -72,22 +68,22 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
-df_NEW['OLD DATASET'] = "Australia Landslide Catalogue"
-df_NEW['OLD ID'] = df_OLD['Landslide']
-df_NEW['VERSION'] = "12/06/2018"
-df_NEW['COUNTRY'] = "Australia"
-df_NEW['ACCURACY'] = df_OLD['Capture Me']
-df_NEW['START DATE'] = "1900/01/01"
-df_NEW['END DATE'] = "2016/12/31"
-df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = "ND"
+df_NEW['OLD DATASET'] = "French Landslide Observatory – OMIV (Temporary data)"
+df_NEW['OLD ID'] = df_OLD.apply(lambda row: f"Station: {repr(row['Station'])}", axis=1)
+df_NEW['VERSION'] = "2024/01/01"
+df_NEW['COUNTRY'] = "France"
+df_NEW['ACCURACY'] = "0"
+df_NEW['START DATE'] = "2015/01/01"
+df_NEW['END DATE'] = "2023/12/31"
+df_NEW['TYPE'] = "rock fall"
+df_NEW['TRIGGER'] = "seismic"
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"ALC -locality:{row['Location']},description: {repr(row['Land Cover'])}",axis=1)
-df_NEW['LINK'] ="Source: ND"
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"1N network - locality: France - description: {repr(row['SiteName'])}", axis=1)
+df_NEW['LINK'] = "Source: https://www.fdsn.org/networks/detail/1N_2015/"
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
@@ -100,8 +96,9 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/05_ALC_converted.csv", sep=',', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/14_1N_converted.csv", sep=',', index=False, encoding="utf-8")
 
 print("__________________________________________________________________________________________")
-print("                             05_ALC_native conversion: DONE                             ")
+print("                             14_1N_native conversion: DONE                                ")
 print("__________________________________________________________________________________________")
+#--------------------------------------------------------------------------------------------------------------------

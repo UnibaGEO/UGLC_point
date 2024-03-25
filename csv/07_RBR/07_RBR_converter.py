@@ -1,33 +1,28 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     GFLD - Global fatal landslide occurrence from 2004 to 2016, Froude, M. J. and Petley, D. N
+# native dataframe:     RBR - Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi), Arthur Depicker, Gerard Govers, et al.
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
+import numpy as np
 import pandas as pd
 import json
-import numpy as np
-from lib.function_collection import apply_affidability_calculator
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from lib.function_collection import apply_affidability_calculator, trasforma_data_end, trasforma_data_start, assign_country_to_points
 
 # Load the enviroment variables from config.env file
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/02_GFLD_native.csv", low_memory=False, encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/07_RBR_native.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('02_GFLD_LOOKUPTABLES.json', 'r', encoding='utf-8') as file:
+with open('07_RBR_lookuptables.json', 'r', encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["02_GFLD LOOKUP TABLES"]
-
-# null values replacement in the Native Dataframe
-df_OLD['Report_1'] = df_OLD['Report_1'].fillna('ND')
-df_OLD['Location_M'] = df_OLD['Location_M'].fillna('ND')
-df_OLD['Source_1'] = df_OLD['Source_1'].fillna('ND')
+    lookup_tables = lookup_config["07_RBR LOOKUP TABLES"]
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -43,6 +38,8 @@ for column in df_OLD.columns:
         else:
             # Update just the no-"ND" columns
             df_OLD[column] = df_OLD[column].map(lambda x: lookup_table.get(str(x), x))
+
+df_OLD['Year'] = df_OLD['Year'].astype(str)
 
 # New dataframe Configuration
 new_data = {
@@ -73,24 +70,25 @@ df_NEW = pd.DataFrame(new_data)
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "Global fatal landslide Catalog"
-df_NEW['OLD ID'] = df_OLD['LandslideN']
-df_NEW['VERSION'] = "2017"
-df_NEW['COUNTRY'] = df_OLD['Country']
-df_NEW['ACCURACY'] = (np.sqrt(df_OLD['Precision'].astype(float) / np.pi)).apply(round).astype(int)
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
+df_NEW['ID'] = "CALC"
+df_NEW['OLD DATASET'] = "Shallow Landslide Inventory for 2000-2019 (eastern DRC, Rwanda, Burundi)"
+df_NEW['OLD ID'] = df_OLD['ID']
+df_NEW['VERSION'] = "Version v1.0"
+df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].replace('Dem. Rep. Congo', 'Democratic Republic of Congo')
+df_NEW['ACCURACY'] = (np.sqrt(df_OLD['area'].astype(float) / np.pi)).apply(round).astype(int)
+df_NEW['START DATE'] = df_OLD['Year'].apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['Year'].apply(trasforma_data_end)
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
+df_NEW['TRIGGER'] = "ND"
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('-99999')
+df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f"GFLD, locality: {repr(row['Location_M'])}, description: {repr(row['Report_1'])}", axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['Source_1'])}",axis=1)
+df_NEW['NOTES'] = df_NEW.apply(lambda row:f"RBR - locality: {repr(row['COUNTRY'])} - description: ND ",axis=1)
+df_NEW['LINK'] ="Source: ND"
 
+#-----------------------------------------------------------------------------------------------------------------------
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -101,10 +99,9 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/02_GFLD_converted.csv", index=False, encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/07_RBR_converted.csv", sep=',', index=False,encoding="utf-8")
 
-print("________________________________________________________________________________________")
-print("                             02_GFLD_native conversion: DONE                            ")
-print("________________________________________________________________________________________")
-#-----------------------------------------------------------------------------------------------------------------------
-
+print("__________________________________________________________________________________________")
+print("                             07_RBR_native conversion: DONE                               ")
+print("__________________________________________________________________________________________")
+#--------------------------------------------------------------------------------------------------------------------
