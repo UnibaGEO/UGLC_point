@@ -599,7 +599,7 @@ def populate_end_date(row):
         return "2020/12/31"
 
     print("__________________________________________________________________________________________")
-    print("                             END DATE  correction: DONE                                 ")
+    print("                             END DATE  correction: DONE                                   ")
     print("__________________________________________________________________________________________")
 # ----------------------------------------------------------------------------------------------------------------------
 # 10 - START DATE and END DATE calculator (only SLIDO)
@@ -634,6 +634,10 @@ def start_date_SLIDO(row):
 
     else:
         return "1677/12/31"
+
+    print("__________________________________________________________________________________________")
+    print("                             START DATE  correction: DONE                                 ")
+    print("__________________________________________________________________________________________")
 
 def end_date_SLIDO(row):
     def last_day_of_month(year, month):
@@ -676,5 +680,54 @@ def end_date_SLIDO(row):
     else:
         return "2020/12/31"
 
+    print("__________________________________________________________________________________________")
+    print("                             END DATE  correction: DONE                                   ")
+    print("__________________________________________________________________________________________")
 
+# ----------------------------------------------------------------------------------------------------------------------
+# 11 - START DATE and END DATE calculator (only CAFLAG)
+
+# START DATE date composer
+def compose_start_date(year, month, day):
+    # Replace "ND" YEAR values with the oldest date present into the dataset
+    if year == "ND":
+        return datetime(1828, 2, 2).strftime('%Y/%m/%d')  # Restituisce la data 1828/02/02 nel formato desiderato
+    # Replace "pre-" or "pre" YEAR values with the oldest date present into the dataset
+    elif isinstance(year, str) and year.startswith("pre-"):
+        return datetime(1828, 2, 2).strftime('%Y/%m/%d')
+    elif isinstance(year, str) and year.startswith("pre"):
+        return datetime(1828, 2, 2).strftime('%Y/%m/%d')
+    else:
+        year_value = int(year) if year != "ND" \
+            else 1828
+        month_value = 2 if year == 1828 \
+            else int(month) if month != "ND" and year != 1828 \
+            else 1
+        day_value = 2 if year == 1828 \
+            else int(day) if day != "ND" and year != 1828 \
+            else 1 if day == "ND" and year != 1828 \
+            else 1
+        return datetime(year_value, month_value, day_value).strftime('%Y/%m/%d')
+
+
+def compose_end_date(year, month, day):
+    # Replace "ND" YEAR values with the latest date present into the dataset
+    if year == "ND":
+        return datetime(2017, 3, 15).strftime('%Y/%m/%d')
+    # Replace "pre-" or "pre" YEAR values with the latest date present into the dataset
+    elif isinstance(year, str) and year.startswith("pre-"):
+        return datetime(2017, 3, 15).strftime('%Y/%m/%d')
+    elif isinstance(year, str) and year.startswith("pre"):
+        return datetime(2017, 3, 15).strftime('%Y/%m/%d')
+    else:
+        year_value = int(year) if year != "ND" \
+            else 2017
+        month_value = 3 if year == 2017 \
+            else int(month) if month != "ND" and year != 2017 \
+            else 1
+        day_value = 15 if year == 2017 \
+            else int(day) if day != "ND" and year != 2017 \
+            else 1 if day == "ND" and year != 2017 \
+            else 1
+        return datetime(year_value, month_value, day_value).strftime('%Y/%m/%d')
 
