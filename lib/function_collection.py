@@ -12,8 +12,9 @@ from datetime import datetime
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
+# -----------------------------------------------------------------------------------------------------------------------
 #1 ASSIGN COUNTRY ( FROM NODATA, WITHOUT COLUMN)
-file_path = f"{root}/COUNTRIES.zip"
+file_path = f"{root}/lib/countries/countries.zip"
 
 def assign_country_to_points(df):
     # Leggi i confini dei paesi dal file ZIP
@@ -28,12 +29,10 @@ def assign_country_to_points(df):
     points_with_country = gpd.sjoin(points, world[['geometry', 'NAME']], how='left', predicate='within')
 
     print("__________________________________________________________________________________________")
-    print("                             COUNTRY Assignment: DONE                                  ")
+    print("                             COUNTRY Assignment: DONE                                     ")
     print("__________________________________________________________________________________________")
 
     return points_with_country
-
-
 
 # -----------------------------------------------------------------------------------------------------------------------
 #2 CORRECTION ND COUNTRY POINTS
@@ -128,18 +127,17 @@ def apply_affidability_calculator(df):
                 return "9"
             elif accuracy > 1000 and start_date != end_date:
                 return "9"
+    print("__________________________________________________________________________________________")
+    print("                             AFFIDABILITY  calculation: DONE                              ")
+    print("__________________________________________________________________________________________")
 
     # Apply the affidability on it's column
     df['AFFIDABILITY'] = df.apply(assign_affidability, axis=1)
-
     return df
 
-print("__________________________________________________________________________________________")
-print("                             AFFIDABILITY  calculation: DONE                              ")
-print("__________________________________________________________________________________________")
-
-
+# -----------------------------------------------------------------------------------------------------------------------
 #4 START_DATE CORRECTION
+
 def trasforma_data_start(data):
 
     # Conversione da yyyy/d/mm a yyyy/mm/d
@@ -247,14 +245,16 @@ def trasforma_data_start(data):
         pass
 
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
-    return data
 
     print("__________________________________________________________________________________________")
-    print("                             START DATE  correction: DONE                            ")
+    print("                             START DATE  correction: DONE                                 ")
     print("__________________________________________________________________________________________")
+
+    return data
 
 # -----------------------------------------------------------------------------------------------------------------------
 #5 END DATE CORRECTION
+
 from datetime import datetime
 
 def trasforma_data_end(data):
@@ -418,14 +418,15 @@ def trasforma_data_end(data):
         pass
 
     # Se non viene effettuata nessuna trasformazione, restituisci la data originale
-    return data
+    print("__________________________________________________________________________________________")
+    print("                             END DATE  correction: DONE                                   ")
+    print("__________________________________________________________________________________________")
 
-    print("__________________________________________________________________________________________")
-    print("                             END DATE  correction: DONE                            ")
-    print("__________________________________________________________________________________________")
+    return data
 
 # ----------------------------------------------------------------------------------------------------------------------
 #6 TYPE CORRECTION
+
 def convert_to_int(value):
     if isinstance(value, str):
         return int(value.split('.')[0])
@@ -435,16 +436,19 @@ def convert_to_int(value):
         return value
 
 # ----------------------------------------------------------------------------------------------------------------------
-# 8 DATEs and DATEf conversion (only PCLD)
+# 7 DATEs and DATEf conversion (only PCLD)
 
 # Conversion DATEs from yyyy to yyyy/mm/dd
 def date_s_correction(input_date_s):
     try:
         corrected_date = datetime.strptime(input_date_s, '%Y').strftime('%Y/01/01')
+
+        print("__________________________________________________________________________________________")
+        print("                             START DATE  correction: DONE                                 ")
+        print("__________________________________________________________________________________________")
+
         return corrected_date
-        print("__________________________________________________________________________________________")
-        print("                             START DATE  correction: DONE                            ")
-        print("__________________________________________________________________________________________")
+
     except ValueError:
         return input_date_s
 
@@ -452,16 +456,18 @@ def date_s_correction(input_date_s):
 def date_f_correction(input_date_f):
     try:
         corrected_date = datetime.strptime(input_date_f, '%Y').strftime('%Y/12/31')
-        return corrected_date
+
         print("__________________________________________________________________________________________")
         print("                             END DATE  correction: DONE                                   ")
         print("__________________________________________________________________________________________")
+
+        return corrected_date
+
     except ValueError:
         return input_date_f
 
-
 # ----------------------------------------------------------------------------------------------------------------------
-# 9 START DATE and END DATE conversion (only BGS)
+# 8 START DATE and END DATE conversion (only BGS)
 
 def date_format(input_date):
     try:
@@ -470,15 +476,17 @@ def date_format(input_date):
         # Convert 'yyyy/mm/dd' strings into a datetime object
         date_object = datetime.strptime(fixed_date, '%Y/%m/%d')
         formatted_date = date_object.strftime('%Y/%m/%d')
+
+        print("__________________________________________________________________________________________")
+        print("                             START DATE and END DATE  correction: DONE                    ")
+        print("__________________________________________________________________________________________")
+
         return formatted_date
     except ValueError:
         return 'error'
-    print("__________________________________________________________________________________________")
-    print("                             START DATE and END DATE  correction: DONE                    ")
-    print("__________________________________________________________________________________________")
 
 # ----------------------------------------------------------------------------------------------------------------------
-# START DATE and END DATE calculator (only NTMI)
+# 9 START DATE and END DATE calculator (only NTMI)
 
 def populate_start_date(row):
     if pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "Other":
@@ -601,6 +609,7 @@ def populate_end_date(row):
     print("__________________________________________________________________________________________")
     print("                             END DATE  correction: DONE                                   ")
     print("__________________________________________________________________________________________")
+
 # ----------------------------------------------------------------------------------------------------------------------
 # 10 - START DATE and END DATE calculator (only SLIDO)
 
@@ -633,11 +642,11 @@ def start_date_SLIDO(row):
         return f"{year:04d}/{month:02d}/{day:02d}"
 
     else:
-        return "1677/12/31"
+        print("__________________________________________________________________________________________")
+        print("                             START DATE  correction: DONE                                 ")
+        print("__________________________________________________________________________________________")
 
-    print("__________________________________________________________________________________________")
-    print("                             START DATE  correction: DONE                                 ")
-    print("__________________________________________________________________________________________")
+        return "1677/12/31"
 
 def end_date_SLIDO(row):
     def last_day_of_month(year, month):
@@ -678,16 +687,16 @@ def end_date_SLIDO(row):
         return f"{year:04d}/{month:02d}/{day:02d}"
 
     else:
-        return "2020/12/31"
+        print("__________________________________________________________________________________________")
+        print("                             END DATE  correction: DONE                                   ")
+        print("__________________________________________________________________________________________")
 
-    print("__________________________________________________________________________________________")
-    print("                             END DATE  correction: DONE                                   ")
-    print("__________________________________________________________________________________________")
+        return "2020/12/31"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # 11 - START DATE and END DATE calculator (only CAFLAG)
-
 # START DATE date composer
+
 def compose_start_date(year, month, day):
     # Replace "ND" YEAR values with the oldest date present into the dataset
     if year == "ND":
@@ -709,7 +718,6 @@ def compose_start_date(year, month, day):
             else 1
         return datetime(year_value, month_value, day_value).strftime('%Y/%m/%d')
 
-
 def compose_end_date(year, month, day):
     # Replace "ND" YEAR values with the latest date present into the dataset
     if year == "ND":
@@ -730,4 +738,3 @@ def compose_end_date(year, month, day):
             else 1 if day == "ND" and year != 2017 \
             else 1
         return datetime(year_value, month_value, day_value).strftime('%Y/%m/%d')
-
