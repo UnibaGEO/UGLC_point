@@ -29,8 +29,6 @@ gdf['descriptio'] = gdf['descriptio'].fillna("ND")
 gdf['TYPE'] = gdf.apply(lambda row: row['type'] + row['descriptio'], axis=1)
 gdf['ACCURACY'] = gdf['source_lin'].fillna('-99999')
 
-print(gdf['source_lin'].unique())
-
 # Save the GeoDataFrame as a CSV
 output_csv = f"{root}/input/native_datasets/16_ETGFI_native.csv"
 gdf.to_csv(output_csv, index=False)
