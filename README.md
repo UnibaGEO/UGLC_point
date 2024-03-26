@@ -12,11 +12,11 @@
 ## :red_circle: Authors
 
 ----------------------------------------------------------------------------------------------------------------
-- [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari).
-- [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari).
-- [@Francesco Paolo Lovergine](https://github.com/fpl) - PhD Researcher (CNR - IREA).
-- [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher (Yale University).
-- Domenico Capolongo - PhD Professor (University of Bari).
+- [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari - Department of Geo-Enviromental Science).
+- [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari - Department of Geo-Enviromental Science).
+- [@Francesco Paolo Lovergine](https://github.com/fpl) - PhD Researcher (National Research Council of Italy - Institute for Electromagnetic Sensing of the Environment "IREA").
+- [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher (Yale University - Center for Research Computing "Y-CRC").
+- Domenico Capolongo - PhD Professor (University of Bari - Department of Geo-Enviromental Science).
 
 ----------------------------------------------------------------------------------------------------------------
 
