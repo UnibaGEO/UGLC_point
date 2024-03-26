@@ -10,7 +10,7 @@ root = os.getenv("FILES_REPO")
 
 # - Access to the information into the geodatabase
 # Load the zip files variables from config.env file
-zip_file =  f"{root}/input/download/13_SLIDO/SLIDO R4_4.zip"
+zip_file = f"{root}/input/download/13_SLIDO/SLIDO R4_4.zip"
 extract_to = f"{root}/input/download/13_SLIDO/extracted/"
 
 # Create a destination folder (if is not present) for the unzipped file, then unzip it
