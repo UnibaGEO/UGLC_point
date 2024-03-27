@@ -70,7 +70,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "ITAlian rainfall-induced LandslIdes Catalogue - CNR IRPI"
 df_NEW['OLD ID'] = df_OLD['id']
-df_NEW['VERSION'] = "V2 - 2023"
+df_NEW['VERSION'] = str("V2 - 2023")
 df_NEW['COUNTRY'] = "Italy"
 df_NEW['ACCURACY'] = df_OLD['geographic_accuracy']
 df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")

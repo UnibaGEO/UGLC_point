@@ -70,7 +70,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
 df_NEW['OLD DATASET'] = "CAmpi Flegrei LAndslide Geodatabase"
 df_NEW['OLD ID'] = df_OLD['ID']
-df_NEW['VERSION'] = "version 2 - 2021-04-23 (latest)"
+df_NEW['VERSION'] = str("version 2 - 2021-04-23 (latest)")
 df_NEW['COUNTRY'] = "Italy"
 df_NEW['ACCURACY'] = df_OLD['LOCAT_ACC']
 df_NEW['START DATE'] = df_OLD.apply(lambda row: compose_start_date(row['YEAR'], row['MONTH'], row['DAY']), axis=1)

@@ -76,7 +76,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC" #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "Landslide Inventories across the United States v.2 (USA, Alaska & Puertorico) - USGS"
 df_NEW['OLD ID'] = df_OLD['OBJECTID']
-df_NEW['VERSION'] = "V2 - 2022/06/03"
+df_NEW['VERSION'] = str("V2")
 df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME'].fillna('United States of America')
 df_NEW['ACCURACY'] = df_OLD['Confidence']
 df_NEW['START DATE'] = df_OLD['Date'].fillna('1878/01/01').apply(trasforma_data_start)
@@ -88,8 +88,8 @@ df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row:f"UAP - locality: ND - description: {repr(row['Notes'])}",axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['InventoryU']}",axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"UAP - locality: ND - description: {repr(row['Notes'])}", axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {row['InventoryU']}", axis=1)
 
 
 #-----------------------------------------------------------------------------------------------------------------------
