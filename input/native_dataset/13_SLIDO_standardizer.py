@@ -55,6 +55,9 @@ df_orig['MOVE_CLASS'] = df_orig['MOVE_CLASS'].fillna('ND')
 # Convert geometry to WKT format
 df_orig['WKT_GEOM'] = df_orig['geometry'].apply(lambda geom: f"POINT ({geom.xy[0][0]} {geom.xy[1][0]})")
 
+# Drop rows where "WKT_GEOM" is invalid
+df_orig = df_orig[df_orig['WKT_GEOM'] != "POINT (115.49309449355307 -89.99997319935751)"]
+
 # Save to CSV
 df_orig.to_csv(f"{root}/input/native_datasets/13_SLIDO_native.csv", sep=",", decimal=".", index=False)
 

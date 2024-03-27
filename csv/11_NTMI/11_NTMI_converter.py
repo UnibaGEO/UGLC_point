@@ -75,7 +75,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
 df_NEW['OLD DATASET'] = "Landslide Inventory  (Irish Landslides Working Group - Geological Survey Ireland (GSI)"
 df_NEW['OLD ID'] = df_OLD['EVENT_ID']
-df_NEW['VERSION'] = "Last update 2020"
+df_NEW['VERSION'] = str("Last update 2020")
 df_NEW['COUNTRY'] = "Ireland"
 df_NEW['ACCURACY'] = df_OLD['ACCURACY'].apply(lambda x: int(x) if pd.notna(x) else -99999)
 df_NEW['START DATE'] = df_OLD.apply(populate_start_date, axis=1)

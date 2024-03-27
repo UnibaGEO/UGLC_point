@@ -70,7 +70,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "ND"
 df_NEW['OLD DATASET'] = "Earthquake-Triggered Ground-Failure Inventories"
 df_NEW['OLD ID'] = "ND"
-df_NEW['VERSION'] = "V4 - 2022/10/25"
+df_NEW['VERSION'] = str("V4 - 2022/10/25")
 df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['NAME']
 df_NEW['ACCURACY'] = df_OLD['ACCURACY']
 df_NEW['START DATE'] = pd.to_datetime(df_OLD['event_date'], format='%Y-%m-%d').dt.strftime('%Y/%m/%d')

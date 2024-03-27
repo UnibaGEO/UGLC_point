@@ -70,7 +70,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
 df_NEW['OLD DATASET'] = "French Landslide Observatory – OMIV (Temporary data)"
 df_NEW['OLD ID'] = df_OLD.apply(lambda row: f"Station: {repr(row['Station'])}", axis=1)
-df_NEW['VERSION'] = "2024/01/01"
+df_NEW['VERSION'] = str("2024/01/01")
 df_NEW['COUNTRY'] = "France"
 df_NEW['ACCURACY'] = "0"
 df_NEW['START DATE'] = "2015/01/01"
