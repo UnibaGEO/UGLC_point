@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------------------------------------------------
 #                                              UGLC DATAFRAME CONVERTER
 #-----------------------------------------------------------------------------------------------------------------------
-# native dataframe:     NZK - Map of co-seismic Landslides for the 7.8 Kaikoura earthquake, New Zealand
+# native dataframe:     CA - Colombia Landslides Dataset for the Capa Descargada area, Aristizábal E, Sánchez O. 2020
 #-----------------------------------------------------------------------------------------------------------------------
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
@@ -16,12 +16,12 @@ load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
 
 # Native Dataframe 01_COOLR_native loading
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/08_NZK_native.csv", low_memory=False,encoding="utf-8")
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/09_CA_native.csv", low_memory=False,encoding="utf-8")
 
 # JSON Lookup Tables Loading
-with open('08_NZK_lookuptables.json', 'r', encoding="utf-8") as file:
+with open('09_CA_lookuptables.json', 'r', encoding="utf-8") as file:
     lookup_config = json.load(file)
-    lookup_tables = lookup_config["08_NZK LOOKUP TABLES"]
+    lookup_tables = lookup_config["09_CA LOOKUP TABLES"]
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -69,22 +69,22 @@ df_NEW = pd.DataFrame(new_data)
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
-df_NEW['OLD DATASET'] = "Map of co-seismic Landslides for the 7.8 Kaikoura earthquake, New Zealand"
-df_NEW['OLD ID'] = df_OLD['Source_ID']
-df_NEW['VERSION'] = "PRJ-2765 -V2.0"
-df_NEW['COUNTRY'] = "New Zealand"
-df_NEW['ACCURACY'] = "0"
-df_NEW['START DATE'] = "2016/11/14"
-df_NEW['END DATE'] = "2016/11/14"
-df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = "seismic"
+df_NEW['OLD DATASET'] = "Colombia Landslides Dataset for the Capa Descargada area, Aristizábal E, Sánchez O. 2020"
+df_NEW['OLD ID'] = df_OLD['id']
+df_NEW['VERSION'] = "updated to 2023"
+df_NEW['COUNTRY'] = "Colombia"
+df_NEW['ACCURACY'] = df_OLD['Incertidumb']
+df_NEW['START DATE'] = df_OLD['Fecha']
+df_NEW['END DATE'] = df_OLD['Fecha']
+df_NEW['TYPE'] = df_OLD['TYPE']
+df_NEW['TRIGGER'] = df_OLD['Detonante']
 df_NEW['AFFIDABILITY'] = "CALC"
 df_NEW['PSV'] = "CALC"
 df_NEW['DCMV'] = "CALC"
-df_NEW['FATALITIES'] = "-99999"
+df_NEW['FATALITIES'] = df_OLD['Fallecidos'].astype(int)
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_NEW.apply(lambda row:f"NZK - locality: Kaikoura district  - description: The Mw 7.8 14 November 2016 Kaikoura Earthquake generated many thousands of landslides ",axis=1)
-df_NEW['LINK'] ="Source: ND"
+df_NEW['NOTES'] = df_OLD.apply(lambda row:f"CA - locality: Colombia,{row['Municipio']} ({row['Departament']}) - description: {row['Notas']} ", axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['Fuente']}", axis=1)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
@@ -97,9 +97,9 @@ apply_affidability_calculator(df_NEW)
 #-----------------------------------------------------------------------------------------------------------------------
 
 # Creation of the new updated Dataframe as a .csv file in the selected directory
-df_NEW.to_csv(f"{root}/output/converted_csv/08_NZK_converted.csv", sep=',', index=False,encoding="utf-8")
+df_NEW.to_csv(f"{root}/output/converted_csv/09_CA_converted.csv", sep=',', index=False,encoding="utf-8")
 
 print("__________________________________________________________________________________________")
-print("                             08_NZK_native conversion: DONE                             ")
+print("                             09_CA_native conversion: DONE                                ")
 print("__________________________________________________________________________________________")
 #--------------------------------------------------------------------------------------------------------------------
