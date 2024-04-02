@@ -79,8 +79,8 @@ df_NEW['OLD ID'] = df_OLD['LandslideN']
 df_NEW['VERSION'] = str("2017")
 df_NEW['COUNTRY'] = df_OLD['Country']
 df_NEW['ACCURACY'] = (np.sqrt(df_OLD['Precision'].astype(float) / np.pi)).apply(round).astype(int)
-df_NEW['START DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
-df_NEW['END DATE'] = pd.to_datetime(df_OLD['Year'].astype(str) + '/' + df_OLD['Month'].astype(str) + '/' + df_OLD['Day'].astype(str))
+df_NEW['START DATE'] = df_OLD.apply(lambda row: pd.to_datetime(f"{row['Year']}/{row['Month']:02d}/{row['Day']:02d}", format='%Y/%m/%d').strftime('%Y/%m/%d'), axis=1)
+df_NEW['END DATE'] = df_OLD.apply(lambda row: pd.to_datetime(f"{row['Year']}/{row['Month']:02d}/{row['Day']:02d}", format='%Y/%m/%d').strftime('%Y/%m/%d'), axis=1)
 df_NEW['TYPE'] = "ND"
 df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
 df_NEW['AFFIDABILITY'] = "CALC"
