@@ -30,7 +30,7 @@ gdf_orig['Trigger'].fillna('ND', inplace=True)
 gdf_orig['Type'] = gdf_orig['Type'].fillna('ND')
 
 # Creating  the DATAs and DATAf fields replacing the NaN with the oldest (except for pre 0000 dates) date and the most recent
-gdf_orig['DATEs'] = (gdf_orig['Timing'].fillna('1771/01/01')).astype(str)
+gdf_orig['DATEs'] = (gdf_orig['Timing'].fillna('1677/12/31')).astype(str)
 gdf_orig['DATEf'] = (gdf_orig['Timing'].fillna('2023/12/31')).astype(str)
 
 # Merging the Name and Study area content, removing the NaN values

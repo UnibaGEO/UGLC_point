@@ -28,6 +28,8 @@ df_OLD['loc_acc'] = df_OLD['loc_acc'].fillna('-99999')
 df_OLD['src_link'] = df_OLD['src_link'].fillna('ND')
 df_OLD['loc_desc'] = df_OLD['loc_desc'].fillna('ND')
 df_OLD['ev_desc'] = df_OLD['ev_desc'].fillna('ND')
+df_OLD['ev_dateS'] = df_OLD['ev_date'].fillna('1956/01/01')
+df_OLD['ev_dateE'] = df_OLD['ev_date'].fillna('2023/01/01')
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -79,8 +81,8 @@ df_NEW['OLD ID'] = df_OLD['ev_id']
 df_NEW['VERSION'] = str("2019")
 df_NEW['COUNTRY'] = df_OLD['ctry_name'].fillna('ND')
 df_NEW['ACCURACY'] = df_OLD['loc_acc']
-df_NEW['START DATE'] = df_OLD['ev_date'].fillna('1956/01/01')
-df_NEW['END DATE'] = df_OLD['ev_date'].fillna('2023/01/01')
+df_NEW['START DATE'] = df_OLD.apply(lambda row: pd.to_datetime(row['ev_dateS']).strftime('%Y/%m/%d'), axis=1)
+df_NEW['END DATE'] = df_OLD.apply(lambda row: pd.to_datetime(row['ev_dateE']).strftime('%Y/%m/%d'), axis=1)
 df_NEW['TYPE'] = df_OLD['ls_cat'].fillna('ND')
 df_NEW['TRIGGER'] = df_OLD['ls_trig'].fillna('ND')
 df_NEW['AFFIDABILITY'] = 'CALC'

@@ -73,8 +73,8 @@ df_NEW['OLD ID'] = df_OLD['LS_ID']
 df_NEW['VERSION'] = str("V6.1")
 df_NEW['COUNTRY'] = "Canada"
 df_NEW['ACCURACY'] = df_OLD['Accuracy']
-df_NEW['START DATE'] = (df_OLD['DATEs'].apply(lambda x: date_s_correction(x)))
-df_NEW['END DATE'] = (df_OLD['DATEf'].apply(lambda x: date_f_correction(x)))
+df_NEW['START DATE'] = df_OLD['DATEs'].apply(lambda x: pd.to_datetime(x, errors='coerce').strftime('%Y/%m/%d'))
+df_NEW['END DATE'] = df_OLD['DATEf'].apply(lambda x: pd.to_datetime(x, errors='coerce').strftime('%Y/%m/%d'))
 df_NEW['TYPE'] = df_OLD['Type']
 df_NEW['TRIGGER'] = df_OLD['Trigger']
 df_NEW['AFFIDABILITY'] = "CALC"
