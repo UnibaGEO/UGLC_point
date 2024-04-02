@@ -489,7 +489,9 @@ def date_format(input_date):
 # 9 START DATE and END DATE calculator (only NTMI)
 
 def populate_start_date(row):
-    if pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "Other":
+    if row['EVENT_DATE'] == "1697/06/07":
+        return row['EVENT_DATE']
+    elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == "Other":
         return row['EVENT_DATE']
     elif pd.notna(row['EVENT_DATE']) and row['DATE_ACCUR'] == " Unknown ":
         return row['EVENT_DATE']

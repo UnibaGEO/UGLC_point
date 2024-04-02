@@ -31,5 +31,3 @@ if csv_files:
     print(f"Il file CSV combinato è stato salvato come '{output_file}'")
 else:
     print("Nessun file CSV trovato nella directory specificata.")
-
-print(df_combined['VERSION'].unique())
