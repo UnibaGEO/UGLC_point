@@ -8,7 +8,7 @@ from shapely import wkt
 # Load the environment variables from config.env file
 load_dotenv("../../config.env")
 root = os.getenv("FILES_REPO")
-"""
+
 # Lista dei file SHP da unire
 shp_files = [f"{root}/input/download/17_IFFI/frane_piff_abruzzo_opendata/frane_piff_opendataPoint.shp",
              f"{root}/input/download/17_IFFI/frane_piff_basilicata_opendata/frane_piff_opendataPoint.shp",
@@ -59,6 +59,3 @@ df_orig['WKT_GEOM'] = df_orig['geometry'].apply(lambda geom: f"POINT ({geom.xy[0
 
 # Save the GeoDataFrame as a CSV
 df_orig.to_csv(f"{root}/input/native_datasets/17_IFFI_native.csv", index=False)
-"""
-df_OLD = pd.read_csv(f"{root}/input/native_datasets/17_IFFI_native.csv", low_memory=False, encoding="utf-8")
-print(df_OLD['nome_tipo'].unique())
