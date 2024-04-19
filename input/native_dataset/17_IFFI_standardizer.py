@@ -45,7 +45,7 @@ for shp_file in shp_files[1:]:
 
 # Salva il file unito
 merged_data.to_file(f"{root}/input/download/17_IFFI/IFFI.shp")
-"""
+
 # Load the shp
 df_orig = gpd.read_file(f"{root}/input/download/17_IFFI/IFFI.shp")
 
@@ -57,8 +57,8 @@ if crs_shapefile != 'EPSG:4326':
 # Crete a GeoDataFrame using 'geometry' column for generating the WKT_GEOM
 df_orig['WKT_GEOM'] = df_orig['geometry'].apply(lambda geom: f"POINT ({geom.xy[0][0]} {geom.xy[1][0]})")
 
-
-
-
 # Save the GeoDataFrame as a CSV
 df_orig.to_csv(f"{root}/input/native_datasets/17_IFFI_native.csv", index=False)
+"""
+df_OLD = pd.read_csv(f"{root}/input/native_datasets/17_IFFI_native.csv", low_memory=False, encoding="utf-8")
+print(df_OLD['nome_tipo'].unique())

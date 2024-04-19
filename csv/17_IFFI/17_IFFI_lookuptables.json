@@ -1,0 +1,19 @@
+{
+  "17_IFF9 LOOKUP TABLES": {
+
+    "nome_tipo_lookup": {
+      "Scivolamento rotazionale/traslativo": "complex",
+      "Colamento lento": "soil creep",
+      "Complesso": "complex",
+      "n.d.": "not defined",
+      "Colamento rapido": " debris flow",
+      "Crollo/Ribaltamento": "rock slide",
+      "DGPV": "earth slide",
+      "Aree con frane superficiali diffuse": "earth slide",
+      "Aree con sprofondamenti diffusi": "sinkhole",
+      "Aree con crolli/ribaltamenti diffusi": " complex",
+      "Espansione": "earth spreading",
+      "Sprofondamento": "rock fall"
+    }
+  }
+}
