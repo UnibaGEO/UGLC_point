@@ -12,11 +12,11 @@
 ## :red_circle: Authors
 
 ----------------------------------------------------------------------------------------------------------------
-- [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari - DISTEGEO).
-- [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari - DISTEGEO).
+- [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari - Dept. Geo-enviromental science).
+- [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari - Dept. Geo-enviromental science).
 - [@Francesco Paolo Lovergine](https://github.com/fpl) - PhD Researcher (National Research Council of Italy - IREA).
 - [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher (Yale University - CRC).
-- Domenico Capolongo - PhD Professor (University of Bari - DISTEGEO).
+- Domenico Capolongo - PhD Professor (University of Bari - Dept. Geo-enviromental science).
 
 ----------------------------------------------------------------------------------------------------------------
 
