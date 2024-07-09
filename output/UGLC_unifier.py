@@ -21,13 +21,13 @@ for file in csv_files:
     df_temp = pd.read_csv(file_path, dtype={'VERSION': object})  # Imposta il tipo di dati della colonna "VERSION" come object (stringa)
     df_combined = pd.concat([df_combined, df_temp], ignore_index=True)
 
-df_combined['ID'] = ['P-' + str(i) for i in range(1, len(df_combined) + 1)]
+df_combined['ID'] = [str(i) for i in range(1, len(df_combined) + 1)]
 
 # Verifica se ci sono file CSV nella directory specificata
 if csv_files:
     # Salva il DataFrame combinato in un nuovo file CSV
     output_file = f"{root}/output/UGLC.csv"
-    df_combined.to_csv(output_file, index=False)
-    print(f"UGLC dataset created on '{output_file}' path")
+    df_combined.to_csv(output_file, index=False, sep='|')
+    print(f"UGLC dataset created on '{output_file}' path with '|' as separator.")
 else:
     print("No CSV file found tino the directory.")
