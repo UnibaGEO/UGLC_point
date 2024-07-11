@@ -152,6 +152,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | Human-induced trigger                          | human                    | 
     | Climate temperatures trigger                   | climate                  | 
     | Postfire trigger                               | postfire                 |
+    | Deforestation processes                        | deforestation            |
     | Erosional/gravitational and biological trigger | natural                  | 
     | Unknown                                        | ND                       | 
 
