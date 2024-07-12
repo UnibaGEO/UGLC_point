@@ -53,8 +53,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -78,8 +77,7 @@ df_NEW['END DATE'] = pd.to_datetime(df_OLD['event_date'], format='%Y-%m-%d').dt.
 df_NEW['TYPE'] = df_OLD['TYPE']
 df_NEW['TRIGGER'] = "seismic"
 df_NEW['AFFIDABILITY'] = "ND"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_NEW.apply(lambda row: f"ETGFI - locality: {row['COUNTRY']} - ", axis=1) + df_OLD.apply(lambda row: f"description: {row['comments']}", axis=1)

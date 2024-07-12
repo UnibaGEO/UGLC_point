@@ -53,8 +53,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -78,8 +77,7 @@ df_NEW['END DATE'] = "2023/12/31"
 df_NEW['TYPE'] = "rock fall"
 df_NEW['TRIGGER'] = "seismic"
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_OLD.apply(lambda row: f"1N network - locality: France - description: {repr(row['SiteName'])}", axis=1)

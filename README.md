@@ -176,7 +176,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 
 - <b> RECORD TYPE: </b>  The contents of this field contain information regarding the record type: <u>report</u>, 
-    <u>event</u>,or <u>ND</u> for the undefined records.
+    <u>event</u>.
     
     - Report catalogs are usually landslide reports that typically collect a lot of detailed technical information 
     about individual landslide events.
