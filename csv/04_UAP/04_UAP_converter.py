@@ -59,8 +59,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -84,8 +83,7 @@ df_NEW['END DATE'] = pd.to_datetime(df_OLD['DATEf'].apply(trasforma_data_end)).d
 df_NEW['TYPE'] = df_OLD['Inventory']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = df_OLD['TRIGGER'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = df_OLD['Fatalities']
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_OLD.apply(lambda row: f"UAP - locality: ND - description: {repr(row['Notes'])}", axis=1)

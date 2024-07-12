@@ -61,8 +61,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -86,8 +85,7 @@ df_NEW['END DATE'] = df_OLD.apply(lambda row: pd.to_datetime(row['ev_dateE']).st
 df_NEW['TYPE'] = df_OLD['ls_cat'].fillna('ND')
 df_NEW['TRIGGER'] = df_OLD['ls_trig'].fillna('ND')
 df_NEW['AFFIDABILITY'] = 'CALC'
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = df_OLD['OLD DATASET'].apply(lambda x: 'event' if x == 'COOLR_E' else 'report')
 df_NEW['FATALITIES'] = df_OLD['fatalities']
 df_NEW['INJURIES'] = df_OLD['injuries']
 df_NEW['NOTES'] = df_OLD.apply(lambda row:f"{row['OLD DATASET']}, locality: {repr(row['loc_desc'])}, description: {repr(row['src_name'])} {repr(row['ev_desc'])}",axis=1)

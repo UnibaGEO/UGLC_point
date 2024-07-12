@@ -53,8 +53,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -78,8 +77,7 @@ df_NEW['END DATE'] = df_OLD.apply(lambda row: compose_end_date(row['YEAR'], row[
 df_NEW['TYPE'] = df_OLD['TYPE']
 df_NEW['TRIGGER'] = df_OLD['CAUSE']
 df_NEW['AFFIDABILITY'] = "ND"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = df_OLD['FATAL']
 df_NEW['INJURIES'] = df_OLD['INJURED']
 df_NEW['NOTES'] = df_OLD.apply(lambda row: f"CAFLAG - locality: Italy,{(row['TOWN'])} {(row['LOCALITY'])} - description: {(row['GEOM_CONT'])} {(row['TYPE'])}", axis=1)

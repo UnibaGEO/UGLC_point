@@ -57,8 +57,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -82,8 +81,7 @@ df_NEW['END DATE'] = "2016/12/31"
 df_NEW['TYPE'] = "ND"
 df_NEW['TRIGGER'] = "ND"
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = "report"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_OLD.apply(lambda row:f"ALC -locality:{row['Location']},description: {repr(row['Land Cover'])}",axis=1)

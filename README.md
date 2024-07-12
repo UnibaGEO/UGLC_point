@@ -175,14 +175,15 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | ( -99999)              | TRUE and FALSE                 | Unreliable point                 | 10             | 
 
 
-- <b> RPSV: </b> the content of this field contains the data validation flag through a comparison with the data from Radar Permanent Scatterers product from Sentinel 1 - Copernicus
+- <b> RECORD TYPE: </b>  The contents of this field contain information regarding the record type: <u>report</u>, 
+    <u>event</u>.
     
-      NOT YET IMPLEMENTED
-
-
-- <b> DCMV: </b> the content of this field contains the data validation flag through a comparison with the data from DEM change maps TanDEM-X - DLR (approximately 2010 - 2022)
-    
-      NOT YET IMPLEMENTED
+    - Report catalogs are usually landslide reports that typically collect a lot of detailed technical information 
+    about individual landslide events.
+  
+    - Event catalogs, on the other hand, generally focus on summarizing landslide events 
+    triggered by episodic events (such as heavy rains, earthquakes, eruptions, etc.) with less technical information and 
+    more statistical details, without delving into the specifics of each event.
 
 
 - <b> FATALITIES: </b> the content of this field contains the number of fatalities related to the event (if explicit), where the NaN values are represented by the value -99999

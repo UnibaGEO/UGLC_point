@@ -54,8 +54,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -79,8 +78,7 @@ df_NEW['END DATE'] = "2016/11/14"
 df_NEW['TYPE'] = "ND"
 df_NEW['TRIGGER'] = "seismic"
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_NEW.apply(lambda row:f"NZK - locality: Kaikoura district  - description: The Mw 7.8 14 November 2016 Kaikoura Earthquake generated many thousands of landslides ",axis=1)

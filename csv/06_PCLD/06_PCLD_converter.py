@@ -53,8 +53,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -78,8 +77,7 @@ df_NEW['END DATE'] = df_OLD['DATEf'].apply(lambda x: pd.to_datetime(x, errors='c
 df_NEW['TYPE'] = df_OLD['Type']
 df_NEW['TRIGGER'] = df_OLD['Trigger']
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = df_OLD['Trigger'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_OLD.apply(lambda row: f"PCLD - locality: Canada - description: {repr(row['Info'])}", axis=1)

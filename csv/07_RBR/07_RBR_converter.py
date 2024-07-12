@@ -56,8 +56,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -81,8 +80,7 @@ df_NEW['END DATE'] = df_OLD['Year'].apply(trasforma_data_end)
 df_NEW['TYPE'] = "ND"
 df_NEW['TRIGGER'] = "deforestation"
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_NEW.apply(lambda row:f"RBR - locality: {repr(row['COUNTRY'])} - description: ND ",axis=1)

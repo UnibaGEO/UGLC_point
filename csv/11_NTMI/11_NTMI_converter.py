@@ -58,8 +58,7 @@ new_data = {
     'TYPE': [],
     'TRIGGER': [],
     'AFFIDABILITY': [],
-    'PSV': [],
-    'DCMV': [],
+    'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
     'NOTES': [],
@@ -83,8 +82,7 @@ df_NEW['END DATE'] = df_OLD.apply(populate_end_date, axis=1)
 df_NEW['TYPE'] = df_OLD['LANDSIDE_M']
 df_NEW['TRIGGER'] = df_OLD['TRIGGER']
 df_NEW['AFFIDABILITY'] = "CALC"
-df_NEW['PSV'] = "CALC"
-df_NEW['DCMV'] = "CALC"
+df_NEW['RECORD TYPE'] = df_OLD['TRIGGER'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
 df_NEW['NOTES'] = df_OLD.apply(lambda row: f"NTMI - locality: {repr(row['LOCATION_C'])}, {repr(row['EVENT_NAME'])} - description: {repr(row['IMPACT_COM'])} ", axis=1)
