@@ -9,11 +9,23 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import trasforma_data_start,trasforma_data_end,apply_affidability_calculator,assign_country_to_points
+from lib.function_collection import trasforma_data_start, trasforma_data_end, apply_affidability_calculator, assign_country_to_points
 
-# Load the enviroment variables from config.env file
+# Enviroment loading from config.env file -----------------------------------------------------------------------
+
 load_dotenv("../../config.env")
-root = os.getenv("FILES_REPO")
+files_repo = os.getenv("FILES_REPO")
+files_repo_linux = os.getenv("FILES_REPO_LINUX")
+
+# Verify if its there is a Windows G-Drive files repo or a Linux G-Drive files repo
+if os.path.exists(files_repo):
+    root = files_repo
+else:
+    root = files_repo_linux
+
+print(f"Using root= {root}")
+
+# -----------------------------------------------------------------------
 
 # Native Dataframe 01_COOLR_native loading
 df_OLD = pd.read_csv(f"{root}/input/native_datasets/04_UAP_native.csv", low_memory=False,encoding="utf-8")

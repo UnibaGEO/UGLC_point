@@ -78,14 +78,6 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [16_ETGFI](https://www.sciencebase.gov/catalog/item/583f4114e4b04fc80e3c4a1a)                                                                       | ETGFI - Earthquake-Triggered Ground-Failure Inventories (POINTS) - USGS                        | 115402    | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [17_IFFI](https://idrogeo-isprambiente-it.translate.goog/app/page/open-data?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=it&_x_tr_pto=sc&_x_tr_hist=true)                                                                   | IFFI - Inventario fenomeni franosi in Italia (ISPRA)                                | 622447    | [LICENSE](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en)                                                              | free      | :heavy_check_mark:   |
 
-    |POLYGONAL DATASET|
-    |-----------------|
-  
-    | REFERING                                                                                                                                            | NAME                                                                                           | N° POLYGONS | LICENSE                                                                                                             | DOWNLOAD  | IMPLEMENTED              |
-    |-----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------|-----------|--------------------------|
-
-
-
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
 
