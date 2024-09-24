@@ -36,8 +36,8 @@ gdf_orig_e.to_csv(f"{root}/input/download/01_COOLR/COOLR event points/nasa_coolr
 
 # COOLR MERGED -----------------------------------------------------------------------
 
-coolr_csv_e=pd.read_csv(f"{root}/input/download/01_COOLR/COOLR event points/nasa_coolr_events_point.csv",sep=',',encoding='UTF-8',low_memory=False)
-coolr_csv_r=pd.read_csv(f"{root}/input/download/01_COOLR/COOLR report points/nasa_coolr_reports_point.csv",sep=',',encoding='UTF-8',low_memory=False)
+coolr_csv_e=pd.read_csv(f"{root}/input/download/01_COOLR/COOLR event points/nasa_coolr_events_point.csv", sep=',', encoding='UTF-8', low_memory=False)
+coolr_csv_r=pd.read_csv(f"{root}/input/download/01_COOLR/COOLR report points/nasa_coolr_reports_point.csv", sep=',', encoding='UTF-8', low_memory=False)
 
 # Set the OLD DATASET field
 coolr_csv_r['OLD DATASET'] = 'COOLR_R'
@@ -49,5 +49,5 @@ coolr_csv_E_R_filtered = coolr_csv_E_R.drop_duplicates(subset=['WKT_GEOM'])
 coolr_csv_E_R_filtered = coolr_csv_E_R_filtered.drop(columns=['geometry'])
 
 # Save the merged and filtered GeoDataFrame
-coolr_csv_E_R_filtered.to_csv(f"{root}/input/native_datasets/01_COOLR_native.csv",index=False)
+coolr_csv_E_R_filtered.to_csv(f"{root}/input/native_datasets/01_COOLR_native.csv", index=False)
 
