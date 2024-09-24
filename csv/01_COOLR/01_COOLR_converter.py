@@ -102,7 +102,7 @@ df_NEW['RECORD TYPE'] = df_OLD['OLD DATASET'].apply(lambda x: 'event' if x == 'C
 df_NEW['FATALITIES'] = df_OLD['fatalities']
 df_NEW['INJURIES'] = df_OLD['injuries']
 df_NEW['NOTES'] = df_OLD.apply(lambda row:f"{row['OLD DATASET']}, locality: {repr(row['loc_desc'])}, description: {repr(row['src_name'])} {repr(row['ev_desc'])}",axis=1)
-df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['src_link'])}",axis=1)
+df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['src_link'])}", axis=1)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Corrections
@@ -122,6 +122,4 @@ print("_________________________________________________________________________
 print("                             01_COOLR_native conversion: DONE                           ")
 print("________________________________________________________________________________________")
 
-#-----------------------------------------------------------------------------------------------------------------------
-# End
 #-----------------------------------------------------------------------------------------------------------------------
