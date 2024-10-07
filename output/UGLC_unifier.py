@@ -40,7 +40,6 @@ else:
 # Data Cleaning: removes records with 'TYPE' == "snow avalanche"
 df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
 
-
 ## ------------------ DIRECTORY SELECTION ------------------
 ## G-Cloud directory
 ## (keep this commented when is not used)
