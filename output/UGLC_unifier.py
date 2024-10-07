@@ -35,7 +35,7 @@ if csv_files:
 else:
     print("No CSV file found in the directory.")
 
-## ------------------ DATA CLANING ------------------
+## ------------------ DATA CLEANING ------------------
 
 # Data Cleaning: removes records with 'TYPE' == "snow avalanche"
 df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
