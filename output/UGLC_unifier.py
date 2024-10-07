@@ -40,6 +40,19 @@ else:
 # Data Cleaning: removes records with 'TYPE' == "snow avalanche"
 df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
 
+
+## ------------------ DIRECTORY SELECTION ------------------
+## G-Cloud directory
+## (keep this commented when is not used)
+## print(f"> Saving on cloud directory")
+# output_file_root = f"{root}/output/"
+
+## Local directory
+## (insert your local directory)
+## (keep this commented when is not used)
+print(f"> Saving on local directory")
+output_file_root = f"C:/Users/microzonazione_05/Desktop/UGLC Dataset/UGLC_point"
+
 ## ------------------ NO DUPLICATES ------------------
 
 # Removes duplicates based on having same 'WKT_GEOM', 'START DATE', 'END DATE' keeping the ones wth more affidability
@@ -47,7 +60,7 @@ df_cleaned = df_combined.loc[df_combined.groupby(['WKT_GEOM', 'START DATE', 'END
 df_cleaned['ID'] = [str(i) for i in range(1, len(df_cleaned) + 1)] # Generates ID
 
 # Save the duplicate-free dataframe as a csv file
-output_file = f"{root}/output/UGLC.csv"
+output_file = f"{output_file_root}/UGLC.csv"
 df_cleaned.to_csv(output_file, index=False, sep='|')
 print(f"UGLC dataset cleaned created on '{output_file}' path with '|' as separator.")
 
@@ -58,8 +71,6 @@ duplicates = df_combined[~df_combined.index.isin(df_cleaned.index)].copy()
 duplicates['ID'] = [str(i) for i in range(1, len(duplicates) + 1)] # Generates ID
 
 # Save the duplicates as a separate csv file
-duplicates_file = f"{root}/output/UGLC_duplicates.csv"
+duplicates_file = f"{output_file_root}/UGLC_duplicates.csv"
 duplicates.to_csv(duplicates_file, index=False, sep='|')
 print(f"Duplicates file created on '{duplicates_file}' with '|' as separator.")
-
-print(len(df_cleaned))
