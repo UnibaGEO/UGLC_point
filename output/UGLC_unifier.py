@@ -35,7 +35,12 @@ if csv_files:
 else:
     print("No CSV file found in the directory.")
 
-## ------------------ NO DUPLICATES -------------------
+## ------------------ DATA CLANING ------------------
+
+# Data Cleaning: removes records with 'TYPE' == "snow avalanche"
+df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
+
+## ------------------ NO DUPLICATES ------------------
 
 # Removes duplicates based on having same 'WKT_GEOM', 'START DATE', 'END DATE' keeping the ones wth more affidability
 df_cleaned = df_combined.loc[df_combined.groupby(['WKT_GEOM', 'START DATE', 'END DATE'])['AFFIDABILITY'].idxmin()]
@@ -46,7 +51,7 @@ output_file = f"{root}/output/UGLC.csv"
 df_cleaned.to_csv(output_file, index=False, sep='|')
 print(f"UGLC dataset cleaned created on '{output_file}' path with '|' as separator.")
 
-## ------------------ DUPLICATES -------------------
+## ------------------ DUPLICATES ------------------
 
 # Find duplicates based on having same 'WKT_GEOM', 'START DATE', 'END DATE' (same event)
 duplicates = df_combined[~df_combined.index.isin(df_cleaned.index)].copy()
@@ -56,3 +61,5 @@ duplicates['ID'] = [str(i) for i in range(1, len(duplicates) + 1)] # Generates I
 duplicates_file = f"{root}/output/UGLC_duplicates.csv"
 duplicates.to_csv(duplicates_file, index=False, sep='|')
 print(f"Duplicates file created on '{duplicates_file}' with '|' as separator.")
+
+print(len(df_cleaned))
