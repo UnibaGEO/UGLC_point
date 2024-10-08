@@ -97,7 +97,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     In case the date of the event is not present or clearly explicit, this field will contain the start date of the acquisition gap 
     of the information in the dataset, thus specifying its uncertainty
     In addition. for events where the start date could not be derived and for events that began before 1677/12/31, the start date
-    was set as 1677/12/31.
+    was set as 1678/01/01.
 
 
 - <b> END DATE: </b> the contents of this field represent the date of the event (if specified exactly in the source dataset) 

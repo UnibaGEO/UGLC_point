@@ -487,13 +487,15 @@ def date_format(input_date):
         date_object = datetime.strptime(fixed_date, '%Y/%m/%d')
         formatted_date = date_object.strftime('%Y/%m/%d')
 
-        print("__________________________________________________________________________________________")
-        print("                             START DATE and END DATE  correction: DONE                    ")
-        print("__________________________________________________________________________________________")
-
         return formatted_date
+
     except ValueError:
+
         return 'error'
+
+print("__________________________________________________________________________________________")
+print("                             START DATE and END DATE  correction: DONE                    ")
+print("__________________________________________________________________________________________")
 
 # ----------------------------------------------------------------------------------------------------------------------
 # 9 START DATE and END DATE calculator (only NTMI)
@@ -546,12 +548,12 @@ def populate_start_date(row):
     elif row['DATE_ACC_1'] == "2 Days ":
         return "2015/09/10"
     elif pd.isna(row['DATE_ACC_1']) and pd.isna(row['DATE_ACCUR']) and pd.isna(row['EVENT_DATE']):
-        return "1677/12/31"
+        return "1678/01/01"
     elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR'] == "Unknown":
         if not pd.isna(row['EVENT_DATE']):
             return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
         else:
-            return "1677/12/31"
+            return "1678/01/01"
     elif pd.isna(row['DATE_ACC_1']) and pd.isna(row['DATE_ACCUR']) and not pd.isna(row['EVENT_DATE']):
         return pd.to_datetime(row['EVENT_DATE']).strftime("%Y/%m/%d")
     elif pd.isna(row['DATE_ACC_1']) and row['DATE_ACCUR']=="20_Years" and pd.isna(row['EVENT_DATE']):
@@ -627,11 +629,11 @@ def populate_end_date(row):
 
 def start_date_SLIDO(row):
     if not pd.isnull(row["MONTH"]) and row["MONTH"] == "0" or not pd.isnull(row["DAY"]) and row["DAY"] == "0" or not pd.isnull(row["YEAR"]) and row["YEAR"] == "0.0":
-        return "1677/12/31"
+        return "1678/01/01"
 
     elif pd.isnull(row["YEAR"]) and pd.isnull(row["MONTH"]) and pd.isnull(row["DAY"]) and pd.isnull(
             row["REACTIVATI"]) and pd.isnull(row["DATE_RANGE"]):
-        return "1677/12/31"
+        return "1678/01/01"
 
     elif not pd.isnull(row["YEAR"]):
         year = int(row["YEAR"])
