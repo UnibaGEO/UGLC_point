@@ -6,7 +6,7 @@
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
 import json
-from lib.function_collection import apply_affidability_calculator, apply_country_corrections
+from lib.function_collection import apply_affidability_calculator
 import pandas as pd
 import os
 from dotenv import load_dotenv
@@ -90,7 +90,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "Cooperative Open Online Landslide Repository - NASA"
 df_NEW['OLD ID'] = df_OLD['ev_id']
-df_NEW['VERSION'] = str("2019")
+df_NEW['VERSION'] = str("2023")
 df_NEW['COUNTRY'] = df_OLD['ctry_name'].replace("CÃ´te d'Ivoire", "Côte d'Ivoire", inplace=True)
 df_NEW['ACCURACY'] = df_OLD['loc_acc']
 df_NEW['START DATE'] = df_OLD.apply(lambda row: pd.to_datetime(row['ev_dateS']).strftime('%Y/%m/%d'), axis=1)
@@ -108,7 +108,6 @@ df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['src_link'])}", ax
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-apply_country_corrections(df_NEW)
 apply_affidability_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------

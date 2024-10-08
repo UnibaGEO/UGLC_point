@@ -3,9 +3,21 @@ import os
 import geopandas as gpd
 import pandas as pd
 
-# Load the environment variables from config.env file
-load_dotenv("../../../../../../OneDrive/Desktop/test/pythonProject/.venv/config.env")
-root = os.getenv("FILES_REPO")
+# Enviroment loading from config.env file -----------------------------------------------------------------------
+
+load_dotenv("../../config.env")
+files_repo = os.getenv("FILES_REPO")
+files_repo_linux = os.getenv("FILES_REPO_LINUX")
+
+# Verify if its there is a Windows G-Drive files repo or a Linux G-Drive files repo
+if os.path.exists(files_repo):
+    root = files_repo
+else:
+    root = files_repo_linux
+
+print(f"Using root= {root}")
+
+# -----------------------------------------------------------------------
 
 # COOLR_R-----------------------------------------------------------------------
 # SHP to CSV
@@ -50,4 +62,3 @@ coolr_csv_E_R_filtered = coolr_csv_E_R_filtered.drop(columns=['geometry'])
 
 # Save the merged and filtered GeoDataFrame
 coolr_csv_E_R_filtered.to_csv(f"{root}/input/native_datasets/01_COOLR_native.csv", index=False)
-
