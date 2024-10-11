@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import apply_affidability_calculator, start_date_SLIDO, end_date_SLIDO
+from lib.function_collection import apply_RELIABILITY_calculator, start_date_SLIDO, end_date_SLIDO
 
 # Enviroment loading from config.env file -----------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ new_data = {
     'END DATE': [],
     'TYPE': [],
     'TRIGGER': [],
-    'AFFIDABILITY': [],
+    'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
@@ -94,7 +94,7 @@ df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1)
 df_NEW['END DATE'] = df_OLD.apply(end_date_SLIDO, axis=1)
 df_NEW['TYPE'] = df_OLD['MOVE_CLASS']
 df_NEW['TRIGGER'] = df_OLD['CONTR_FACT'].fillna('ND')
-df_NEW['AFFIDABILITY'] = "CALC"
+df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = df_OLD['CONTR_FACT'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = df_OLD['LOSSES']
 df_NEW['INJURIES'] = "-99999"
@@ -105,7 +105,7 @@ df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {row['DATA_SOURC']}", axis=1
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-apply_affidability_calculator(df_NEW)
+apply_RELIABILITY_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

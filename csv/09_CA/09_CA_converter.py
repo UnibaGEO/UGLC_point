@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_RELIABILITY_calculator
 
 # Enviroment loading from config.env file -----------------------------------------------------------------------
 
@@ -65,7 +65,7 @@ new_data = {
     'END DATE': [],
     'TYPE': [],
     'TRIGGER': [],
-    'AFFIDABILITY': [],
+    'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
@@ -89,7 +89,7 @@ df_NEW['START DATE'] = pd.to_datetime(df_OLD['Fecha']).dt.strftime('%Y/%m/%d')
 df_NEW['END DATE'] = pd.to_datetime(df_OLD['Fecha']).dt.strftime('%Y/%m/%d')
 df_NEW['TYPE'] = df_OLD['TYPE']
 df_NEW['TRIGGER'] = df_OLD['Detonante']
-df_NEW['AFFIDABILITY'] = "CALC"
+df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "report"
 df_NEW['FATALITIES'] = df_OLD['Fallecidos'].astype(int)
 df_NEW['INJURIES'] = "-99999"
@@ -100,7 +100,7 @@ df_NEW['LINK'] = df_OLD.apply(lambda row:f"Source: {row['Fuente']}", axis=1)
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-apply_affidability_calculator(df_NEW)
+apply_RELIABILITY_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

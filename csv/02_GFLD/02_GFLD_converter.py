@@ -8,7 +8,7 @@
 import pandas as pd
 import json
 import numpy as np
-from lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_RELIABILITY_calculator
 from dotenv import load_dotenv
 import os
 
@@ -70,7 +70,7 @@ new_data = {
     'END DATE': [],
     'TYPE': [],
     'TRIGGER': [],
-    'AFFIDABILITY': [],
+    'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
@@ -94,7 +94,7 @@ df_NEW['START DATE'] = df_OLD.apply(lambda row: pd.to_datetime(f"{row['Year']}/{
 df_NEW['END DATE'] = df_OLD.apply(lambda row: pd.to_datetime(f"{row['Year']}/{row['Month']:02d}/{row['Day']:02d}", format='%Y/%m/%d').strftime('%Y/%m/%d'), axis=1)
 df_NEW['TYPE'] = "ND"
 df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
-df_NEW['AFFIDABILITY'] = "CALC"
+df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('-99999')
 df_NEW['INJURIES'] = "-99999"
@@ -104,7 +104,7 @@ df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['Source_1'])}",axi
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-apply_affidability_calculator(df_NEW)
+apply_RELIABILITY_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
