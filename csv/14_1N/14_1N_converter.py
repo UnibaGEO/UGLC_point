@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import apply_affidability_calculator
+from lib.function_collection import apply_RELIABILITY_calculator
 
 # Enviroment loading from config.env file -----------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ new_data = {
     'END DATE': [],
     'TYPE': [],
     'TRIGGER': [],
-    'AFFIDABILITY': [],
+    'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
     'INJURIES': [],
@@ -88,7 +88,7 @@ df_NEW['START DATE'] = "2015/01/01"
 df_NEW['END DATE'] = "2023/12/31"
 df_NEW['TYPE'] = "rock fall"
 df_NEW['TRIGGER'] = "seismic"
-df_NEW['AFFIDABILITY'] = "CALC"
+df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
@@ -99,7 +99,7 @@ df_NEW['LINK'] = "Source: https://www.fdsn.org/networks/detail/1N_2015/"
 # Corrections
 #-----------------------------------------------------------------------------------------------------------------------
 
-apply_affidability_calculator(df_NEW)
+apply_RELIABILITY_calculator(df_NEW)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output

@@ -3,9 +3,21 @@ import os
 import geopandas as gpd
 from lib.function_collection import convert_to_int
 
-# Load the environment variables from config.env file
+# Enviroment loading from config.env file -----------------------------------------------------------------------
+
 load_dotenv("../../config.env")
-root = os.getenv("FILES_REPO")
+files_repo = os.getenv("FILES_REPO")
+files_repo_linux = os.getenv("FILES_REPO_LINUX")
+
+# Verify if its there is a Windows G-Drive files repo or a Linux G-Drive files repo
+if os.path.exists(files_repo):
+    root = files_repo
+else:
+    root = files_repo_linux
+
+print(f"Using root= {root}")
+
+# -----------------------------------------------------------------------
 
 # Load the shp
 df_orig = gpd.read_file(f"{root}/input/download/07_RBR/landslide_data/08_RBR_REPUBBLICA DOMENICANA DEL CONGO.shp",decimal=".",low_memory=False,encoding="utf-8")

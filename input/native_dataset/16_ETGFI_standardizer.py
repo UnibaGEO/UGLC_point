@@ -3,9 +3,21 @@ import geopandas as gpd
 from dotenv import load_dotenv
 from shapely import wkt
 
-# Load the environment variables from config.env file
+# Enviroment loading from config.env file -----------------------------------------------------------------------
+
 load_dotenv("../../config.env")
-root = os.getenv("FILES_REPO")
+files_repo = os.getenv("FILES_REPO")
+files_repo_linux = os.getenv("FILES_REPO_LINUX")
+
+# Verify if its there is a Windows G-Drive files repo or a Linux G-Drive files repo
+if os.path.exists(files_repo):
+    root = files_repo
+else:
+    root = files_repo_linux
+
+print(f"Using root= {root}")
+
+# -----------------------------------------------------------------------
 
 # Load the shp
 input_shapefile = f"{root}/input/download/16_ETGFI/GFDB_V4_shapefiles/24_ETGFI .shp"
