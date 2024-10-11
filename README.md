@@ -34,10 +34,26 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 
 ## :red_circle: Attribute fields summary
 
-|        | WKT_GEOM         | NEW DATASET | ID       | OLD DATASET | OLD ID | VERSION  | COUNTRY  | ACCURACY | START DATE | END DATE | TYPE    | TRIGGER | AFFIDABILITY | RPSV     | DPCM     | FATALITIES | INJURIES | NOTES  | LINK   |
-|--------|------------------|-------------|----------|-------------|--------|----------|----------|----------|------------|----------|---------|---------|--------------|----------|----------|------------|----------|--------|--------|
-| TYPE   | Well known text  | String      | Int      | String      | String | String   | String   | Int      | Date       | Date     | String  | String  | Int          | Bool     | Bool     | Int        | Int      | String | String |
-| STATUS | active           | Active      | Inactive | Active      | Active | Active   | Active   | Active   | Active     | Active   | Active  | Active  | Active       | Inactive | inactive | Active     | Active   | Active | Active |
+| ATTRIBUTE    | TYPE            |
+|--------------|-----------------|
+| WKT_GEOM     | Well known text |
+| NEW DATASET  | String          |
+| ID           | Int             |
+| OLD DATASET  | String          |
+| OLD ID       | String          |
+| VERSION      | String          |
+| COUNTRY      | String          |
+| ACCURACY     | Int             |
+| START DATE   | Date            |
+| END DATE     | Date            |
+| TYPE         | String          |
+| TRIGGER      | String          |
+| AFFIDABILITY | Int             |
+| RECORD TYPE  | String          |
+| FATALITIES   | Int             |
+| INJURIES     | Int             |
+| NOTES        | String          |
+| LINK         | String          |
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -60,7 +76,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
   
     | REFERING                                                                                                                                            | NAME                                                                                           | N° POINTS | LICENSE                                                                                                              | DOWNLOAD  | IMPLEMENTED          |
     |-----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|-----------|----------------------------------------------------------------------------------------------------------------------|-----------|----------------------|
-    | [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)                               | Cooperative Open Online Landslide Repository (NASA) Event + Report points (with no duplicates) | 49718     | [LICENSE](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521) | free      | :heavy_check_mark:   |
+    | [01_COOLR](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?appid=574f26408683485799d02e857e5d9521)                               | Cooperative Open Online Landslide Repository (NASA) Event + Report points (with no duplicates) | 49718     | [LICENSE](https://maps.nccs.nasa.gov/arcgis/apps/MapAndAppGallery/index.html?ppid=574f26408683485799d02e857e5d9521) | free      | :heavy_check_mark:   |
     | [02_GFLD](https://nhess.copernicus.org/articles/18/2161/2018/)                                                                                      | Global fatal landslide occurrence from 2004 to 2016                                            | 5490      | [LICENSE](https://creativecommons.org/licenses/by/4.0/legalcode)                                                     | free      | :heavy_check_mark:   |
     | [03_ITALICA](https://zenodo.org/records/8009366)                                                                                                    | ITAlian rainfall-induced LandslIdes CAtalogue (CNR - IRPI)                                     | 6312      | [LICENSE](https://creativecommons.org/licenses/by/4.0/legalcode)                                                     | free      | :heavy_check_mark:   |
     | [04_UAP](https://www.sciencebase.gov/catalog/item/61f326dfd34e622189b93308)                                                                         | Landslide Inventories across the United States version2 (USGS)                                 | 176427    | [LICENSE](https://www.usgs.gov/emergency-operations-portal/copyright-and-data-citation)                              | free      | :heavy_check_mark:   |
@@ -76,7 +92,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [14_1N](https://www.fdsn.org/networks/detail/1N_2015/)                                                                                              | 1N (2015-2027): French Landslide Observatory – OMIV (Temporary data)                           | 194       | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [15_CAFLAG](https://data.4tu.nl/articles/dataset/CAmpi_Flegrei_LAndslide_Geodatabase_CAFLAG_/14440757)                                              | The CAmpi Flegrei LAndslide Geodatabase                                                        | 2302      | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [16_ETGFI](https://www.sciencebase.gov/catalog/item/583f4114e4b04fc80e3c4a1a)                                                                       | ETGFI - Earthquake-Triggered Ground-Failure Inventories (POINTS) - USGS                        | 115402    | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
-    | [17_IFFI](https://idrogeo-isprambiente-it.translate.goog/app/page/open-data?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=it&_x_tr_pto=sc&_x_tr_hist=true)                                                                   | IFFI - Inventario fenomeni franosi in Italia (ISPRA)                                | 622447    | [LICENSE](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en)                                                              | free      | :heavy_check_mark:   |
+    | [17_IFFI](https://idrogeo-isprambiente-it.translate.goog/app/page/open-data?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=it&_x_tr_pto=sc&_x_tr_hist=true)       | IFFI - Inventario fenomeni franosi in Italia (ISPRA)                                           | 622447    | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
 
 
 - <b> OLD ID: </b> the contents of this field represent the identifying id assigned to this row in the source dataset (if any)
