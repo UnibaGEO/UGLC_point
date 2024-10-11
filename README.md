@@ -48,7 +48,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 | END DATE     | Date            |
 | TYPE         | String          |
 | TRIGGER      | String          |
-| AFFIDABILITY | Int             |
+| RELIABILITY  | Int             |
 | RECORD TYPE  | String          |
 | FATALITIES   | Int             |
 | INJURIES     | Int             |
