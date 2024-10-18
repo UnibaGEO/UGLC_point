@@ -6,7 +6,6 @@ from shapely.geometry import Point
 from dotenv import load_dotenv
 import os
 import calendar
-from datetime import datetime
 
 # Enviroment loading from config.env file -----------------------------------------------------------------------
 
@@ -150,6 +149,18 @@ def apply_RELIABILITY_calculator(df):
 
 def trasforma_data_start(data):
 
+    # Conversione da mm/d/yyyy,Periodo a yyyy/mm/d
+    try:
+        # Splitta la data e il periodo
+        parti = data.split(',')
+        data_senza_periodo = parti[0]
+
+        # Converte la data nel formato desiderato
+        nuova_data = datetime.strptime(data_senza_periodo, '%m/%d/%Y').strftime('%Y/%m/%d')
+        return nuova_data
+    except ValueError:
+        pass
+
     # Conversione da yyyy/d/mm a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%Y/%d/%m').strftime('%Y/%m/%d')
@@ -160,18 +171,6 @@ def trasforma_data_start(data):
     # Conversione da mm/d/yyyy a yyyy/mm/d
     try:
         nuova_data = datetime.strptime(data, '%m/%d/%Y').strftime('%Y/%m/%d')
-        return nuova_data
-    except ValueError:
-        pass
-
-    # Conversione da mm/d/yyyy,Periodo a yyyy/mm/d
-    try:
-        # Splitta la data e il periodo
-        parti = data.split(',')
-        data_senza_periodo = parti[0]
-
-        # Converte la data nel formato desiderato
-        nuova_data = datetime.strptime(data_senza_periodo, '%m/%d/%Y').strftime('%Y/%m/%d')
         return nuova_data
     except ValueError:
         pass
@@ -444,37 +443,6 @@ def convert_to_int(value):
         return int(value)
     else:
         return value
-
-# ----------------------------------------------------------------------------------------------------------------------
-# 7 DATEs and DATEf conversion (only PCLD)
-
-# Conversion DATEs from yyyy to yyyy/mm/dd
-def date_s_correction(input_date_s):
-    try:
-        corrected_date = datetime.strptime(input_date_s, '%Y').strftime('%Y/01/01')
-
-        print("__________________________________________________________________________________________")
-        print("                             START DATE  correction: DONE                                 ")
-        print("__________________________________________________________________________________________")
-
-        return corrected_date
-
-    except ValueError:
-        return input_date_s
-
-# Conversion DATEf from yyyy to yyyy/mm/dd
-def date_f_correction(input_date_f):
-    try:
-        corrected_date = datetime.strptime(input_date_f, '%Y').strftime('%Y/12/31')
-
-        print("__________________________________________________________________________________________")
-        print("                             END DATE  correction: DONE                                   ")
-        print("__________________________________________________________________________________________")
-
-        return corrected_date
-
-    except ValueError:
-        return input_date_f
 
 # ----------------------------------------------------------------------------------------------------------------------
 # 8 START DATE and END DATE conversion (only BGS)
