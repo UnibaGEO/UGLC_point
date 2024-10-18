@@ -9,7 +9,7 @@ import pandas as pd
 import json
 import os
 from dotenv import load_dotenv
-from lib.function_collection import date_f_correction, date_s_correction, apply_RELIABILITY_calculator
+from lib.function_collection import apply_RELIABILITY_calculator, trasforma_data_start, trasforma_data_end
 
 # Enviroment loading from config.env file -----------------------------------------------------------------------
 
@@ -78,21 +78,21 @@ df_NEW = pd.DataFrame(new_data)
 # New Dataframe Updating with the Old Dataframe columns content values
 df_NEW['WKT_GEOM'] = df_OLD['WKT_GEOM']
 df_NEW['NEW DATASET'] = "UGLC"
-df_NEW['ID'] = "CALC"# range(1, len(df_OLD) + 1)
-df_NEW['OLD DATASET'] = "Preliminary Canadian Landslide Database v.6.1 - Brideau et al. 2023"
+df_NEW['ID'] = "CALC"
+df_NEW['OLD DATASET'] = "Preliminary Canadian Landslide Database v.9.0 - Brideau et al. 2023"
 df_NEW['OLD ID'] = df_OLD['LS_ID']
-df_NEW['VERSION'] = str("V6.1")
+df_NEW['VERSION'] = str("V9.0")
 df_NEW['COUNTRY'] = "Canada"
 df_NEW['ACCURACY'] = df_OLD['Accuracy']
-df_NEW['START DATE'] = df_OLD['DATEs'].apply(lambda x: pd.to_datetime(x, errors='coerce').strftime('%Y/%m/%d'))
-df_NEW['END DATE'] = df_OLD['DATEf'].apply(lambda x: pd.to_datetime(x, errors='coerce').strftime('%Y/%m/%d'))
+df_NEW['START DATE'] = df_OLD['DATEs'].astype(str).apply(trasforma_data_start)
+df_NEW['END DATE'] = df_OLD['DATEf'].astype(str).apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Type']
-df_NEW['TRIGGER'] = df_OLD['Trigger']
+df_NEW['TRIGGER'] = df_OLD['NEWTrigger']
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = df_OLD['Trigger'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = "-99999"
 df_NEW['INJURIES'] = "-99999"
-df_NEW['NOTES'] = df_OLD.apply(lambda row: f"PCLD - locality: Canada - description: {repr(row['Info'])}", axis=1)
+df_NEW['NOTES'] = df_OLD.apply(lambda row: f"PCLD - locality: Canada - description: {repr(row['Info'])}, {row['Comment']}", axis=1)
 df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {row['Reference']}", axis=1)
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -100,7 +100,6 @@ df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {row['Reference']}", axis=1)
 #-----------------------------------------------------------------------------------------------------------------------
 
 apply_RELIABILITY_calculator(df_NEW)
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
