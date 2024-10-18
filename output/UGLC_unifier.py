@@ -50,12 +50,12 @@ df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
 ## (insert your local directory)
 ## (keep this commented when is not used)
 print(f"> Saving on local directory")
-output_file_root = f"C:/Users/microzonazione_05/Desktop/UGLC Dataset/UGLC_point"
+output_file_root = f"C:/Users/microzonazione_05/Desktop/UGLC Dataset/UGLC_point" # <--SET YOUR LOCAL DIRECTORY
 
 ## ------------------ NO DUPLICATES ------------------
 
-# Removes duplicates based on having same 'WKT_GEOM', 'START DATE', 'END DATE' keeping the ones wth more affidability
-df_cleaned = df_combined.loc[df_combined.groupby(['WKT_GEOM', 'START DATE', 'END DATE'])['AFFIDABILITY'].idxmin()]
+# Removes duplicates based on having same 'WKT_GEOM', 'START DATE', 'END DATE' keeping the ones wth more RELIABILITY
+df_cleaned = df_combined.loc[df_combined.groupby(['WKT_GEOM', 'START DATE', 'END DATE'])['RELIABILITY'].idxmin()]
 df_cleaned['ID'] = [str(i) for i in range(1, len(df_cleaned) + 1)] # Generates ID
 
 # Save the duplicate-free dataframe as a csv file
