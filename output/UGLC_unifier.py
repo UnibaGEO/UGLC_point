@@ -50,7 +50,7 @@ df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
 ## (insert your local directory)
 ## (keep this commented when is not used)
 print(f"> Saving on local directory")
-output_file_root = f"C:/Users/microzonazione_05/Desktop/UGLC Dataset/UGLC_point" # <-- SET YOUR LOCAL DIRECTORY
+output_file_root = f"C:/Users/microzonazione_05/Desktop/UGLC Dataset/UGLC_point" # <--SET YOUR LOCAL DIRECTORY
 
 ## ------------------ NO DUPLICATES ------------------
 
