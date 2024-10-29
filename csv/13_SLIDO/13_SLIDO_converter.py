@@ -87,7 +87,7 @@ df_NEW['NEW DATASET'] = "UGLC"
 df_NEW['ID'] = "CALC"
 df_NEW['OLD DATASET'] = "Statewide Landslide Information Database for Oregon (DOGAMI)"
 df_NEW['OLD ID'] = df_OLD['UNIQUE_ID']
-df_NEW['VERSION'] = str("v. 4.4 2021/10/29")
+df_NEW['VERSION'] = str("v. 4.5 2024/04/12")
 df_NEW['COUNTRY'] = "United States of America"
 df_NEW['ACCURACY'] = df_OLD['LOC_METHOD']
 df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1)
