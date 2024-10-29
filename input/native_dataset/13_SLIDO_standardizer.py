@@ -22,7 +22,7 @@ print(f"Using root= {root}")
 
 # - Access to the information into the geodatabase
 # Load the zip files variables from config.env file
-zip_file = f"{root}/input/download/13_SLIDO/SLIDO R4_4.zip"
+zip_file = f"{root}/input/download/13_SLIDO/SLIDO_Release_4p5_wMetadata.gdb.zip"
 extract_to = f"{root}/input/download/13_SLIDO/extracted/"
 
 # Create a destination folder (if is not present) for the unzipped file, then unzip it
@@ -33,7 +33,7 @@ with zipfile.ZipFile(zip_file, 'r') as zip_ref:
     zip_ref.extractall(extract_to)
 
 # Defy the geodatabase path and layer name
-gdb_path = f"{root}/input/download/13_SLIDO/extracted/SLIDO R4_4/SLIDO Release 4_4.gdb"
+gdb_path = f"{root}/input/download/13_SLIDO/extracted/SLIDO_Release_4p5_wMetadata.gdb"
 layer_name = "Historic_Landslide_Points"
 
 # Defy the destination path and the shapefile name
@@ -49,7 +49,6 @@ with fiona.open(gdb_path, layer=layer_name) as src:
 
 df_orig = gpd.read_file(f"{root}/input/download/13_SLIDO/Historic_Landslide_Points.shp", decimal=".", low_memory=False, encoding="utf-8")
 
-# -
 # Read the shapefile into a GeoDataFrame
 df_orig = gpd.read_file(output_shp, decimal=".", low_memory=False, encoding="utf-8")
 

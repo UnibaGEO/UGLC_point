@@ -13,7 +13,7 @@
 
 ----------------------------------------------------------------------------------------------------------------
 - [@Saverio Mancino](https://github.com/RavyHollow) - PhD Student (University of Bari - Dept. Geo-enviromental science).
-- [@Anna Sblano](https://github.com/Anita2333) - Researcher (University of Bari - Dept. Geo-enviromental science).
+- [@Anna Sblano](https://github.com/Anita2333) - Research Fellow (University of Bari - Dept. Geo-enviromental science).
 - [@Francesco Paolo Lovergine](https://github.com/fpl) - PhD Researcher (National Research Council of Italy - IREA).
 - [@Giuseppe Amatulli](https://github.com/selvaje) - PhD Researcher (Yale University - CRC).
 - Domenico Capolongo - PhD Professor (University of Bari - Dept. Geo-enviromental science).
@@ -88,7 +88,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | [10_BGS](https://www.bgs.ac.uk/geology-projects/landslides/national-landslide-database/a-guide-to-the-national-landslide-database-on-the-geoindex/) | National Landslide Database - Index data (BGS)                                                 | 15050     | [LICENSE](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)                                | on demand | :heavy_check_mark:   |
     | [11_NTMI](https://data.gov.ie/dataset/gsi-landslide-events-data)                                                                                    | Landslide Events Data (GSI)                                                                    | 2811      | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [12_VLS](https://anrgeodata.vermont.gov/datasets/landslides/explore?location=43.920513%2C-72.678150%2C8.82)                                         | Vermont Geological Survey's preliminary landslide inventory                                    | 3049      | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
-    | [13_SLIDO](https://www.oregon.gov/dogami/slido/Pages/data.aspx)                                                                                     | Statewide Landslide Information Database for Oregon (DOGAMI)                                   | 15866     | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
+    | [13_SLIDO](https://www.oregon.gov/dogami/slido/Pages/data.aspx)                                                                                     | Statewide Landslide Information Database for Oregon (DOGAMI)                                   | 15378  | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [14_1N](https://www.fdsn.org/networks/detail/1N_2015/)                                                                                              | 1N (2015-2027): French Landslide Observatory – OMIV (Temporary data)                           | 194       | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [15_CAFLAG](https://data.4tu.nl/articles/dataset/CAmpi_Flegrei_LAndslide_Geodatabase_CAFLAG_/14440757)                                              | The CAmpi Flegrei LAndslide Geodatabase                                                        | 2302      | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
     | [16_ETGFI](https://www.sciencebase.gov/catalog/item/583f4114e4b04fc80e3c4a1a)                                                                       | ETGFI - Earthquake-Triggered Ground-Failure Inventories (POINTS) - USGS                        | 115402    | [LICENSE](https://creativecommons.org/licenses/by/4.0/)                                                              | free      | :heavy_check_mark:   |
@@ -255,6 +255,16 @@ The GSR contains 5 main folders :
 All the scripts are managed by the "orchestrator.py" master script in the main folder.
 Into the main folder there is also this readme file wich contains all this informations and the pictures of the UGLC 
 dataframe.
+
+--------------------------------------------------------
+## :red_circle: Tiling system
+
+<img alt="Dataframe Folder Structure" src="files/UGLC_tile_grid_map.jpeg"/>
+<p align="center"><i> UGLC tile grid map </i></p>
+
+The polygonal catalog is available in GeoPackage format, divided into 105 tiles that cover the entire Earth's surface.
+Each tile includes a Tile_ID attribute for unique identification within the grid. Empty tiles are automatically excluded from storage,
+ensuring optimized file management and performance.
 
 --------------------------------------------------------
 ## :red_circle: Requirements
