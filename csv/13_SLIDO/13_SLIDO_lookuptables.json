@@ -181,7 +181,7 @@
       "Rockfall": "rock fall",
       "Debris Flow": "debris flow",
       "Fill Failure": "earth spreading",
-      "Landslide": "landslide",
+      "Landslide": "earth slide",
       "Earth FlowFlow": "earth flow",
       "Debris FlowFlow": "debris flow",
       "--": "ND",
@@ -283,7 +283,7 @@
       "Landslide/ Wall Failure": "earth slide",
       "Mud/ Rockfall": "rock fall",
       "Water (erosion)": "ND",
-      "Mud/ Soil Slide": "mud slide",
+      "Mud/ Soil Slide": "mudslide",
       "Rock/ Soil Slide": "earth slide",
       "Rock/Mud": "mudslide",
       "Land movement/ Potential Landslide": "earth slide",
@@ -388,7 +388,12 @@
       "Slide-Flow": "earth slide",
       "rock slide/rock fall": "rock slide",
       "Debris flow - Inititation": "debris flow",
-      "Debris Flow - Initiation": "debris flow"
+      "Debris Flow - Initiation": "debris flow",
+      "DS-T and EFL": "complex",
+      "RS-T+RFL": "complex",
+      "DF+EFL": "complex",
+      "RFL": "rock fall",
+      "DS-T+EFL": "complex"
     },
     "CONTR_FACT_lookup": {
       "Tree topple": "natural",
@@ -430,7 +435,8 @@
       "road": "human",
       "exisitng slide": "natural",
       "Fill Embankment": "human",
-      "post-wildfire": "postfire"
+      "post-wildfire": "postfire",
+      "EFL": "ND"
     },
     "LOSSES_lookup": {
       "1 lane of W Burnside (northmost lane) closed": "0",
