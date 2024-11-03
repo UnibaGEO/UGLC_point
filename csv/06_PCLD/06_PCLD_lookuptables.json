@@ -593,7 +593,7 @@
     },
     "Info_lookup": "ND",
     "LS_ID_lookup": "ND",
-    "Trigger_lookup": {
+    "NEWTrigger_lookup": {
       "nan": "ND",
       "Glacial retreat": "climate",
       "Logging": "human",
@@ -618,7 +618,13 @@
       "Deglaciation": "climate",
       "Heat wave": "climate",
       "Freeze-thaw": "climate",
-      "Earthquake?": "seismic"
+      "Earthquake?": "seismic",
+      "Post-Wildfire": "postfire",
+      "Rain on snow": "climate",
+      "Preciptiation": "rainfall",
+      "2004-Jun-25": "ND",
+      "Snowmlet & Rainfall": "climate",
+      "Snowmelt & Rainfall": "climate"
     },
     "Type_lookup": {
       "Active layer detachment": "translational sliding",
@@ -636,7 +642,7 @@
       "GLOF": "glacial lake outburst floods",
       "Gullying": "earth flow",
       "Mountain slope deformation": "ND",
-      "Mud flow": "mudflow",
+      "Mud flow": "mud flow",
       "Retrogressive thaw slump": "earth slide",
       "Rock avalanche": "debris flow",
       "Rock complex": "complex",
@@ -645,7 +651,9 @@
       "Rock spread": "rock spreading",
       "Rock topple": "rock fall",
       "Subsidence": "ND",
-      "Flood": "earth flow"
+      "Flood": "earth flow",
+      "Submarine landslide": "ND",
+      "Debris flow ": "debris flow"
     }
   }
 }
