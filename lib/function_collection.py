@@ -26,12 +26,24 @@ else:
 file_path = f"{root}/lib/countries/countries.zip"
 
 def assign_country_to_points(df):
-    # Leggi i confini dei paesi dal file ZIP
+
+    # Check lat and long columns name
+    if 'lat' in df.columns and 'lon' in df.columns:
+        lat_col, lon_col = 'lat', 'lon'
+    elif 'latitude' in df.columns and 'longitude' in df.columns:
+        lat_col, lon_col = 'latitude', 'longitude'
+    else:
+        raise ValueError(
+            "Latitude and Longitude name columns are missing, col.names should be: 'lat' 'lon' or 'latitude' 'longitude'.")
+
+
+    # Read Country map, with names and bordersfrom the .ZIP file
     world = gpd.read_file("zip://" + file_path)
+    world = world.to_crs('EPSG:4326')
 
     # Crea un GeoDataFrame per i punti georeferenziati
     points = gpd.GeoDataFrame(df,
-                              geometry=gpd.points_from_xy(df['long'], df['lat']),
+                              geometry=gpd.points_from_xy(df[lon_col], df[lat_col]),
                               crs='EPSG:4326')
 
     # Effettua un'operazione di "spazial join" per assegnare a ciascun punto il paese corrispondente
