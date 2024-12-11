@@ -60,7 +60,7 @@ df_cleaned['ID'] = [str(i) for i in range(1, len(df_cleaned) + 1)] # Generates I
 
 # ------------------ SINGLE CSV
 # Save the duplicate-free dataframe as a csv file [FEATURE REMOVED]
-output_file = f"{output_file_root}/UGLC.csv"
+output_file = f"{output_file_root}/UGLC_point.csv"
 df_cleaned.to_csv(output_file, index=False, sep='|')
 print(f"UGLC dataset cleaned created on '{output_file}' path with '|' as separator.")
 
