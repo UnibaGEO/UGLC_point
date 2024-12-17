@@ -141,10 +141,8 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | translational sliding        |
     | earth spreading              |
     | rock spreading               |
-    | glacial lake outburst floods |
     | mud flow                     |
     | sinkhole                     |
-    | liquefaction                 |
     | ND                           |
 
 
