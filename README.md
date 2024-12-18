@@ -146,7 +146,12 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | ND                           |
 
 
-- <b> TRIGGER: </b> the content of this field represents the trigger that triggered the landslide event (if explicit), standardized using this reference table:
+- <b>PHYSICAL FACTORS:</b> This field encompasses the physical factors contributing to the landslide event, categorized 
+into predisposing, preparatory, and triggering factors. Predisposing factors include invariant characteristics such as 
+geology, topography, and land use; preparatory factors refer to monitorable cyclical changes like seasonal variations 
+in saturation, weathering, or fire-induced alterations; and triggering factors involve impulsive events such as 
+earthquakes, intense rainfall, or volcanic activity. These categories describe structural conditions, progressive 
+stability deterioration, and immediate detachment causes, respectively, and are standardized using this reference table:
   
     | TYPE OF TRIGGER                                | IDENTIFYING ABBREVIATION |
     |------------------------------------------------|--------------------------|
