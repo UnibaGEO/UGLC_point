@@ -34,13 +34,13 @@
       "earthcomplex (fall + flow)": "complex"
     },
     "CAUSE_lookup": {
-      "earthquake": "seismic",
-      "rainfall": "rainfall",
-      "digging activities": "human",
-      "wildfire": "postfire",
-      "water leak": "natural",
-      "dumping activities": "human",
-      "mining activities": "human"
+      "earthquake": "seismic (T)",
+      "rainfall": "rainfall (T)",
+      "digging activities": "anthropic (T,P)",
+      "wildfire": "postfire (P)",
+      "water leak": "natural (T,P)",
+      "dumping activities": "anthropic (T,P)",
+      "mining activities": "anthropic (T,P)"
     }
 
   }

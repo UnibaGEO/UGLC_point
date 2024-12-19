@@ -63,7 +63,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -87,7 +87,7 @@ df_NEW['ACCURACY'] = df_OLD['geographic_accuracy']
 df_NEW['START DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
 df_NEW['END DATE'] = pd.to_datetime(df_OLD['utc_date'], format="%d/%m/%Y %H:%M", errors='coerce').dt.strftime("%Y/%m/%d")
 df_NEW['TYPE'] = df_OLD['landslide_type']
-df_NEW['TRIGGER'] = "rainfall"
+df_NEW['PHYSICAL FACTORS'] = "rainfall (T)"
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"

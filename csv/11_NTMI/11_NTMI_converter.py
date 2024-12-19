@@ -68,7 +68,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -92,7 +92,7 @@ df_NEW['ACCURACY'] = df_OLD['ACCURACY'].apply(lambda x: int(x) if pd.notna(x) el
 df_NEW['START DATE'] = df_OLD.apply(populate_start_date, axis=1)
 df_NEW['END DATE'] = df_OLD.apply(populate_end_date, axis=1)
 df_NEW['TYPE'] = df_OLD['LANDSIDE_M']
-df_NEW['TRIGGER'] = df_OLD['TRIGGER']
+df_NEW['PHYSICAL FACTORS'] = df_OLD['TRIGGER']
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = df_OLD['TRIGGER'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = "-99999"

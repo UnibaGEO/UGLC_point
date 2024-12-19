@@ -24,11 +24,11 @@
 		"Blanks" : "ND"
 	},
 	"TRIGGER_lookup": {
-		"Stream Erosion" : "natural",
-		"Heavy Rainfall" : "rainfall",
-		"Gravity" : "natural",
-		"Excavation at Toe or on Slope" : "human",
-		"Stream erosion": "natural"
+		"Stream Erosion" : "natural (T,P)",
+		"Heavy Rainfall" : "rainfall (T)",
+		"Gravity" : "natural (T,P)",
+		"Excavation at Toe or on Slope" : "anthropic (T,P)",
+		"Stream erosion": "natural (T,P)"
 	}
   }
 }
