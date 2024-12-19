@@ -66,7 +66,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -90,7 +90,7 @@ df_NEW['ACCURACY'] = (np.sqrt(df_OLD['area'].astype(float) / np.pi)).apply(round
 df_NEW['START DATE'] = df_OLD['Year'].apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['Year'].apply(trasforma_data_end)
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = "deforestation"
+df_NEW['PHYSICAL FACTORS'] = "deforestation (P)"
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"

@@ -318,14 +318,14 @@
       "NC GS": "ND",
       "NJ GS": "ND",
       "OR DOGAMI": "ND",
-      "USGS PR Hurricane Maria 2019": "rainfall",
-      "USGS Post-Fire Debris Flows": "postfire",
+      "USGS PR Hurricane Maria 2019": "rainfall (T)",
+      "USGS Post-Fire Debris Flows": "postfire (P)",
       "USGS CO Front Range Sept 2013": "ND",
       "USGS CO Front Range July 1999": "ND",
       "USGS Conterminous": "ND",
       "USGS WA Puget Sound": "ND",
       "NASA": "ND",
-      "USGS Seismic Ground Failure": "seismic",
+      "USGS Seismic Ground Failure": "seismic (T)",
       "VT GS": "ND",
       "WA SDIC": "ND"
     }

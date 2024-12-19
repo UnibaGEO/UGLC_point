@@ -63,7 +63,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -87,7 +87,7 @@ df_NEW['ACCURACY'] = df_OLD['LOCAT_ACC']
 df_NEW['START DATE'] = df_OLD.apply(lambda row: compose_start_date(row['YEAR'], row['MONTH'], row['DAY']), axis=1)
 df_NEW['END DATE'] = df_OLD.apply(lambda row: compose_end_date(row['YEAR'], row['MONTH'], row['DAY']), axis=1)
 df_NEW['TYPE'] = df_OLD['TYPE']
-df_NEW['TRIGGER'] = df_OLD['CAUSE']
+df_NEW['PHYSICAL FACTORS'] = df_OLD['CAUSE']
 df_NEW['RELIABILITY'] = "ND"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = df_OLD['FATAL']

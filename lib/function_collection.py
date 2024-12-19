@@ -32,9 +32,11 @@ def assign_country_to_points(df):
         lat_col, lon_col = 'lat', 'lon'
     elif 'latitude' in df.columns and 'longitude' in df.columns:
         lat_col, lon_col = 'latitude', 'longitude'
+    elif 'lat' in df.columns and 'long' in df.columns:
+        lat_col, lon_col = 'lat', 'long'
     else:
         raise ValueError(
-            "Latitude and Longitude name columns are missing, col.names should be: 'lat' 'lon' or 'latitude' 'longitude'.")
+            "Latitude and Longitude name columns are missing, col.names should be: 'lat' 'lon'/'lat 'long'/'latitude' 'longitude'.")
 
 
     # Read Country map, with names and bordersfrom the .ZIP file

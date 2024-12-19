@@ -67,7 +67,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -91,7 +91,7 @@ df_NEW['ACCURACY'] = df_OLD['Capture Me']
 df_NEW['START DATE'] = "1900/01/01"
 df_NEW['END DATE'] = "2016/12/31"
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = "ND"
+df_NEW['PHYSICAL FACTORS'] = "ND"
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "report"
 df_NEW['FATALITIES'] = "-99999"

@@ -27,11 +27,11 @@
     },
     "Detonante_lookup" :{
       "Unknown": "ND",
-      "Rainfall": "rainfall",
+      "Rainfall": "rainfall (T)",
       "Other cause": "ND",
-      "Anthropogenic": "human",
-      "Volcanic Activity": "volcanic",
-      "Earthquake": "seismic"
+      "Anthropogenic": "anthropic (T,P)",
+      "Volcanic Activity": "volcanic (T)",
+      "Earthquake": "seismic (T)"
     }
   }
 }

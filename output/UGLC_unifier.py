@@ -38,8 +38,10 @@ else:
 
 ## ------------------ DATA CLEANING ------------------
 
-# Data Cleaning: removes records with 'TYPE' == "snow avalanche"
+# Data Cleaning: removes records with 'TYPE' == "snow avalanche", "liquefaction" and "glacial lake outburst floods"
 df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
+df_combined = df_combined[df_combined['TYPE'] != "liquefaction"]
+df_combined = df_combined[df_combined['TYPE'] != "glacial lake outburst floods"]
 
 ## ------------------ DIRECTORY SELECTION ------------------
 ## G-Cloud directory

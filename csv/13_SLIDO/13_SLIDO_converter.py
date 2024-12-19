@@ -63,7 +63,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -93,7 +93,7 @@ df_NEW['ACCURACY'] = df_OLD['LOC_METHOD']
 df_NEW['START DATE'] = df_OLD.apply(start_date_SLIDO, axis=1)
 df_NEW['END DATE'] = df_OLD.apply(end_date_SLIDO, axis=1)
 df_NEW['TYPE'] = df_OLD['MOVE_CLASS']
-df_NEW['TRIGGER'] = df_OLD['CONTR_FACT'].fillna('ND')
+df_NEW['PHYSICAL FACTORS'] = df_OLD['CONTR_FACT'].fillna('ND')
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = df_OLD['CONTR_FACT'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = df_OLD['LOSSES']

@@ -64,7 +64,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -88,7 +88,7 @@ df_NEW['ACCURACY'] = df_OLD['Incertidumb']
 df_NEW['START DATE'] = pd.to_datetime(df_OLD['Fecha']).dt.strftime('%Y/%m/%d')
 df_NEW['END DATE'] = pd.to_datetime(df_OLD['Fecha']).dt.strftime('%Y/%m/%d')
 df_NEW['TYPE'] = df_OLD['TYPE']
-df_NEW['TRIGGER'] = df_OLD['Detonante']
+df_NEW['PHYSICAL FACTORS'] = df_OLD['Detonante']
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "report"
 df_NEW['FATALITIES'] = df_OLD['Fallecidos'].astype(int)

@@ -69,7 +69,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -93,7 +93,7 @@ df_NEW['ACCURACY'] = (np.sqrt(df_OLD['Precision'].astype(float) / np.pi)).apply(
 df_NEW['START DATE'] = df_OLD.apply(lambda row: pd.to_datetime(f"{row['Year']}/{row['Month']:02d}/{row['Day']:02d}", format='%Y/%m/%d').strftime('%Y/%m/%d'), axis=1)
 df_NEW['END DATE'] = df_OLD.apply(lambda row: pd.to_datetime(f"{row['Year']}/{row['Month']:02d}/{row['Day']:02d}", format='%Y/%m/%d').strftime('%Y/%m/%d'), axis=1)
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = df_OLD['Trigger'].fillna('ND')
+df_NEW['PHYSICAL FACTORS'] = df_OLD['Trigger'].fillna('ND')
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = df_OLD['Fatalities'].fillna('-99999')

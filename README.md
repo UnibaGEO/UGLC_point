@@ -141,27 +141,33 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
     | translational sliding        |
     | earth spreading              |
     | rock spreading               |
-    | glacial lake outburst floods |
     | mud flow                     |
     | sinkhole                     |
-    | liquefaction                 |
     | ND                           |
 
 
-- <b> TRIGGER: </b> the content of this field represents the trigger that triggered the landslide event (if explicit), standardized using this reference table:
+- <b>PHYSICAL FACTORS:</b> This field encompasses the physical factors contributing actively to the landslide event, categorized 
+into predisposing (PR), preparatory (P) and triggering (T) factors. Predisposing factors include invariant characteristics 
+such as geology, topography, and land use; preparatory factors refer to monitorable cyclical changes like seasonal variations 
+in saturation, weathering, or fire-induced alterations while triggering factors involve impulsive events such as 
+earthquakes, intense rainfall, or volcanic activity. 
+The category of Predisposing factors (PR) was not considered in our classification because it was absent in the native 
+data. Therefore, only the categories of Preparatory (P) and Triggering (T) factors were considered in the classification 
+of physical factors of landslides in this catalog.
+These categories are standardized using this reference table:
   
-    | TYPE OF TRIGGER                                | IDENTIFYING ABBREVIATION |
-    |------------------------------------------------|--------------------------|
-    | <i>(description)</i>                           | <i>(value)</i>           | 
-    | Rainfall trigger                               | rainfall                 | 
-    | Seismic trigger                                | seismic                  | 
-    | Volcanic trigger                               | volcanic                 |  
-    | Human-induced trigger                          | human                    | 
-    | Climate temperatures trigger                   | climate                  | 
-    | Postfire trigger                               | postfire                 |
-    | Deforestation processes                        | deforestation            |
-    | Erosional/gravitational and biological trigger | natural                  | 
-    | Unknown                                        | ND                       | 
+    | PHYSICAL FACTORS                        | IDENTIFYING ABBREVIATION |
+    |-----------------------------------------|--------------------------|
+    | <i>(description)</i>                    | <i>(value)</i>           | 
+    | Rainfall triggering factor              | rainfall (T)             | 
+    | Seismic triggering factor               | seismic (T)              | 
+    | Volcanic triggering factor              | volcanic (T)             |  
+    | Human-induced factors                   | anthropic (T,P)          | 
+    | Climatic factors                        | climate (T,P)            | 
+    | Post-fire conditions                    | postfire (P)             |
+    | Post-deforestation processes conditions | deforestation (P)        |
+    | Erosional and biological factors        | natural (T,P)            | 
+    | Unknown                                 | ND                       | 
 
 
 - <b> RELIABILITY: </b> the content of this field represents the reliability of the data based on a decision table that takes into 
