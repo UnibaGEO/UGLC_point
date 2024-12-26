@@ -44,7 +44,7 @@
       "unknown": "ND",
       "illegal hillcutting": "anthropic (T,P)",
       "illegal mining": "anthropic (T,P)",
-      "earthquake": "seismic (T) ",
+      "earthquake": "seismic (T)",
       "legal mining": "anthropic (T,P)",
       "leaking pipe": "anthropic (T,P)",
       "volcanic eruption": "volcanic (T)",
