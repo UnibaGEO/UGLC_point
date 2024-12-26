@@ -36,6 +36,7 @@ if csv_files:
 else:
     print("No CSV file found in the directory.")
 
+
 ## ------------------ DATA CLEANING ------------------
 
 # Data Cleaning: removes records with 'TYPE' == "snow avalanche", "liquefaction" and "glacial lake outburst floods"
