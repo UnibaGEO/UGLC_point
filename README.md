@@ -47,7 +47,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 | START DATE   | Date            |
 | END DATE     | Date            |
 | TYPE         | String          |
-| TRIGGER      | String          |
+| PHYSICAL FACTORS      | String          |
 | RELIABILITY  | Int             |
 | RECORD TYPE  | String          |
 | FATALITIES   | Int             |
