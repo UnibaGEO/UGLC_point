@@ -37,9 +37,9 @@ Stay tuned for updates as we approach the release date.
 
 ----------------------------------------------------------------------------------------------------------------
 
-## :red_circle: Data availability [WORK IN PROGRESS]
+## :red_circle: Data availability
 The catalogues files are open access and available here:
-- [UGLC Point Catalogue](INDIRIZZO DRIVE POINT)
+- [UGLC Point Catalogue](https://drive.google.com/drive/folders/1Vj0yNB488g2bhAlrlug_8xoyZsgazn6t?usp=sharing)
 - [UGLC Polygonal Catalogue](INDIRIZZO DRIVE POLY)
 
 ----------------------------------------------------------------------------------------------------------------
