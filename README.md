@@ -279,8 +279,12 @@ The GSR contains 5 main folders :
 <img alt="Dataframe Folder Structure" src="files/UGLC_tile_grid_map.jpeg"/>
 
 The UGLC catalog is also available in GeoPackage format, divided into 105 tiles that cover the entire Earth's surface.
-Each tile includes a Tile_ID attribute for unique identification within the grid. Empty tiles are automatically excluded from storage,
-ensuring optimized file management and performance.
+Each tile includes a Tile_ID attribute (_i_j) for unique identification within the grid: 
+
+    i (longitude step) = [0-15]
+    j (latitude step) = [0-7]
+
+Empty tiles are automatically excluded from storage, ensuring optimized file management and performance.
 
 --------------------------------------------------------
 ## :red_circle: Catalogue Data Analysis
