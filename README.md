@@ -246,7 +246,7 @@ The entire UGLC structure is allocated in 2 main repositories:
 - Drive Files Repository (DFR)
 
 The GSR contains 5 main folders :
-/input
+- /input
  
     This folder contains the "native_datasets" subfolder, which contains the standardizer scripts ("N_DATAFRAME_standardizer.py")
     which read the downloaded files into the DFR 'input/download' subfolder (containing native datasets as .csv/.shp/.gpkg etc.
@@ -254,25 +254,25 @@ The GSR contains 5 main folders :
     and create a standardized .csv ready to be converted into the UGLC format, and save it (as "N_DATAFRAME_native.csv")
     into the DFR 'input/native_dataset' subfolder.
 
-/csv
+- /csv
 
      This folder contains one subfolder named after each different native datasets ("N_DATAFRAME") contains the converting scripts
     ("N_DATAFRAME_converter.py") and the lookup tables ("NN_DATAFRAME_lookuptables.json") which read the native datasets from
     the DFR 'input/native_dataset' subfolder, then filter and convert each one into the UGLC standard format, using also the functions from the 'lib' folder,
     and save them (as "N_DATAFRAME_converted.csv") into the DFR 'output/converted_csv' subfolder.
 
-/output
+- /output
 
     This folder contains the unifier script ("unifier.py") that read all the converted datasets from the DFR 'output/converted_csv'
     subfolder, then merge and filter them for generating the final UGLC dataframe ("UGLC_point.csv") and the tiled verion ("UGLC_point_tile_i_j.gpkg"),
     saving everything into the DFR 'output' folder.
   
-/lib
+- /lib
 
     This folder contains the functions script ("function_collection.py") which are called from the converter scripts into the
     GPR for various data conversion.
 
-/files
+- /files
   
     This folder contains all the files used by this readme file, like pictures and the license file.
 
