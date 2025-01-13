@@ -38,7 +38,8 @@ Stay tuned for updates as we approach the release date.
 ----------------------------------------------------------------------------------------------------------------
 
 ## :red_circle: Data availability
-The catalogues files are open access and available here:
+The catalogues data available in these googledrive repositories are distributed under the licence ![Licenza Dati: CC BY 4.0](https://licensebuttons.net/l/by/4.0/88x31.png)
+
 - [UGLC Point Catalogue](https://drive.google.com/drive/folders/1Vj0yNB488g2bhAlrlug_8xoyZsgazn6t?usp=sharing)
 - [UGLC Polygonal Catalogue](https://drive.google.com/drive/folders/1-0yvEdZmx0iwCRC8c-RowXHr8nmXtR9O?usp=sharing)
 
