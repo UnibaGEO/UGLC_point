@@ -30,7 +30,7 @@ The whole code is published under the [MIT License](files/LICENSE.txt).
 ----------------------------------------------------------------------------------------------------------------
 
 ## :red_circle: Publication Notice
-The catalogue, along with its associated analyses, methodologies, and results, is planned for publication by Summer 2025.\
+The catalogue, along with its associated analyses, methodologies, and results, is planned for publication by Spring 2025.\
 This release will include comprehensive documentation and datasets, making the information fully accessible to the 
 scientific community and the public.\
 Stay tuned for updates as we approach the release date.
@@ -118,7 +118,7 @@ They're distributed under the licence [Creative Commons Attribution 4.0 Internat
 - <b> VERSION: </b> the contents of this field represent the latest updated version of the original dataset used (if specified)
 
 
-- <b> COUNTRY: </b> the content of this field represents the country where the event was located (where missing it was derived using its coordinates)
+- <b> COUNTRY: </b> the content of this field represents the country where the record was located (where missing it was derived using its coordinates)
 
 
 - <b> ACCURACY: </b> the content of this field represents the precision in meters of the relative deviation of the geo-referenced point from 
@@ -219,16 +219,16 @@ They're distributed under the licence [Creative Commons Attribution 4.0 Internat
     more statistical details, without delving into the specifics of each event.
 
 
-- <b> FATALITIES: </b> the content of this field contains the number of fatalities related to the event (if explicit), where the NaN values are represented by the value -99999
+- <b> FATALITIES: </b> the content of this field contains the number of fatalities related to the record (if explicit), where the NaN values are represented by the value -99999
   
 
-- <b> INJURIES: </b> the content of this field contains the number of injuries related to the event (if explicit), where the NaN values are represented by the value -99999
+- <b> INJURIES: </b> the content of this field contains the number of injuries related to the record (if explicit), where the NaN values are represented by the value -99999
 
 
-- <b> NOTES: </b> the content of this field contains the notes and information relate to the event (if explicit)
+- <b> NOTES: </b> the content of this field contains the notes and information relate to the record (if explicit)
 
 
-- <b> LINKS: </b>  the content of this field contains the link to the source of the event report or study (if explicit)
+- <b> LINKS: </b>  the content of this field contains the link to the source of the record report or study (if explicit)
 
 --------------------------------------------------------
 
