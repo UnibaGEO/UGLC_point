@@ -40,8 +40,8 @@ Stay tuned for updates as we approach the release date.
 ## :red_circle: Data availability
 The catalogues data available in these googledrive repositories are distributed under the licence [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) 
 
-- [UGLC Point Catalogue](https://drive.google.com/drive/folders/1Vj0yNB488g2bhAlrlug_8xoyZsgazn6t?usp=sharing)
-- [UGLC Polygonal Catalogue](https://drive.google.com/drive/folders/1-0yvEdZmx0iwCRC8c-RowXHr8nmXtR9O?usp=sharing)
+- UGLC Point Catalogue files [:small_red_triangle:](https://drive.google.com/drive/folders/1Vj0yNB488g2bhAlrlug_8xoyZsgazn6t?usp=sharing)
+- UGLC Polygonal Catalogue files [:small_red_triangle:](https://drive.google.com/drive/folders/1-0yvEdZmx0iwCRC8c-RowXHr8nmXtR9O?usp=sharing)
 
 ![Licenza Dati: CC BY 4.0](https://licensebuttons.net/l/by/4.0/88x31.png)
 
