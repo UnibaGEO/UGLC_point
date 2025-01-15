@@ -272,7 +272,7 @@ The GSR contains 5 main folders :
 - /output
 
     This folder contains the unifier script ("unifier.py") that read all the converted datasets from the DFR 'output/converted_csv'
-    subfolder, then merge and filter them for generating the final UGLC dataframe ("UGLC_point.csv") and the tiled verion ("UGLC_point_tile_i_j.gpkg"),
+    subfolder, then merge and filter them for generating the final UGLC dataframe ("UGLC_point_full.csv") and the tiled verion ("UGLC_point_tile_i_j.gpkg"),
     saving everything into the DFR 'output' folder.
   
 - /lib
