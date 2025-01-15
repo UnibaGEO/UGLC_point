@@ -45,8 +45,8 @@ They're distributed under the licence [Creative Commons Attribution 4.0 Internat
 | CATALOGUE TYPE                 | NUMBER OF RECORDS | FILES REPOSITORY                                                                                                              |
 |--------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | UGLC Point Catalogue files     | 1061450 points    | FULL CATALOGUE [download :arrow_down:](https://drive.google.com/file/d/125tZrs_vY4CfTQ4xedFQhUUmlrZDiQT1/view?usp=sharing)    |
-|                                |                   | TILED CATALOGUE [download :arrow_down:](https://drive.google.com/drive/folders/1CoUKL_IQzw_BkmeqhyGu7yvSKETWR2Qt?usp=sharing) |
-|--------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
+                                                     | TILED CATALOGUE [download :arrow_down:](https://drive.google.com/drive/folders/1CoUKL_IQzw_BkmeqhyGu7yvSKETWR2Qt?usp=sharing) |
+
 | UGLC Polygonal Catalogue files | 984126 polygons   | FULL CATALOGUE [download :arrow_down:](https://drive.google.com/file/d/1HbQL4qt0UmgC5jSmPIhIeOCkAojnVzYa/view?usp=sharing)    |
 |                                |                   | TILED CATALOGUE [download :arrow_down:](https://drive.google.com/drive/folders/1OGHdiTZA3E9pfDV20WQ_OT1OpbBxf3WT?usp=sharing) |
 
