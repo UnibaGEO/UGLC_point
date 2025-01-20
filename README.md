@@ -53,6 +53,11 @@ They're distributed under the licence [Creative Commons Attribution 4.0 Internat
 
 ----------------------------------------------------------------------------------------------------------------
 
+## :red_circle: Catalogue update
+If you want to contribute new landslide information, you can enter new landslide points from all over the world in this [google form](https://docs.google.com/forms/d/e/1FAIpQLScCIsHnxUL9r1MyLHCLLNDule9P-dDCKbT58C8M-Yl4XDSi0A/viewform?usp=sharing).
+These new records will be included within the catalog in the next update.
+
+----------------------------------------------------------------------------------------------------------------
 
 ## :red_circle: Attribute fields summary
 
