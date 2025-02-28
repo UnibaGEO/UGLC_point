@@ -20,8 +20,8 @@
 ## :red_circle: Project description
 
 The main purpose of this project is to generate a single global-scale landslide dataset that collects and standardizes within it all open source global, national, 
-and sub-national landslide datasets, provided with spatial and temporal accuracy details, along with several general information about each single record. 
-Researchers that are willing to contribute with additional landslide points and polygons can keep in touch with [@Saverio Mancino](https://github.com/RavyHollow). 
+and sub-national landslide datasets, provided with spatial and temporal accuracy details, along with several general information about each single record.\
+Researchers that are willing to contribute with additional landslide points and polygons can keep in touch with [@Saverio Mancino](https://github.com/RavyHollow).\
 The Unified Global Landslide Catalogue (UGLC) scientifcial and technical publication is under preparation and a will be submmited to ESSD Copernicus in early 2025.
 
 ----------------------------------------------------------------------------------------------------------------
