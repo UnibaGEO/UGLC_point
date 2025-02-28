@@ -40,7 +40,7 @@ They're distributed under the licence [Creative Commons Attribution 4.0 Internat
 |--------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | UGLC Point Catalogue files     | 1061450 points    | FULL CATALOGUE [download :arrow_down:](https://drive.google.com/file/d/125tZrs_vY4CfTQ4xedFQhUUmlrZDiQT1/view?usp=sharing)    |
 |                                |                   | TILED CATALOGUE [download :arrow_down:](https://drive.google.com/drive/folders/1CoUKL_IQzw_BkmeqhyGu7yvSKETWR2Qt?usp=sharing) |
-| UGLC Polygonal Catalogue files | 984126 polygons   | [POLYGONAL CATALOGUE](https://github.com/UnibaGEO/UGLC_polygonal)                                                             |
+| UGLC Polygonal Catalogue files | 984126 polygons   | :leftwards_arrow_with_hook: [POLYGONAL CATALOGUE](https://github.com/UnibaGEO/UGLC_polygonal)                                 |
 
 
 ![Licenza Dati: CC BY 4.0](https://licensebuttons.net/l/by/4.0/88x31.png)
