@@ -37,8 +37,8 @@ They're distributed under the licence [Creative Commons Attribution 4.0 Internat
 
 | CATALOGUE TYPE                 | NUMBER OF RECORDS | FILES REPOSITORY                                                                                                              |
 |--------------------------------|-------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| UGLC Point Catalogue files     | 1061450 points    | FULL CATALOGUE [download :arrow_down:](https://drive.google.com/file/d/125tZrs_vY4CfTQ4xedFQhUUmlrZDiQT1/view?usp=sharing)    |
-|                                |                   | TILED CATALOGUE [download :arrow_down:](https://drive.google.com/drive/folders/1CoUKL_IQzw_BkmeqhyGu7yvSKETWR2Qt?usp=sharing) |
+| UGLC Point Catalogue files     | 1061450 points    | FULL CATALOGUE [download :arrow_down:]([https://drive.google.com/file/d/125tZrs_vY4CfTQ4xedFQhUUmlrZDiQT1/view?usp=sharing](https://doi.org/10.5281/zenodo.16755044))    |
+|                                |                   | TILED CATALOGUE [download :arrow_down:]([https://drive.google.com/drive/folders/1CoUKL_IQzw_BkmeqhyGu7yvSKETWR2Qt?usp=sharing](https://doi.org/10.5281/zenodo.16755044)) |
 | UGLC Polygonal Catalogue files | 984126 polygons   | :leftwards_arrow_with_hook: [POLYGONAL CATALOGUE](https://github.com/UnibaGEO/UGLC_polygonal)                                 |
 
 
