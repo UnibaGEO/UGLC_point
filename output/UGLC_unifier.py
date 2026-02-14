@@ -102,7 +102,6 @@ for i in range(16):
             print(f"GeoDataFrame Tile ({i}, {j}) was not saved because it's empty.")
 
 ## ------------------ DUPLICATES ------------------
-
 # Find duplicates based on having same 'WKT_GEOM', 'START DATE', 'END DATE' (same event)
 duplicates = df_combined[~df_combined.index.isin(df_cleaned.index)].copy()
 duplicates['ID'] = [str(i) for i in range(1, len(duplicates) + 1)] # Generates ID
