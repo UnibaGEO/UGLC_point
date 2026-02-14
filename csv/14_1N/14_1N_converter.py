@@ -63,7 +63,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -87,7 +87,7 @@ df_NEW['ACCURACY'] = "0"
 df_NEW['START DATE'] = "2015/01/01"
 df_NEW['END DATE'] = "2023/12/31"
 df_NEW['TYPE'] = "rock fall"
-df_NEW['TRIGGER'] = "seismic"
+df_NEW['PHYSICAL FACTORS'] = "seismic (T)"
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "event"
 df_NEW['FATALITIES'] = "-99999"

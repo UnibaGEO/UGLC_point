@@ -64,7 +64,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -88,7 +88,7 @@ df_NEW['ACCURACY'] = df_OLD['PLUS_OR_MI'].astype(int).fillna('-99999')
 df_NEW['START DATE'] = df_OLD['FIRST_KN_1'].fillna("1678-01-01").apply(date_format)
 df_NEW['END DATE'] = df_OLD['FIRST_KN_1'].fillna("2023-12-31").apply(date_format)
 df_NEW['TYPE'] = "ND"
-df_NEW['TRIGGER'] = "ND"
+df_NEW['PHYSICAL FACTORS'] = "ND"
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = "report"
 df_NEW['FATALITIES'] = "-99999"

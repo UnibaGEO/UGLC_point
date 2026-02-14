@@ -78,16 +78,16 @@
     "WKT_GEOM_lookup": "ND",
     "TRIGGER_lookup": {
       "Unknown, ND" : "ND",
-      "Human Factor, ND" : "human",
-      "Exceptional Rainfall, ND" : "rainfall",
-      "Exceptional_Rainfall, ND" : "rainfall",
-      "Snowmelt, ND" : "climate",
+      "Human Factor, ND" : "anthropic (T,P)",
+      "Exceptional Rainfall, ND" : "rainfall (T)",
+      "Exceptional_Rainfall, ND" : "rainfall (T)",
+      "Snowmelt, ND" : "climate (T,P)",
       "Other, ND" : "ND",
-      "River_undercutting, ND" : "natural",
-      "other, River errosion and possibly a rainfall event" : "natural",
-      "Human_Factor, ND" : "human",
-      "other, triggered by the December rains and exacerbated by Storm Frank" : "rainfall",
-      "Flood, ND" : "rainfall",
+      "River_undercutting, ND" : "natural (T,P)",
+      "other, River errosion and possibly a rainfall event" : "natural (T,P)",
+      "Human_Factor, ND" : "anthropic (T,P)",
+      "other, triggered by the December rains and exacerbated by Storm Frank" : "rainfall (T)",
+      "Flood, ND" : "rainfall (T)",
       "ND, ND" : "ND"
     }
   }

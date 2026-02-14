@@ -63,7 +63,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -87,7 +87,7 @@ df_NEW['ACCURACY'] = df_OLD['Accuracy']
 df_NEW['START DATE'] = df_OLD['DATEs'].astype(str).apply(trasforma_data_start)
 df_NEW['END DATE'] = df_OLD['DATEf'].astype(str).apply(trasforma_data_end)
 df_NEW['TYPE'] = df_OLD['Type']
-df_NEW['TRIGGER'] = df_OLD['NEWTrigger']
+df_NEW['PHYSICAL FACTORS'] = df_OLD['NEWTrigger']
 df_NEW['RELIABILITY'] = "CALC"
 df_NEW['RECORD TYPE'] = df_OLD['Trigger'].apply(lambda x: 'report' if x == 'natural' else 'event')
 df_NEW['FATALITIES'] = "-99999"

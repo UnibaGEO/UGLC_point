@@ -36,10 +36,13 @@ if csv_files:
 else:
     print("No CSV file found in the directory.")
 
+
 ## ------------------ DATA CLEANING ------------------
 
-# Data Cleaning: removes records with 'TYPE' == "snow avalanche"
+# Data Cleaning: removes records with 'TYPE' == "snow avalanche", "liquefaction" and "glacial lake outburst floods"
 df_combined = df_combined[df_combined['TYPE'] != "snow avalanche"]
+df_combined = df_combined[df_combined['TYPE'] != "liquefaction"]
+df_combined = df_combined[df_combined['TYPE'] != "glacial lake outburst floods"]
 
 ## ------------------ DIRECTORY SELECTION ------------------
 ## G-Cloud directory
@@ -60,7 +63,7 @@ df_cleaned['ID'] = [str(i) for i in range(1, len(df_cleaned) + 1)] # Generates I
 
 # ------------------ SINGLE CSV
 # Save the duplicate-free dataframe as a csv file [FEATURE REMOVED]
-output_file = f"{output_file_root}/UGLC.csv"
+output_file = f"{output_file_root}/UGLC_point.csv"
 df_cleaned.to_csv(output_file, index=False, sep='|')
 print(f"UGLC dataset cleaned created on '{output_file}' path with '|' as separator.")
 

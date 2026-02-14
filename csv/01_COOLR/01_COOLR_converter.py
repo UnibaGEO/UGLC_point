@@ -6,7 +6,7 @@
 # Conversion
 #-----------------------------------------------------------------------------------------------------------------------
 import json
-from lib.function_collection import apply_RELIABILITY_calculator
+from lib.function_collection import apply_RELIABILITY_calculator, assign_country_to_points
 import pandas as pd
 import os
 from dotenv import load_dotenv
@@ -42,7 +42,6 @@ df_OLD['loc_desc'] = df_OLD['loc_desc'].fillna('ND')
 df_OLD['ev_desc'] = df_OLD['ev_desc'].fillna('ND')
 df_OLD['ev_dateS'] = df_OLD['ev_date'].fillna('1956/01/01')
 df_OLD['ev_dateE'] = df_OLD['ev_date'].fillna('2023/01/01')
-df_OLD['ctry_name'] = df_OLD['ctry_name'].fillna('ND')
 
 # Application of lookup Tables to the columns of the old DataFrame
 for column in df_OLD.columns:
@@ -72,7 +71,7 @@ new_data = {
     'START DATE': [],
     'END DATE': [],
     'TYPE': [],
-    'TRIGGER': [],
+    'PHYSICAL FACTORS': [],
     'RELIABILITY': [],
     'RECORD TYPE': [],
     'FATALITIES': [],
@@ -91,12 +90,12 @@ df_NEW['ID'] = "CALC"  #range(1, len(df_OLD) + 1)
 df_NEW['OLD DATASET'] = "Cooperative Open Online Landslide Repository - NASA"
 df_NEW['OLD ID'] = df_OLD['ev_id']
 df_NEW['VERSION'] = str("2023")
-df_NEW['COUNTRY'] = df_OLD['ctry_name'].replace("CÃ´te d'Ivoire", "Côte d'Ivoire", inplace=True)
+df_NEW['COUNTRY'] = assign_country_to_points(df_OLD)['ctry_name']
 df_NEW['ACCURACY'] = df_OLD['loc_acc']
 df_NEW['START DATE'] = df_OLD.apply(lambda row: pd.to_datetime(row['ev_dateS']).strftime('%Y/%m/%d'), axis=1)
 df_NEW['END DATE'] = df_OLD.apply(lambda row: pd.to_datetime(row['ev_dateE']).strftime('%Y/%m/%d'), axis=1)
 df_NEW['TYPE'] = df_OLD['ls_cat'].fillna('ND')
-df_NEW['TRIGGER'] = df_OLD['ls_trig'].fillna('ND')
+df_NEW['PHYSICAL FACTORS'] = df_OLD['ls_trig'].fillna('ND')
 df_NEW['RELIABILITY'] = 'CALC'
 df_NEW['RECORD TYPE'] = df_OLD['OLD DATASET'].apply(lambda x: 'event' if x == 'COOLR_E' else 'report')
 df_NEW['FATALITIES'] = df_OLD['fatalities']
@@ -109,6 +108,7 @@ df_NEW['LINK'] = df_OLD.apply(lambda row: f"Source: {repr(row['src_link'])}", ax
 #-----------------------------------------------------------------------------------------------------------------------
 
 apply_RELIABILITY_calculator(df_NEW)
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Output
