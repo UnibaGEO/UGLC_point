@@ -65,7 +65,6 @@ df_cleaned.to_csv(output_file, index=False, sep='|')
 print(f"UGLC dataset cleaned created on '{output_file}' path with '|' as separator.")
 
 # ------------------ TILED GPKG
-
 # Convert the dataframe to GeoDataFrame
 # Define global limits
 min_lon, max_lon = -180, 180
